@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2016-09-20T12:43:58Z" product-name="jpfaq">
+        <header/>
+        <body>
+            <trans-unit id="pi1_title">
+                <target>jpFAQ Plugin</target>
+            </trans-unit>
+            <trans-unit id="pi1_plus_wiz_description">
+                <target>Frequently Asked Questions</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question">
+                <target>Question</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.question">
+                <target>Question</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.answer">
+                <target>Résponse</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.categories">
+                <target>Catégories</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category">
+                <target>Catégorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.category">
+                <target>Catégorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.description">
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_main">
+                <target>Configuration</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.selectCategory">
+                <target>Choisir une catégorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.selectPid">
+                <target>Sélectionnez le dossier avec des records</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showSearch">
+                <target>Moteur de recherche d'affichage (recherche de questions sur la page)</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showResultsNumber">
+                <target>Afficher le numéro trouvé des questions</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

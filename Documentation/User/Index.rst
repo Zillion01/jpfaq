@@ -1,0 +1,21 @@
+﻿.. ==================================================
+.. FOR YOUR INFORMATION
+.. --------------------------------------------------
+.. -*- coding: utf-8 -*- with BOM.
+
+.. include:: ../Includes.txt
+
+
+.. _user-manual:
+
+Users Manual
+============
+
+#. Create a folder in the page tree for example 'FAQ records'.
+#. In the page properties of the folder, under tab 'Behaviour' select 'jpFAQ' at 'Contains Plugin', this gives an own folder icon in the page tree (optional).
+#. Create records of categories (optional).
+#. Create records of questions, choose categories in question record (optional).
+#. Insert jpFAQ plugin on a page. Save and than under Plugin tab choose page or folder with question records at the 'Record Storage Page'. Choose categories if you want. If no categories are selected, all will be shown.
+#. Insert plugin again if needed to show other categories seperate.
+#. If you want the on the fly quicksearch, check checkbox. This searchform searches all questions and answers of the whole page, so I would include this only once in a page. The searchform hides immediately all questions (and answers) which do not contain the terms you type in the searchbox.
+#. You can also tick the 'Show number of search results' if wanted.

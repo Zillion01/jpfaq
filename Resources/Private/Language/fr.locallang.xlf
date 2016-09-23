@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="messages" date="2016-09-20T12:43:58Z" product-name="jpfaq">
+        <header/>
+        <body>
+            <trans-unit id="tx_jpfaq_domain_model_question">
+                <target>Question</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.question">
+                <target>Question</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.answer">
+                <target>Résponse</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.categories">
+                <target>Catégories</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category">
+                <target>Catégorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.category">
+                <target>Catégorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.description">
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_showAll">
+                <target>Afficher toutes les résponses</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_hideAll">
+                <target>Cacher toutes les résponses</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_searchboxLabel">
+                <target>Recherche rapide FAQ</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_filterCount">
+                <target>Nombre de questions trouvé: </target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

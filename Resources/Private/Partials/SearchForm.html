@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-md-4">
+        <form id="jpfaqSearch">
+            <div class="form-group">
+                <label for="jpfaqSearch">{f:translate(key:'jpfaq_searchboxLabel')}</label>
+                <input type="search" class="form-control" placeholder="{f:translate(key:'jpfaq_searchboxLabel')}">
+            </div>
+        </form>
+    </div>
+</div>
+<f:if condition="{showNumberOfResults}">
+    <div><span id="jpfaq-filter-count">{f:translate(key:'jpfaq_filterCount')} <span></span></span>&nbsp;</div>
+</f:if>

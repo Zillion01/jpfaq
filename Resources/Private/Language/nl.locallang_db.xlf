@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="nl" datatype="plaintext" original="messages" date="2016-09-20T12:43:58Z" product-name="jpfaq">
+        <header/>
+        <body>
+            <trans-unit id="pi1_title">
+                <target>jpFAQ Plugin</target>
+            </trans-unit>
+            <trans-unit id="pi1_plus_wiz_description">
+                <target>Frequently Asked Questions</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question">
+                <target>Vraag</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.question">
+                <target>Vraag</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.answer">
+                <target>Antwoord</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.categories">
+                <target>Categorieën</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category">
+                <target>Categorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.category">
+                <target>Categorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.description">
+                <target>Beschrijving</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_main">
+                <target>Configuratie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.selectCategory">
+                <target>Kies categorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.selectPid">
+                <target>Kies folder met records</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showSearch">
+                <target>Toon zoekbox (doorzoekt alle vragen op de pagina)</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showResultsNumber">
+                <target>Toon aantal gevonden vragen</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

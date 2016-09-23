@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-09-20T12:43:58Z" product-name="jpfaq">
+		<header/>
+		<body>
+			<trans-unit id="question.description">
+				<source>question</source>
+			</trans-unit>
+			<trans-unit id="answer.description">
+				<source>answer</source>
+			</trans-unit>
+			<trans-unit id="categories.description">
+				<source>categories</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

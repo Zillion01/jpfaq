@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2016-09-20T12:43:58Z" product-name="jpfaq">
+        <header/>
+        <body>
+            <trans-unit id="pi1_title">
+                <source>jpFAQ Plugin</source>
+            </trans-unit>
+            <trans-unit id="pi1_plus_wiz_description">
+                <source>Frequently Asked Questions</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question">
+                <source>Question</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.question">
+                <source>Question</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.answer">
+                <source>Answer</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.categories">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category">
+                <source>Category</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.category">
+                <source>Category</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_main">
+                <source>Configuration</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.selectCategory">
+                <source>Choose category</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.selectPid">
+                <source>Choose folder with records</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showSearch">
+                <source>Show searchbox (searches all questions on page)</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showResultsNumber">
+                <source>Show number of search results</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

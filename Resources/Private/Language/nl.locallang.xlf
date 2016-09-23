@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="nl" datatype="plaintext" original="messages" date="2016-09-20T12:43:58Z" product-name="jpfaq">
+        <header/>
+        <body>
+            <trans-unit id="tx_jpfaq_domain_model_question">
+                <target>Vraag</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.question">
+                <target>Vraag</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.answer">
+                <target>Antwoord</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.categories">
+                <target>Categorieën</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category">
+                <target>Categorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.category">
+                <target>Categorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.description">
+                <target>Beschrijving</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_showAll">
+                <target>Toon alle antwoorden</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_hideAll">
+                <target>Verberg alle antwoorden</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_searchboxLabel">
+                <target>Snel zoeken FAQ</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_filterCount">
+                <target>Aantal gevonden vragen: </target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

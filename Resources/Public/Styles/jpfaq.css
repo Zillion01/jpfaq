@@ -1,0 +1,51 @@
+/*
+***********************************************************
+Title: jpfaq.css
+Author: Jacco van der Post - www.id-webdesign.nl
+Date: may 2011 - sep 2016
+***********************************************************
+*/
+
+.tx-jpfaq ul {
+    margin: 0;
+    padding: 0 0 10px 0;
+}
+
+.tx-jpfaq li {
+    list-style: none;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+.tx-jpfaq li h3 {
+    background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/plus.png') no-repeat left center;
+    padding-left: 20px;
+    margin-bottom: 3px;
+    cursor: pointer;
+}
+
+.tx-jpfaq li h3.questionUnfolded {
+    background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/min.png') no-repeat left center;
+}
+
+.tx-jpfaq .jpfaqAll {
+    margin-bottom: 10px;
+}
+
+.tx-jpfaq .jpfaqShowAll,
+.tx-jpfaq .jpfaqHideAll {
+    background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/all_plus.png') no-repeat left center;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.tx-jpfaq .jpfaqHideAll {
+    background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/all_min.png') no-repeat left center;
+}
+
+.tx-jpfaq label,
+.tx-jpfaq .jpfaqHideAll,
+.tx-jpfaq .toggleTriggerContainer,
+.tx-jpfaq #jpfaq-filter-count {
+    display: none;
+}

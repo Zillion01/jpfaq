@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="ru" datatype="plaintext" original="messages" date="2016-09-20T12:43:58Z" product-name="jpfaq">
+        <header/>
+        <body>
+            <trans-unit id="tx_jpfaq_domain_model_question">
+                <target>Вопрос</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.question">
+                <target>Вопрос</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.answer">
+                <target>ответ</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.categories">
+                <target>категории</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category">
+                <target>категория</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.category">
+                <target>категория</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.description">
+                <target>описание</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_showAll">
+                <target>Показать все ответы</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_hideAll">
+                <target>Cкрыть все ответы</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_searchboxLabel">
+                <target>Быстрый поиск</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_filterCount">
+                <target>Количество вопросов найдены: </target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
