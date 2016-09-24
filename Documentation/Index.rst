@@ -32,10 +32,10 @@ jpFAQ
 		2016
 
 	:Author:
-        Jacco van der Post
+        	Jacco van der Post
 
 	:Email:
-        jacco@id-webdesign.nl
+        	jacco@id-webdesign.nl
 
 	:License:
 		This document is published under the Open Content License
