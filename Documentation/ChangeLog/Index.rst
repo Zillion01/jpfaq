@@ -11,7 +11,7 @@
 ChangeLog
 =========
 4.0.4
-#. Moved Globals and plugin registering to overrides tt_content.php for caching.
+#. Moved globals and plugin registering to overrides tt_content.php for caching.
 
 4.0.3
 #. Small bugfix ext_emconf.php 
