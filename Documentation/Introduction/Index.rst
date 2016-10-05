@@ -17,8 +17,7 @@ Introduction
 What does it do?
 ----------------
 
-Simple Frequently Asked Questions (FAQ) plugin with answers optional in categories. Made with Extbase en jQuery.  Since irFAQ gave me some problems on TYPO3 4.4+ I decided to build a new FAQ plugin.
-New version 2.x includes a cool on the fly “while you type” searchform, improved and independent toggling of answers and all Javascript has moved to the footer.
+Simple Frequently Asked Questions (FAQ) plugin with rich text answers. Optional categories and searchform. 
 Version 3.x is for TYPO3 6.2.
 Version 4.x is a total refactoring and for TYPO3 7.6+
 
