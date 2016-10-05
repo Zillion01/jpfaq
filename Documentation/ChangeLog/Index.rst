@@ -10,14 +10,17 @@
 
 ChangeLog
 =========
+4.0.4
+#. Moved Globals and plugin registering to overrides tt_content.php for caching.
+
 4.0.3
-#. TYPO3 7.6+ compatibility. Totally rewritten.  Small bugfix ext_emconf.php 
+#. Small bugfix ext_emconf.php 
 
 4.0.2
-#. TYPO3 7.6+ compatibility. Totally rewritten.  4.0.2 fix for documentation
+#. Fix for documentation
 
 4.0.1
-#. TYPO3 7.6+ compatibility. Totally rewritten.  4.0.1 fix for documentation
+#. Fix for documentation
 
 4.0.0
 #. TYPO3 7.6+ compatibility. Totally rewritten.
