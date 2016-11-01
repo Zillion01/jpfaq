@@ -15,7 +15,7 @@
         "issues": "https://forge.typo3.org/projects/extension-jpfaq/"
     },
     "require": {
-        "typo3/cms-core": ">=7.6.0,<8.4"
+        "typo3/cms-core": ">=7.6.0,<8.5"
     },
     "autoload": {
         "psr-4": {

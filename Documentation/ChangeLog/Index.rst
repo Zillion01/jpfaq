@@ -10,6 +10,9 @@
 
 ChangeLog
 =========
+8.4.0
+#. Changed requirements to TYPO3 version <= 8.4.99. Changed version number to max. supported TYPO3 version.
+
 4.0.4
 #. Moved globals and plugin registering to overrides tt_content.php for caching.
 
