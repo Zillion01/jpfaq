@@ -1,5 +1,5 @@
 plugin.tx_jpfaq_faq {
-    view {=
+    view {
         templateRootPaths.0 = EXT:jpfaq/Resources/Private/Templates/
         templateRootPaths.1 = {$plugin.tx_jpfaq_faq.view.templateRootPath}
         partialRootPaths.0 = EXT:jpfaq/Resources/Private/Partials/
