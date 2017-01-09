@@ -116,7 +116,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Get content elements (additionalContentAnswer)
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\ThcbVenues\Domain\Model\TtContent> $detailDescription
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\ThcbVenues\Domain\Model\TtContent> $additionalContentAnswer
      */
     public function getAdditionalContentAnswer()
     {
