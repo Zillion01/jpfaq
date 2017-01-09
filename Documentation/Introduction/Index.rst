@@ -17,9 +17,7 @@ Introduction
 What does it do?
 ----------------
 
-Simple Frequently Asked Questions (FAQ) plugin with rich text answers. Optional categories and searchform. 
-Version 3.x is for TYPO3 6.2.
-Version 4.x is a total refactoring and for TYPO3 7.6+
+Frequently Asked Questions (FAQ) or definitions plugin with rich text answers and / or tt_content IRRE answers. Optional categories and searchform.
 
 
 .. _screenshots:

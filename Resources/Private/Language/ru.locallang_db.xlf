@@ -18,6 +18,9 @@
             <trans-unit id="tx_jpfaq_domain_model_question.answer">
                 <target>ответ</target>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.answerAdditional">
+                <source>ответ дополнительный контент</source>
+            </trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_question.categories">
                 <target>категории</target>
             </trans-unit>

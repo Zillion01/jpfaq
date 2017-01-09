@@ -8,6 +8,7 @@ CREATE TABLE tx_jpfaq_domain_model_question (
 
 	question varchar(255) DEFAULT '' NOT NULL,
 	answer text NOT NULL,
+	additional_content_answer int(11) unsigned DEFAULT '0' NOT NULL,
 	categories int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
@@ -38,6 +39,21 @@ CREATE TABLE tx_jpfaq_domain_model_question (
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
 	KEY language (l10n_parent,sys_language_uid)
 
+);
+
+# IRRE Records
+CREATE TABLE tx_jpfaq_question_content_mm (
+    uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+    uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+    sorting int(11) unsigned DEFAULT '0' NOT NULL,
+    sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+
+    KEY uid_local (uid_local),
+    KEY uid_foreign (uid_foreign)
+);
+
+CREATE TABLE tt_content (
+    jpfaq int(11) unsigned DEFAULT '0' NOT NULL
 );
 
 #

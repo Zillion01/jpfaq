@@ -20,14 +20,14 @@ return [
 			'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'question,answer,categories,',
+        'searchFields' => 'question,answer,additional_content_answer,categories,',
         'iconfile' => 'EXT:jpfaq/Resources/Public/Icons/tx_jpfaq_domain_model_question.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, answer, categories',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, answer, additional_content_answer, categories',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, answer, categories, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, answer, additional_content_answer, categories, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -132,6 +132,36 @@ return [
 			],
 	        'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
 	    ],
+        'additional_content_answer' => [
+            'exclude' => 1,
+            'l10n_mode' => 'mergeIfNotBlank',
+            'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.answerAdditional',
+            'config' => [
+                'type' => 'inline',
+                'allowed' => 'tt_content',
+                'foreign_table' => 'tt_content',
+                'foreign_record_defaults' => array(
+                    'CType' => 'textmedia'
+                ),
+                'foreign_sortby' => 'sorting',
+                'foreign_field' => 'venue',
+                'minitems' => 0,
+                'maxitems' => 99,
+                'appearance' => [
+                    'collapseAll' => 1,
+                    'expandSingle' => 1,
+                    'levelLinksPosition' => 'bottom',
+                    'useSortable' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'showRemovedLocalizationRecords' => 1,
+                    'showAllLocalizationLink' => 1,
+                    'showSynchronizationLink' => 1,
+                    'enabledControls' => [
+                        'info' => false,
+                    ]
+                ]
+            ]
+        ],
 	    'categories' => [
 	        'exclude' => 1,
 	        'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.categories',

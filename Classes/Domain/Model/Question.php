@@ -34,6 +34,14 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $answer = '';
 
     /**
+     * Additional tt_content for Answer
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\ThcbVenues\Domain\Model\TtContent>
+     * @lazy
+     */
+    protected $additionalContentAnswer;
+
+    /**
      * categories
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category>
@@ -60,6 +68,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected function initStorageObjects()
     {
         $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->additionalContentAnswer = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -102,6 +111,16 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setAnswer($answer)
     {
         $this->answer = $answer;
+    }
+
+    /**
+     * Get content elements (additionalContentAnswer)
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\ThcbVenues\Domain\Model\TtContent> $detailDescription
+     */
+    public function getAdditionalContentAnswer()
+    {
+        return $this->additionalContentAnswer;
     }
 
     /**

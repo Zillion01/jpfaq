@@ -18,6 +18,9 @@
             <trans-unit id="tx_jpfaq_domain_model_question.answer">
                 <target>Antwort</target>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.answerAdditional">
+                <source>Antwort zusätzlicher Inhalt</source>
+            </trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_question.categories">
                 <target>Kategorien</target>
             </trans-unit>
