@@ -26,3 +26,25 @@ page {
     }
 }
 
+
+# Mapping tt_content
+config.tx_extbase {
+    persistence {
+        enableAutomaticCacheClearing = 1
+        updateReferenceIndex = 0
+        classes {
+            Jp\Jpfaq\Domain\Model\TtContent {
+                mapping {
+                    tableName = tt_content
+                    columns {
+                        uid.mapOnProperty = uid
+                        pid.mapOnProperty = pid
+                        sorting.mapOnProperty = sorting
+                        CType.mapOnProperty = contentType
+                        header.mapOnProperty = header
+                    }
+                }
+            }
+        }
+    }
+}
