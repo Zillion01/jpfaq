@@ -8,16 +8,16 @@ return [
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => 1,
         'sortby' => 'sorting',
-		'versioningWS' => 2,
+        'versioningWS' => 2,
         'versioning_followPages' => true,
 
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
-		'delete' => 'deleted',
+        'delete' => 'deleted',
         'enablecolumns' => [
-			'disabled' => 'hidden',
-			'starttime' => 'starttime',
+            'disabled' => 'hidden',
+            'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
         'searchFields' => 'question,answer,additional_content_answer,categories,',
@@ -111,28 +111,27 @@ return [
             ],
         ],
 
-	    'question' => [
-	        'exclude' => 1,
-	        'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.question',
-	        'config' => [
-			    'type' => 'input',
-			    'size' => 30,
-			    'eval' => 'trim,required'
-			],
-	        
-	    ],
-	    'answer' => [
-	        'exclude' => 1,
-	        'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.answer',
-	        'config' => [
-			    'type' => 'text',
-			    'cols' => 40,
-			    'rows' => 15,
-			    'softref' => 'rtehtmlarea_images,typolink_tag,images,email[subst],url',
-			    'eval' => 'trim,required',
-			],
-	        'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
-	    ],
+        'question' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.question',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim,required'
+            ],
+
+        ],
+        'answer' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.answer',
+            'config' => [
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim,required',
+            ],
+            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
+        ],
         'additional_content_answer' => [
             'exclude' => 1,
             'l10n_mode' => 'mergeIfNotBlank',
@@ -163,48 +162,48 @@ return [
                 ]
             ]
         ],
-	    'categories' => [
-	        'exclude' => 1,
-	        'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.categories',
-	        'config' => [
-			    'type' => 'select',
-			    'renderType' => 'selectMultipleSideBySide',
-			    'foreign_table' => 'tx_jpfaq_domain_model_category',
-			    'MM' => 'sys_category_record_mm',
-			    'size' => 10,
-			    'autoSizeMax' => 30,
-			    'maxitems' => 9999,
-			    'multiple' => 0,
-			    'wizards' => [
-			        '_PADDING' => 1,
-			        '_VERTICAL' => 1,
-			        'edit' => [
-			            'module' => [
-			                'name' => 'wizard_edit',
-			            ],
-			            'type' => 'popup',
-			            'title' => 'Edit', // todo define label: LLL:EXT:.../Resources/Private/Language/locallang_tca.xlf:wizard.edit
-			            'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
-			            'popup_onlyOpenIfSelected' => 1,
-			            'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-			        ],
-			        'add' => [
-			            'module' => [
-			                'name' => 'wizard_add',
-			            ],
-			            'type' => 'script',
-			            'title' => 'Create new', // todo define label: LLL:EXT:.../Resources/Private/Language/locallang_tca.xlf:wizard.add
-			            'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
-			            'params' => [
-			                'table' => 'tx_jpfaq_domain_model_category',
-			                'pid' => '###CURRENT_PID###',
-			                'setValue' => 'prepend'
-			            ],
-			        ],
-			    ],
-			],
+        'categories' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.categories',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'tx_jpfaq_domain_model_category',
+                'MM' => 'sys_category_record_mm',
+                'size' => 10,
+                'autoSizeMax' => 30,
+                'maxitems' => 9999,
+                'multiple' => 0,
+                'wizards' => [
+                    '_PADDING' => 1,
+                    '_VERTICAL' => 1,
+                    'edit' => [
+                        'module' => [
+                            'name' => 'wizard_edit',
+                        ],
+                        'type' => 'popup',
+                        'title' => 'Edit', // todo define label: LLL:EXT:.../Resources/Private/Language/locallang_tca.xlf:wizard.edit
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
+                        'popup_onlyOpenIfSelected' => 1,
+                        'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+                    ],
+                    'add' => [
+                        'module' => [
+                            'name' => 'wizard_add',
+                        ],
+                        'type' => 'script',
+                        'title' => 'Create new', // todo define label: LLL:EXT:.../Resources/Private/Language/locallang_tca.xlf:wizard.add
+                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
+                        'params' => [
+                            'table' => 'tx_jpfaq_domain_model_category',
+                            'pid' => '###CURRENT_PID###',
+                            'setValue' => 'prepend'
+                        ],
+                    ],
+                ],
+            ],
 
-	    ],
-        
+        ],
+
     ],
 ];
