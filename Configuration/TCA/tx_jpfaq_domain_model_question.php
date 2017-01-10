@@ -128,6 +128,7 @@ return [
 			    'type' => 'text',
 			    'cols' => 40,
 			    'rows' => 15,
+			    'softref' => 'rtehtmlarea_images,typolink_tag,images,email[subst],url',
 			    'eval' => 'trim,required',
 			],
 	        'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
