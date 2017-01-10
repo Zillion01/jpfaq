@@ -145,7 +145,7 @@ return [
                     'CType' => 'textmedia'
                 ),
                 'foreign_sortby' => 'sorting',
-                'foreign_field' => 'venue',
+                'foreign_field' => 'jpfaq',
                 'minitems' => 0,
                 'maxitems' => 99,
                 'appearance' => [
