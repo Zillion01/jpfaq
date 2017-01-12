@@ -6,8 +6,8 @@
 conf.py:
   copyright: 2016
   project: jpFAQ
-  version: 4.0
-  release: 4.0.4
+  version: 8.5
+  release: 8.5.2
   intersphinx_mapping:
     t3tsref:
     - http://docs.typo3.org/typo3cms/TyposcriptReference/
