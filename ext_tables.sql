@@ -42,16 +42,6 @@ CREATE TABLE tx_jpfaq_domain_model_question (
 );
 
 # IRRE Records
-CREATE TABLE tx_jpfaq_question_content_mm (
-    uid_local int(11) unsigned DEFAULT '0' NOT NULL,
-    uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-    sorting int(11) unsigned DEFAULT '0' NOT NULL,
-    sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-
-    KEY uid_local (uid_local),
-    KEY uid_foreign (uid_foreign)
-);
-
 CREATE TABLE tt_content (
     jpfaq int(11) unsigned DEFAULT '0' NOT NULL
 );
@@ -98,9 +88,9 @@ CREATE TABLE tx_jpfaq_domain_model_category (
 );
 
 #
-# Table structure for table 'sys_category_record_mm'
+# Table structure for table 'tx_jpfaq_question_category_mm'
 #
-CREATE TABLE sys_category_record_mm (
+CREATE TABLE tx_jpfaq_question_category_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,

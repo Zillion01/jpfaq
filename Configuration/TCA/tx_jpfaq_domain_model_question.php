@@ -169,7 +169,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_jpfaq_domain_model_category',
-                'MM' => 'sys_category_record_mm',
+                'MM' => 'tx_jpfaq_question_category_mm',
                 'size' => 10,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
