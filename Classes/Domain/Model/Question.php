@@ -124,6 +124,23 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Get id list of content elements (additionalContentAnswer)
+     *
+     * @return string
+     */
+    public function getContentElementIdList()
+    {
+        $idList = [];
+        $contentElements = $this->getAdditionalContentAnswer();
+        if ($contentElements) {
+            foreach ($this->getAdditionalContentAnswer() as $contentElement) {
+                $idList[] = $contentElement->getUid();
+            }
+        }
+        return implode(',', $idList);
+    }
+
+    /**
      * Adds a Category
      *
      * @param \Jp\Jpfaq\Domain\Model\Category $category

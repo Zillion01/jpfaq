@@ -8,9 +8,7 @@ return [
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => 1,
         'sortby' => 'sorting',
-        'versioningWS' => 2,
-        'versioning_followPages' => true,
-
+        'versioningWS' => true,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
@@ -21,7 +19,9 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'question,answer,additional_content_answer,categories,',
-        'iconfile' => 'EXT:jpfaq/Resources/Public/Icons/tx_jpfaq_domain_model_question.gif'
+        'typeicon_classes' => [
+            'default' => 'mimetypes-x-tx_jpfaq_domain_model_question'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, answer, additional_content_answer, categories',
@@ -80,34 +80,28 @@ return [
         ],
         'starttime' => [
             'exclude' => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
             'config' => [
                 'type' => 'input',
-                'size' => 13,
-                'max' => 20,
+                'renderType' => 'inputDateTime',
                 'eval' => 'datetime',
-                'checkbox' => 0,
-                'default' => 0,
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
+                'allowLanguageSynchronization' => true,
             ],
         ],
         'endtime' => [
             'exclude' => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
             'config' => [
                 'type' => 'input',
-                'size' => 13,
-                'max' => 20,
+                'renderType' => 'inputDateTime',
                 'eval' => 'datetime',
-                'checkbox' => 0,
-                'default' => 0,
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
+                'allowLanguageSynchronization' => true,
             ],
         ],
 
@@ -126,23 +120,26 @@ return [
             'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.answer',
             'config' => [
                 'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
                 'eval' => 'trim,required',
+                'enableRichtext' => true
             ],
-            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
         ],
         'additional_content_answer' => [
             'exclude' => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.answerAdditional',
             'config' => [
                 'type' => 'inline',
                 'allowed' => 'tt_content',
                 'foreign_table' => 'tt_content',
-                'foreign_record_defaults' => array(
-                    'CType' => 'textmedia'
-                ),
+                'overrideChildTca' => [
+                    'columns' => [
+                        'CType' => [
+                            'config' => [
+                                'default' => 'textmedia'
+                            ]
+                        ],
+                    ],
+                ],
                 'foreign_sortby' => 'sorting',
                 'foreign_field' => 'jpfaq',
                 'minitems' => 0,
@@ -159,7 +156,8 @@ return [
                     'enabledControls' => [
                         'info' => false,
                     ]
-                ]
+                ],
+                'allowLanguageSynchronization' => true,
             ]
         ],
         'categories' => [
@@ -174,31 +172,12 @@ return [
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
                 'multiple' => 0,
-                'wizards' => [
-                    '_PADDING' => 1,
-                    '_VERTICAL' => 1,
-                    'edit' => [
-                        'module' => [
-                            'name' => 'wizard_edit',
-                        ],
-                        'type' => 'popup',
-                        'title' => 'Edit', // todo define label: LLL:EXT:.../Resources/Private/Language/locallang_tca.xlf:wizard.edit
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
-                        'popup_onlyOpenIfSelected' => 1,
-                        'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
                     ],
-                    'add' => [
-                        'module' => [
-                            'name' => 'wizard_add',
-                        ],
-                        'type' => 'script',
-                        'title' => 'Create new', // todo define label: LLL:EXT:.../Resources/Private/Language/locallang_tca.xlf:wizard.add
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
-                        'params' => [
-                            'table' => 'tx_jpfaq_domain_model_category',
-                            'pid' => '###CURRENT_PID###',
-                            'setValue' => 'prepend'
-                        ],
+                    'addRecord' => [
+                        'disabled' => false,
                     ],
                 ],
             ],

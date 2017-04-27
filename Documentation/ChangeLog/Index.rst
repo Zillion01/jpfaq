@@ -10,6 +10,9 @@
 
 ChangeLog
 =========
+8.7.0
+#. For TYPO3 8.7
+
 8.5.2
 #. Fixed mm relations question - category
 

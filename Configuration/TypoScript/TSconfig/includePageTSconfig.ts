@@ -1,0 +1,1 @@
+<INCLUDE_TYPOSCRIPT: source="DIR: EXT:jpfaq/Configuration/TypoScript/TSconfig/Page/" extension="ts">

@@ -1,5 +1,4 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-{namespace m=Jp\Jpfaq\ViewHelpers}
 <f:layout name="Default"/>
 
 <f:section name="main">
@@ -27,9 +26,7 @@
                         </f:if>
                         <f:if condition="{question.additionalContentAnswer}">
                             <div class="jpfaqAdditionalAnswerContent">
-                                <f:for each="{question.additionalContentAnswer}" as="additionalContent">
-                                    <m:Content uid="{additionalContent.uid}"/>
-                                </f:for>
+                                <f:cObject typoscriptObjectPath="lib.tx_jpfaq.contentElementRendering">{question.contentElementIdList}</f:cObject>
                             </div>
                         </f:if>
                     </div>

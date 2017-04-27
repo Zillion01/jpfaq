@@ -17,7 +17,7 @@ plugin.tx_jpfaq_faq {
 page {
     #First include jQuery! Disable jpfaq_jquery if you have your own jQuery lib
     includeJSFooter {
-        tx_jpfaq_jquery = EXT:jpfaq/Resources/Public/Javascript/jquery-3.1.1.min.js
+        tx_jpfaq_jquery = EXT:jpfaq/Resources/Public/Javascript/jquery-3.2.1.min.js
         tx_jpfaq = EXT:jpfaq/Resources/Public/Javascript/jpFaq.js
     }
 
@@ -47,4 +47,12 @@ config.tx_extbase {
             }
         }
     }
+}
+
+# Rendering of content elements in answer
+lib.tx_jpfaq.contentElementRendering = RECORDS
+lib.tx_jpfaq.contentElementRendering {
+    tables = tt_content
+    source.current = 1
+    dontCheckPid = 1
 }
