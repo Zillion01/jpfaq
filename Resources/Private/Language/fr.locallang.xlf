@@ -25,10 +25,10 @@
                 <target>Description</target>
             </trans-unit>
             <trans-unit id="jpfaq_showAll">
-                <target>Afficher toutes les résponses</target>
+                <target>Afficher tout les résponses</target>
             </trans-unit>
             <trans-unit id="jpfaq_hideAll">
-                <target>Cacher toutes les résponses</target>
+                <target>Cacher tout les résponses</target>
             </trans-unit>
             <trans-unit id="jpfaq_searchboxLabel">
                 <target>Recherche rapide FAQ</target>
