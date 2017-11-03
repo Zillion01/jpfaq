@@ -5,17 +5,19 @@
 //
 
 var jpFaq = jpFaq || {};
-var txJpfaq = '.tx-jpfaq';
-var jpFaqToggleTrigger = 'ul.listCategory .toggleTrigger';
-var jpFaqListItem = 'ul.listCategory li';
-var jpfaqShow = '.jpfaqShowAll';
-var jpfaqHide = '.jpfaqHideAll';
-var jpFaqToggleTriggerContainer = '.toggleTriggerContainer';
-var thisPlugin = '';
-var jpFaqSearchForm = '#jpfaqSearch input';
-var jpFaqFilterCount = '#jpfaq-filter-count';
 
 (function ($) {
+
+    var txJpfaq = '.tx-jpfaq';
+    var jpFaqToggleTrigger = 'ul.listCategory .toggleTrigger';
+    var jpFaqListItem = 'ul.listCategory li';
+    var jpfaqShow = '.jpfaqShowAll';
+    var jpfaqHide = '.jpfaqHideAll';
+    var jpFaqToggleTriggerContainer = '.toggleTriggerContainer';
+    var thisPlugin = '';
+    var jpFaqSearch = '#jpfaqSearch';
+    var jpFaqSearchForm = '#jpfaqSearch input';
+    var jpFaqFilterCount = '#jpfaq-filter-count';
 
     /**
      * Plugins
@@ -32,6 +34,7 @@ var jpFaqFilterCount = '#jpfaq-filter-count';
         initialize: function () {
             jpFaq.Main.openClose();
             jpFaq.Main.search();
+            jpFaq.Main.preventSubmit();
         },
 
         /**
@@ -93,8 +96,19 @@ var jpFaqFilterCount = '#jpfaq-filter-count';
                         count++;
                     }
                 });
-                
+
                 $(jpFaqFilterCount + ' span').text(count);
+            })
+        },
+
+        /**
+         * Prevent reload page on submit search
+         *
+         * @return void
+         */
+        preventSubmit : function () {
+            $(jpFaqSearch).submit(function (e) {
+                e.preventDefault();
             });
         }
     }
