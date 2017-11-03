@@ -10,6 +10,9 @@
 
 ChangeLog
 =========
+8.7.1
+#. Added default constants for paths and prevent submit search form
+
 8.7.0
 #. For TYPO3 8.7
 
