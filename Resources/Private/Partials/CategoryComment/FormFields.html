@@ -1,0 +1,22 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <label for="name">
+        <f:translate key="tx_jpfaq_domain_model_categorycomment.name"/>
+    </label>
+    <f:form.textfield property="name" class="form-control"/>
+    <label for="email">
+        <f:translate key="tx_jpfaq_domain_model_categorycomment.email"/>
+    </label>
+    <f:form.textfield property="email" class="form-control jpfaqEmailField"/>
+    <label for="comment">
+        <f:translate key="tx_jpfaq_domain_model_categorycomment.comment"/>
+        <span class="required">*</span>
+    </label>
+    <f:form.textarea property="comment" cols="60" rows="5" class="form-control jpfaqRequired"/>
+    <div class="jpfaqFinfo">
+        <label for="finfo">
+            <f:translate key="tx_jpfaq_domain_model_categorycomment.finfo"/>
+        </label>
+        <f:form.textfield property="finfo"/>
+    </div>
+    <br/>
+</html>

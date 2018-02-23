@@ -1,0 +1,2 @@
+# cat=basic/enable; type=boolean; label=Anonymize comment IP address to meet strict data protection laws.
+anonymizeIp = 0

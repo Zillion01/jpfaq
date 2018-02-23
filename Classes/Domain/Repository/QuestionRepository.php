@@ -1,4 +1,5 @@
 <?php
+
 namespace Jp\Jpfaq\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -30,9 +31,10 @@ class QuestionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Find questions with constraints
      *
      * @param array $categories
+     * @param bool $excludeAlreadyDisplayedQuestions
      * @return array|QueryResultInterface
      */
-    public function findQuestionsWithConstraints(array $categories = [])
+    public function findQuestionsWithConstraints(array $categories = [], bool $excludeAlreadyDisplayedQuestions)
     {
         $query = $this->createQuery();
 
@@ -45,6 +47,15 @@ class QuestionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         if (!empty($constraintsCategories)) {
             $query->matching($query->logicalOr($constraintsCategories));
+        }
+
+        if ($excludeAlreadyDisplayedQuestions && isset($GLOBALS['EXT']['jpfaq']['alreadyDisplayed']) && !empty($GLOBALS['EXT']['jpfaq']['alreadyDisplayed'])) {
+            $query->matching($query->logicalNot(
+                $query->in(
+                    'uid',
+                    $GLOBALS['EXT']['jpfaq']['alreadyDisplayed']
+                )
+            ));
         }
 
         return $query->execute();

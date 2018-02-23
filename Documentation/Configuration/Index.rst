@@ -16,7 +16,7 @@ Configuration Reference
 TypoScript Reference
 --------------------
 
-A few TypoScript settings..
+Prefix TypoScript view and settings with plugin.tx_jpfaq_faq.
 
 Property details
 ^^^^^^^^^^^^^^^^
@@ -28,40 +28,40 @@ Property details
 		:depth: 1
 
 
-.. _templateRootPaths:
+.. _view.templateRootPaths:
 
-templateRootPaths
-"""""""""""""""""
+view.templateRootPaths
+""""""""""""""""""""""
 .. container:: table-row
 
    Property
-         templateRootPaths
+         view.templateRootPaths
    Data type
          string
    Description
          The path to the template. templateRootPaths.0 points to the extension. Use templateRootPaths.1 to override.
 
-.. _partialRootPaths:
+.. _view.partialRootPaths:
 
-partialRootPaths
-""""""""""""""""
+view.partialRootPaths
+"""""""""""""""""""""
 .. container:: table-row
 
    Property
-         partialRootPaths
+         view.partialRootPaths
    Data type
          string
    Description
          The path to the partial (the search form, which has some Bootstrap markup). partialRootPaths.0 points to the extension. Use partialRootPaths.1 to override.
 
-.. _layoutRootPaths:
+.. _view.layoutRootPaths:
 
-layoutRootPaths
-"""""""""""""""
+view.layoutRootPaths
+""""""""""""""""""""
 .. container:: table-row
 
    Property
-         layoutRootPaths
+         view.layoutRootPaths
    Data type
          string
    Description
@@ -79,6 +79,266 @@ persistence.storagePid
          int
    Description
          Disabled, to be able to use the Record Storage Page at the plugin properties.
+
+.. _settings.excludeAlreadyDisplayedQuestions:
+
+settings.excludeAlreadyDisplayedQuestions
+"""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.excludeAlreadyDisplayedQuestions
+   Data type
+         int
+   Description
+         Exclude already displayed questions when multiple plugins are inserted on a page.
+
+.. _settings.gtag.enable:
+
+settings.gtag.enable
+""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.gtag.enable
+   Data type
+         int
+   Description
+         Enable Google Analytics Event tracking for helpful / unhelpfulresponse. First install gtag.js snippet https://developers.google.com/analytics/devguides/collection/gtagjs/
+
+.. _settings.gtag.event:
+
+settings.gtag.event
+"""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.gtag.event
+   Data type
+         string
+   Description
+         Event for Gtag. Note that that the label will be the question title.
+
+.. _settings.gtag.category:
+
+settings.gtag.category
+""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.gtag.category
+   Data type
+         string
+   Description
+         Category for Gtag.
+
+.. _settings.gtag.valueHelpful:
+
+settings.gtag.valueHelpful
+""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.gtag.valueHelpful
+   Data type
+         string
+   Description
+         Value for Gtag when clicked helpful.
+
+.. _settings.gtag.valueUnhelpful:
+
+settings.gtag.valueUnhelpful
+""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.gtag.valueUnhelpful
+   Data type
+         string
+   Description
+         Value for Gtag when clicked unhelpful.
+
+.. _settings.question.comment.email.enable:
+
+settings.question.comment.email.enable
+""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.question.comment.email.enable
+   Data type
+         int
+   Description
+         Send an email when visitors fill in the question comment form.
+
+.. _settings.question.comment.email.subject:
+
+settings.question.comment.email.subject
+"""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.question.comment.email.subject
+   Data type
+         string
+   Description
+         Subject for question comment email.
+
+.. _settings.question.comment.email.sender.name:
+
+settings.question.comment.email.sender.name
+"""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.question.comment.email.sender.name
+   Data type
+         string
+   Description
+         Sender name for question comment email.
+
+.. _settings.question.comment.email.sender.email:
+
+settings.question.comment.email.sender.email
+""""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.question.comment.email.sender.email
+   Data type
+         string
+   Description
+         Sender email address for question comment email.
+
+.. _settings.question.comment.email.receivers.email:
+
+settings.question.comment.email.receivers.email
+"""""""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.question.comment.email.receivers.email
+   Data type
+         string
+   Description
+         Receiver email address or comma seperated list of email addresses without spaces of receivers for question comment email.
+
+.. _settings.question.comment.email.introText:
+
+settings.question.comment.email.introText
+"""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.question.comment.email.introText
+   Data type
+         string
+   Description
+         Simple HTML introtext in the question comment email.
+
+.. _settings.question.comment.email.closeText:
+
+settings.question.comment.email.closeText
+"""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.question.comment.email.closeText
+   Data type
+         string
+   Description
+         Simple HTML text at the bottom of the question comment email.
+
+.. _settings.category.comment.email.enable:
+
+settings.category.comment.email.enable
+""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.category.comment.email.enable
+   Data type
+         int
+   Description
+         Send an email when visitors fill in the 'categories' form (at the bottom) of the plugin.
+
+.. _settings.category.comment.email.subject:
+
+settings.category.comment.email.subject
+"""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.category.comment.email.subject
+   Data type
+         string
+   Description
+         Subject for categories comment email.
+
+.. _settings.category.comment.email.sender.name:
+
+settings.category.comment.email.sender.name
+"""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.category.comment.email.sender.name
+   Data type
+         string
+   Description
+         Sender name for categories comment email.
+
+.. _settings.category.comment.email.sender.email:
+
+settings.category.comment.email.sender.email
+""""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.category.comment.email.sender.email
+   Data type
+         string
+   Description
+         Sender email address for categories comment email.
+
+.. _settings.category.comment.email.receivers.email:
+
+settings.category.comment.email.receivers.email
+"""""""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.category.comment.email.receivers.email
+   Data type
+         string
+   Description
+         Receiver email address or comma seperated list of email addresses without spaces of receivers for categories comment email.
+
+.. _settings.category.comment.email.introText:
+
+settings.category.comment.email.introText
+"""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.category.comment.email.introText
+   Data type
+         string
+   Description
+         Simple HTML introtext in the categories comment email.
+
+.. _settings.category.comment.email.closeText:
+
+settings.category.comment.email.closeText
+"""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.category.comment.email.closeText
+   Data type
+         string
+   Description
+         Simple HTML text at the bottom of the categories comment email.
 
 .. _page.includeJSFooter.tx_jpfaq_jquery:
 
@@ -118,3 +378,16 @@ page.includeCSS.tx_jpfaq
          string
    Description
          The path to some basic CSS.
+
+.. _page.includeCSS.tx_jpfaq_fontAwesome:
+
+page.includeCSS.tx_jpfaq_fontAwesome
+""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         page.includeCSS.tx_jpfaq_fontAwesome
+   Data type
+         string
+   Description
+         The path to some FontAwesome CSS. Disable if you don't want to use it in the templates or if you already load this.

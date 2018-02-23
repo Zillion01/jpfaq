@@ -8,12 +8,15 @@ call_user_func(
             'Jp.Jpfaq',
             'Faq',
             [
-                'Question' => 'list'
+                'Question' => 'list, helpfulness',
+                'QuestionComment' => 'comment, addComment',
+                'CategoryComment' => 'comment, addComment'
             ],
             // non-cacheable actions
             [
-                'Question' => '',
-                'Category' => ''
+                'Question' => 'helpfulness',
+                'QuestionComment' => 'comment, addComment',
+                'CategoryComment' => 'comment, addComment'
             ]
         );
     },
@@ -23,28 +26,44 @@ call_user_func(
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE: EXT:jpfaq/Configuration/TypoScript/TSconfig/includePageTSconfig.ts">');
 
 /**
- * Wizard icon
+ *  Icon registry
  */
-/** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
-$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-$iconRegistry->registerIcon(
-    'ext-jpfaq-wizard-icon',
-    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-    ['source' => 'EXT:jpfaq/Resources/Public/Icons/ce_wiz.svg']
-);
+if (TYPO3_MODE === 'BE') {
+    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Core\Imaging\IconRegistry::class);
+    $iconPath = 'EXT:jpfaq/Resources/Public/Icons/';
 
-/**
- *  Icon registry for record types
- */
-$recordTypes = [
-    'tx_jpfaq_domain_model_category',
-    'tx_jpfaq_domain_model_question'
-];
+    $svgIcons = [
+        'ext-jpfaq-wizard-icon' => $iconPath . 'ce_wiz.svg',
+        'tx_jpfaq_domain_model_questioncomment' => $iconPath . 'tx_jpfaq_domain_model_questioncomment.svg',
+        'tx_jpfaq_domain_model_categorycomment' => $iconPath . 'tx_jpfaq_domain_model_categorycomment.svg'
+    ];
 
-foreach ($recordTypes as $recordType) {
-    $iconRegistry->registerIcon(
-        'mimetypes-x-' . $recordType,
-        \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
-        ['source' => 'EXT:jpfaq/Resources/Public/Icons/' . $recordType . '.gif']
-    );
+    foreach ($svgIcons as $identifier => $path) {
+        $iconRegistry->registerIcon(
+            $identifier,
+            \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+            ['source' => $path]
+        );
+    }
+
+    $bitmapIcons = [
+        'tx_jpfaq_domain_model_category' => $iconPath . 'tx_jpfaq_domain_model_category.gif',
+        'tx_jpfaq_domain_model_question' => $iconPath . 'tx_jpfaq_domain_model_question.gif'
+    ];
+
+    foreach ($bitmapIcons as $identifier => $path) {
+        $iconRegistry->registerIcon(
+            $identifier,
+            \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
+            ['source' => $path]
+        );
+    }
 }
+
+// Example Signal Slot registering
+//$signalSlotDispatcher->connect(
+//    \Jp\Jpfaq\Controller\QuestionController::class,  // Signal class name
+//    'NewFaqComment',                                  // Signal name
+//    'bla::class',        // Slot class name
+//    'yourslot'           // Slot name
+//);

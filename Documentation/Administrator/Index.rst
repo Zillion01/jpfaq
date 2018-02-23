@@ -11,10 +11,13 @@
 Administrator Manual
 ====================
 
-#. Remove jQuery in typoscript if you have your own library included.
+#. Remove jQuery and FontAwesome in typoscript if you have your own libraries included.
 #. In the page properties of the records folder, under tab 'Behaviour' select 'jpFAQ' at 'Contains Plugin', this gives an own folder icon in the page tree and loads some tsconfig, like hiding tt_content records.
 #. In the page properties of the folder, under tab 'Resources' enter 'TCEMAIN.clearCacheCmd = 12,45,78'. Where the numbers represent the page id's of the page(s) with a jpFAQ plugin from which you want the cache get auto cleared when adding or editing FAQ records (optional)
 #. If you like to restrict at the answers the additional IRRE tt_content types (for example allow only textmedia), check out typo3conf/ext/jpfaq/Configuration/TypoScript/TSconfig/Page/pageTSconfig.ts
+#. Check out typo3conf/ext/jpfaq/Configuration/TypoScript/setup.ts for settings to exclude already displayed questions, configuring comment emails and Google Analytics tracking
+#. In the extension manager you can go to 'Configure' at jpFAQ to anonymize comment IP addresses. This is needed in for example Germany.
+#. If you want name and email in the comment form to be required (there is a simple JS frontend validation), just add the class jpfaqRequired at the fields in the FormFields.html files.
 
 
 .. _admin-installation:

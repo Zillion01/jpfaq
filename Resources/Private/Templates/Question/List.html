@@ -1,12 +1,17 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/Jp/Jpfaq/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 <f:layout name="Default"/>
 
 <f:section name="main">
-
     <f:if condition="{showSearchForm}">
         <f:render partial="SearchForm" arguments="{showNumberOfResults: showNumberOfResults}"/>
     </f:if>
-    <h2 class="jpfaqCategory">{category}</h2>
+
+    <h2 class="jpfaqCategory" itemprop="about">
+        <f:for each="{categories}" as="category">{category.category}<br/></f:for>
+    </h2>
+
     <div class="jpfaqAll">
         <div class="jpfaqShowAll">
             <f:translate key="jpfaq_showAll"/>
@@ -15,25 +20,16 @@
             <f:translate key="jpfaq_hideAll"/>
         </div>
     </div>
-    <ul class="listCategory{categoryUid}">
+
+    <ul class="jpfaqList">
         <f:for each="{questions}" as="question">
-            <li>
-                <h3 class="toggleTrigger">{question.question}</h3>
-                <div class="toggleTriggerContainer{categoryUid}">
-                    <div class="jpfaqAnswer">
-                        <f:if condition="{question.answer}">
-                            <f:format.html>{question.answer}</f:format.html>
-                        </f:if>
-                        <f:if condition="{question.additionalContentAnswer}">
-                            <div class="jpfaqAdditionalAnswerContent">
-                                <f:cObject typoscriptObjectPath="lib.tx_jpfaq.contentElementRendering">{question.contentElementIdList}</f:cObject>
-                            </div>
-                        </f:if>
-                    </div>
-                </div>
-            </li>
+            <n:excludeAlreadyDisplayedQuestions question="{question}"/>
+            <f:render partial="Question/Question" arguments="{_all}"/>
         </f:for>
     </ul>
 
+    <f:if condition="{showCategoriesCommentForm}">
+        <f:render partial="CategoryComment/LoadCommentFormLink" arguments="{currentUid: currentUid, restrictToCategories: restrictToCategories}"/>
+    </f:if>
 </f:section>
 </html>

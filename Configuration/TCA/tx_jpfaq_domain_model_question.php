@@ -1,5 +1,7 @@
 <?php
-return [
+use Jp\Jpfaq\Utility\ConfigurationUtility;
+
+$questionTca = [
     'ctrl' => [
         'title'	=> 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question',
         'label' => 'question',
@@ -8,7 +10,7 @@ return [
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => 1,
         'sortby' => 'sorting',
-        'versioningWS' => true,
+        'versioningWS' => 1,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
@@ -20,14 +22,14 @@ return [
         ],
         'searchFields' => 'question,answer,additional_content_answer,categories,',
         'typeicon_classes' => [
-            'default' => 'mimetypes-x-tx_jpfaq_domain_model_question'
+            'default' => 'tx_jpfaq_domain_model_question'
         ],
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, answer, additional_content_answer, categories',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, answer, additional_content_answer, categories, helpful, nothelpful, questioncomment',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, answer, additional_content_answer, categories, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, answer, additional_content_answer, categories, helpful, nothelpful, questioncomment, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -181,8 +183,60 @@ return [
                     ],
                 ],
             ],
+        ],
+        'helpful' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.helpful',
+            'config' => [
+                'type' => 'input',
+                'size' => 6,
+                'eval' => 'num'
+            ],
 
+        ],
+        'nothelpful' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.nothelpful',
+            'config' => [
+                'type' => 'input',
+                'size' => 6,
+                'eval' => 'num'
+            ],
+
+        ],
+        'questioncomment' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.questioncomment',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_jpfaq_domain_model_questioncomment',
+                'foreign_field' => 'question',
+                'foreign_sortby' => 'sorting',
+                'maxitems' => 9999,
+                'appearance' => [
+                    'collapseAll' => 1,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'useSortable' => 1,
+                    'showAllLocalizationLink' => 1
+                ],
+            ],
         ],
 
     ],
 ];
+
+// Todo: Can be removed with 7.6 support drop
+if (ConfigurationUtility::isOlderThan8Lts()) {
+    unset($questionTca['columns']['starttime']['config']['renderType']);
+    $questionTca['columns']['starttime']['config']['size'] = 13;
+
+    unset($questionTca['columns']['endtime']['config']['renderType']);
+    $questionTca['columns']['endtime']['config']['size'] = 13;
+
+    unset($questionTca['columns']['answer']['config']['enableRichtext']);
+    $questionTca['columns']['answer']['defaultExtras'] = 'richtext:rte_transform[mode=ts_css]';
+}
+
+return $questionTca;

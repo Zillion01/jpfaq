@@ -24,6 +24,12 @@
             <trans-unit id="tx_jpfaq_domain_model_question.categories">
                 <source>Categories</source>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.helpful">
+                <source>This answer was found helpful</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.nothelpful">
+                <source>This answer was not found helpful</source>
+            </trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_category">
                 <source>Category</source>
             </trans-unit>
@@ -43,10 +49,64 @@
                 <source>Choose folder with records</source>
             </trans-unit>
             <trans-unit id="tx_jpfaq_flexform.showSearch">
-                <source>Show searchbox (searches all questions on page)</source>
+                <source>Show searchbox (searches all questions on this page)</source>
             </trans-unit>
             <trans-unit id="tx_jpfaq_flexform.showResultsNumber">
                 <source>Show number of search results</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showQuestionCommentForm">
+                <source>Show a comment form under each question</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showCategoriesCommentForm">
+                <source>Show a (categories) comment form under this list of questions</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.questioncomment">
+                <source>Comments</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment">
+                <source>Question comment</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.email">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.comment">
+                <source>Comment</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.finfo">
+                <source>Finfo (should stay empty, this is used as honeytrap against spam)</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.question">
+                <source>Question</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.ip">
+                <source>IP address</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.categorycomment">
+                <source>Comments</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment">
+                <source>Category comment</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.email">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.comment">
+                <source>Comment</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.finfo">
+                <source>Finfo (should stay empty, this is used as honeytrap against spam)</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.category">
+                <source>Category</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.ip">
+                <source>IP address</source>
             </trans-unit>
         </body>
     </file>

@@ -48,6 +48,60 @@
             <trans-unit id="tx_jpfaq_flexform.showResultsNumber">
                 <target>Zeige Anzahl Fragen gefunden</target>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.helpful">
+                <target>Diese Antwort war hilfreich</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.nothelpful">
+                <target>Diese Antwort war nicht hilfreich</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showQuestionCommentForm">
+                <target>Eingabefeld Bemerkung unter jeder Frage anzeigen</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showCategoriesCommentForm">
+                <target>Eingabefeld Bemerkung am Ende einer Kategorie anzeigen</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.questioncomment">
+                <target>Bemerkungen</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment">
+                <target>Bemerkung zu Fragen</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.name">
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.email">
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.comment">
+                <target>Bemerkung</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.question">
+                <target>Frage</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.ip">
+                <target>IP-Adresse</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.categorycomment">
+                <target>Bemerkungen</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment">
+                <target>Kategorie Bemerkung</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.name">
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.email">
+                <target>E-Mail</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.comment">
+                <target>Bemerkung</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.category">
+                <target>Kategorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.ip">
+                <target>IP-Adresse</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

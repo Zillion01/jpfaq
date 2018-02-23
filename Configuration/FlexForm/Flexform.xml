@@ -22,14 +22,34 @@
                     </settings.flexform.showSearch>
                     <settings.flexform.showNumberOfResults>
                         <TCEforms>
-                            <exclude>1</exclude>
+                            <exclude>0</exclude>
                             <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.showResultsNumber</label>
                             <config>
                                 <type>check</type>
-                                <default>0</default>
+                                <default>1</default>
                             </config>
                         </TCEforms>
                     </settings.flexform.showNumberOfResults>
+                    <settings.flexform.showQuestionCommentForm>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.showQuestionCommentForm</label>
+                            <config>
+                                <type>check</type>
+                                <default>1</default>
+                            </config>
+                        </TCEforms>
+                    </settings.flexform.showQuestionCommentForm>
+                    <settings.flexform.showCategoriesCommentForm>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.showCategoriesCommentForm</label>
+                            <config>
+                                <type>check</type>
+                                <default>1</default>
+                            </config>
+                        </TCEforms>
+                    </settings.flexform.showCategoriesCommentForm>
                     <settings.flexform.selectCategory>
                         <TCEforms>
                             <exclude>1</exclude>
@@ -39,7 +59,6 @@
                                 <renderType>selectMultipleSideBySide</renderType>
                                 <foreign_table>tx_jpfaq_domain_model_category</foreign_table>
                                 <foreign_table_where>ORDER BY category</foreign_table_where>
-                                <items type="array"></items>
                                 <multiple>0</multiple>
                                 <size>10</size>
                                 <maxitems>100</maxitems>

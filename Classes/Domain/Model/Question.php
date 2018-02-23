@@ -34,6 +34,22 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $answer = '';
 
     /**
+     * helpful
+     *
+     * @var int
+     * @validate NotEmpty
+     */
+    protected $helpful = '';
+
+    /**
+     * nothelpful
+     *
+     * @var int
+     * @validate NotEmpty
+     */
+    protected $nothelpful = '';
+
+    /**
      * Additional tt_content for Answer
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\TtContent>
@@ -47,6 +63,15 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category>
      */
     protected $categories = null;
+
+    /**
+     * comments
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Questioncomment>
+     * @cascade remove
+     * @lazy
+     */
+    protected $questioncomment = null;
 
     /**
      * __construct
@@ -69,6 +94,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->additionalContentAnswer = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->questioncomment = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -182,4 +208,59 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->categories = $categories;
     }
+
+    /**
+     * Returns the Helpful
+     *
+     * @return int
+     */
+    public function getHelpful()
+    {
+        return $this->helpful;
+    }
+
+    /**
+     * Sets the Helpful
+     *
+     * @param int $helpful
+     * @return void
+     */
+    public function setHelpful($helpful)
+    {
+        $this->helpful = $helpful;
+    }
+
+    /**
+     * Returns the Nothelpful
+     *
+     * @return int
+     */
+    public function getNothelpful()
+    {
+        return $this->nothelpful;
+    }
+
+    /**
+     * Sets the Nothelpful
+     *
+     * @param int $nothelpful
+     * @return void
+     */
+    public function setNothelpful($nothelpful)
+    {
+        $this->nothelpful = $nothelpful;
+    }
+
+    /**
+     * Adds a questioncomment
+     *
+     * @param \Jp\Jpfaq\Domain\Model\Questioncomment $questioncomment
+     * @return void
+     */
+    public function addComment(\Jp\Jpfaq\Domain\Model\Questioncomment $questioncomment)
+    {
+        $this->questioncomment->attach($questioncomment);
+    }
+
+
 }

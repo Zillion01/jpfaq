@@ -7,45 +7,137 @@ Date: may 2011 - sep 2016
 */
 
 .tx-jpfaq ul {
-    margin: 0;
-    padding: 0 0 10px 0;
+	margin: 0;
+	padding: 0 0 10px 0;
 }
 
 .tx-jpfaq li {
-    list-style: none;
-    margin: 0 0 10px 0;
-    padding: 0;
+	list-style: none;
+	margin: 0 0 10px 0;
+	padding: 0;
 }
 
 .tx-jpfaq li h3 {
-    background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/plus.png') no-repeat left center;
-    padding-left: 20px;
-    margin-bottom: 3px;
-    cursor: pointer;
+	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/plus.png') no-repeat left center;
+	padding-left: 20px;
+	margin-bottom: 3px;
+	cursor: pointer;
 }
 
 .tx-jpfaq li h3.questionUnfolded {
-    background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/min.png') no-repeat left center;
+	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/min.png') no-repeat left center;
 }
 
 .tx-jpfaq .jpfaqAll {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .tx-jpfaq .jpfaqShowAll,
 .tx-jpfaq .jpfaqHideAll {
-    background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/all_plus.png') no-repeat left center;
-    padding-left: 20px;
-    cursor: pointer;
+	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/all_plus.png') no-repeat left center;
+	padding-left: 20px;
+	cursor: pointer;
 }
 
 .tx-jpfaq .jpfaqHideAll {
-    background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/all_min.png') no-repeat left center;
+	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/all_min.png') no-repeat left center;
 }
 
 .tx-jpfaq label,
 .tx-jpfaq .jpfaqHideAll,
 .tx-jpfaq .toggleTriggerContainer,
-.tx-jpfaq #jpfaq-filter-count {
-    display: none;
+.tx-jpfaq #jpfaq-filter-count,
+.jpfaqFinfo {
+	display: none;
+}
+
+.tx-jpfaq form label {
+	display: block;
+}
+
+.tx-jpfaq .jpfaqSpinner {
+	background-image: url('/typo3conf/ext/jpfaq/Resources/Public/Images/jpfaqSpinner.gif');
+	background-size: 32px 32px;
+	width: 32px;
+	height: 32px;
+	margin: 10% 25%;
+	display: block;
+}
+
+.jpfaqQuestionCommentContainer,
+.jpfaqCatCommentContainer {
+	position: relative;
+	max-width: 480px;
+}
+
+.jpfaqAddCommentForm {
+	display: none;
+	padding: 16px;
+	margin-bottom: 16px;
+	border: 1px solid #ccc;
+}
+
+.jpfaqAddCommentForm textarea {
+	width: 100%;
+}
+
+.jpfaqCommentFormIntroHeader,
+.jpfaqCatCommentFormIntroHeader {
+	margin: 10px 0 0;
+}
+
+.jpfaqCommentFormIntroText {
+	font-size: 90%;
+}
+
+.jpfaqQuestionComment label,
+.jpfaqCatComment label {
+	margin-top: 10px;
+}
+
+.jpfaqCommentFieldWarning {
+	border: 2px solid red !important;
+}
+
+.jpfaqQuestionHelpfulText {
+	font-size: 90%;
+}
+
+.jpfaqQuestionHelpful {
+	margin-left: 10px;
+}
+
+.jpfaqAnswerIsHelpfulThankYouText {
+	font-size: 90%;
+	font-weight: bold;
+}
+
+/* include fontawesome for the close buttons */
+.jpfaqCatCommentFormClose .fa-times,
+.jpfaqCommentFormClose .fa-times,
+.jpfaqThanks .fa-times {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	cursor: pointer;
+	font-size: 120%;
+}
+
+.jpfaqThanks {
+	padding: 16px;
+	margin-bottom: 16px;
+	border: 1px solid #ccc;
+}
+
+.jpfaqThanksText {
+	font-weight: bold;
+}
+
+.jpfaqThanksComment {
+	font-style: italic;
+}
+
+.jpfaqThanksComment,
+.jpfaqThanksNameEmail {
+	font-size: 80%;
 }

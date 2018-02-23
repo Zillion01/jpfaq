@@ -2,7 +2,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
     'title' => 'jpFAQ',
-    'description' => 'Easy Frequently Asked Questions (FAQ) plugin. With categories and on-the-fly search.',
+    'description' => 'Frequently Asked Questions (FAQ) plugin. With categories, on-the-fly search, customer helpfulness tracking and comments.',
     'category' => 'plugin',
     'author' => 'Jacco van der Post',
     'author_email' => 'jacco@id-webdesign.nl',
@@ -10,12 +10,12 @@ $EM_CONF[$_EXTKEY] = array(
     'uploadfolder' => false,
     'createDirs' => '',
     'clearCacheOnLoad' => 0,
-    'version' => '8.7.1',
+    'version' => '8.8.0',
     'constraints' =>
         array(
             'depends' =>
                 array(
-                    'typo3' => '8.7.0-8.7.99',
+                    'typo3' => '7.6.0-8.7.99',
                 ),
             'conflicts' =>
                 array(),

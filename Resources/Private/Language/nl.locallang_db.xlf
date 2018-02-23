@@ -48,6 +48,69 @@
             <trans-unit id="tx_jpfaq_flexform.showResultsNumber">
                 <target>Toon aantal gevonden vragen</target>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_config.useSystemCategories">
+                <target>Gebruik TYPO3 systeem categorieën in plaats van jpFaq categorieën</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.questioncomment">
+                <target>Reacties</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.categorycomment">
+                <target>Reacties</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.helpful">
+                <target>Dit antwoord werd nuttig gevonden</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.nothelpful">
+                <target>Dit antwoord werd niet nuttig gevonden</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showQuestionCommentForm">
+                <target>Toon een reactie formulier onder elke vraag</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showCategoriesCommentForm">
+                <target>Toon een (categorieën) reactie formulier onder deze lijst met vragen</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.questioncomment">
+                <target>Reactie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment">
+                <target>Vraag reactie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.name">
+                <target>Naam</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.email">
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.comment">
+                <target>Reactie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.question">
+                <target>Vraag</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.ip">
+                <target>IP-adres</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_category.categorycomment">
+                <target>Reacties</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment">
+                <target>Categorie reactie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.name">
+                <target>Naam</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.email">
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.comment">
+                <target>Reactie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.category">
+                <target>Categorie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.ip">
+                <target>IP-adres</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

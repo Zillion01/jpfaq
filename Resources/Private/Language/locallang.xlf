@@ -12,6 +12,15 @@
             <trans-unit id="tx_jpfaq_domain_model_question.answer">
                 <source>Answer</source>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.helpfulText">
+                <source>Is this answer helpful?</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.helpful">
+                <source>Yes</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.notHelpful">
+                <source>No</source>
+            </trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_question.categories">
                 <source>Categories</source>
             </trans-unit>
@@ -24,6 +33,30 @@
             <trans-unit id="tx_jpfaq_domain_model_category.description">
                 <source>Description</source>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_category_commentform_trigger_intro">
+                <source>Your question / answer was not here?</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_category_commentform_trigger_linktext">
+                <source>What do you miss?</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_category_commentform_intro">
+                <source>Please tell us what you miss</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_category_commentform_intro2">
+                <source>and help us improve the information here.</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.email">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.comment">
+                <source>Comment</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.finfo">
+                <source>Finfo</source>
+            </trans-unit>
             <trans-unit id="jpfaq_showAll">
                 <source>Show all answers</source>
             </trans-unit>
@@ -35,6 +68,33 @@
             </trans-unit>
             <trans-unit id="jpfaq_filterCount">
                 <source>Number of found questions: </source>
+            </trans-unit>
+            <trans-unit id="jpfaq_answerIsHelpfulThankYouText">
+                <source>Thanks for your support</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_question_commentform_intro">
+                <source>Please tell us what you miss</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_question_commentform_intro2">
+                <source>and help us improve the information here.</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.email">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.comment">
+                <source>Comment</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.finfo">
+                <source>Finfo</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_submit_comment">
+                <source>Submit</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_comment_thanks">
+                <source>Thank you, we have received your comment</source>
             </trans-unit>
         </body>
     </file>

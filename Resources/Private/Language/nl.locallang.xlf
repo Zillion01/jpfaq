@@ -34,7 +34,61 @@
                 <target>Snel zoeken FAQ</target>
             </trans-unit>
             <trans-unit id="jpfaq_filterCount">
-                <target>Aantal gevonden vragen: </target>
+                <target>Aantal gevonden vragen:</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.helpfulText">
+                <target>Is dit antwoord nuttig?</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.helpful">
+                <target>Ja</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_question.notHelpful">
+                <target>Nee</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_category_commentform_trigger_intro">
+                <target>Kunnen wij uw vraag niet beantwoorden?</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_category_commentform_trigger_linktext">
+                <target>Wat mist u?</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_category_commentform_intro">
+                <target>Vertelt u svp wat u mist</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_category_commentform_intro2">
+                <target>en help ons de informatie hier te verbeteren.</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.name">
+                <target>Naam</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.email">
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_categorycomment.comment">
+                <target>Reactie</target>
+            </trans-unit>
+            <trans-unit id="jpfaq_answerIsHelpfulThankYouText">
+                <target>Bedankt voor uw support</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_question_commentform_intro">
+                <target>Vertelt u svp wat u mist</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_question_commentform_intro2">
+                <target>en help ons de informatie hier te verbeteren.</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.name">
+                <target>Naam</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.email">
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_domain_model_questioncomment.comment">
+                <target>Reactie</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_submit_comment">
+                <target>Verzend</target>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_comment_thanks">
+                <target>Bedankt, wij hebben uw reactie ontvangen.</target>
             </trans-unit>
         </body>
     </file>

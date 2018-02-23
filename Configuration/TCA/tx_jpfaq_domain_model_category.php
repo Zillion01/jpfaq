@@ -1,5 +1,7 @@
 <?php
-return [
+use Jp\Jpfaq\Utility\ConfigurationUtility;
+
+$categoryTca = [
     'ctrl' => [
         'title' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_category',
         'label' => 'category',
@@ -20,7 +22,7 @@ return [
         ],
         'searchFields' => 'category,description,',
         'typeicon_classes' => [
-            'default' => 'mimetypes-x-tx_jpfaq_domain_model_category'
+            'default' => 'tx_jpfaq_domain_model_category'
         ],
     ],
     'interface' => [
@@ -126,6 +128,16 @@ return [
             ]
 
         ],
-
     ],
 ];
+
+// Todo: Can be removed with 7.6 support drop
+if (ConfigurationUtility::isOlderThan8Lts()) {
+    unset($categoryTca['columns']['starttime']['config']['renderType']);
+    $categoryTca['columns']['starttime']['config']['size'] = 13;
+
+    unset($categoryTca['columns']['endtime']['config']['renderType']);
+    $categoryTca['columns']['endtime']['config']['size'] = 13;
+}
+
+return $categoryTca;
