@@ -69,6 +69,9 @@
             <trans-unit id="tx_jpfaq_flexform.showCategoriesCommentForm">
                 <target>Toon een (categorieën) reactie formulier onder deze lijst met vragen</target>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.selectCategoriesHeadlineType">
+                <source>Selecteer het type kop (H1 - H5) voor categorieën</source>
+            </trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_question.questioncomment">
                 <target>Reactie</target>
             </trans-unit>

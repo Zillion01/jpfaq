@@ -77,6 +77,8 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             'showNumberOfResults' => intval($this->settings['flexform']['showNumberOfResults']),
             'showQuestionCommentForm' => intval($this->settings['flexform']['showQuestionCommentForm']),
             'showCategoriesCommentForm' => intval($this->settings['flexform']['showCategoriesCommentForm']),
+            'headlineTypeCategories' => (isset($this->settings['flexform']['headlineType'])) ? intval($this->settings['flexform']['headlineType']) : 2,
+            'headlineTypeQuestions' => (isset($this->settings['flexform']['headlineType'])) ?  intval($this->settings['flexform']['headlineType']) + 1 : 3,
             'categories' => $categories,
             'restrictToCategories' => $restrictToCategories,
             'currentUid' => $currentUid,
