@@ -17,14 +17,22 @@ Date: may 2011 - sep 2016
 	padding: 0;
 }
 
-.tx-jpfaq li h3 {
+.tx-jpfaq li h2,
+.tx-jpfaq li h3,
+.tx-jpfaq li h4,
+.tx-jpfaq li h5,
+.tx-jpfaq li h6 {
 	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/plus.png') no-repeat left center;
 	padding-left: 20px;
 	margin-bottom: 3px;
 	cursor: pointer;
 }
 
-.tx-jpfaq li h3.questionUnfolded {
+.tx-jpfaq li h2.questionUnfolded,
+.tx-jpfaq li h3.questionUnfolded,
+.tx-jpfaq li h4.questionUnfolded,
+.tx-jpfaq li h5.questionUnfolded,
+.tx-jpfaq li h6.questionUnfolded  {
 	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/min.png') no-repeat left center;
 }
 
