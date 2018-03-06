@@ -1,6 +1,9 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     <li itemprop="hasPart" itemscope itemtype="http://schema.org/Question">
-        <h3 class="toggleTrigger" itemprop="text">{question.question}</h3>
+
+        <f:alias map="{headlineOutput: 'h{headlineTypeQuestions}'}">
+            <{headlineOutput} class="toggleTrigger" itemprop="text">{question.question}</{headlineOutput}>
+        </f:alias>
 
         <div class="toggleTriggerContainer" itemprop="suggestedAnswer acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
             <div class="jpfaqAnswer" itemprop="text">
