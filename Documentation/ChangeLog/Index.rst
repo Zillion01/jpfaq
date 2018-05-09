@@ -10,7 +10,11 @@
 
 ChangeLog
 =========
-9.0.0
+8.8.1
+"""""
+Bugfix TCA sorting of comments. This produced an error when copying a page with jpFAQ. (Thx to Michael Ecker).
+
+8.8.0
 """""
 #. Added optional helpfulness with optional Google Analytics event tracking under each question with a comment form
 #. Added optional commentform under each plugin
