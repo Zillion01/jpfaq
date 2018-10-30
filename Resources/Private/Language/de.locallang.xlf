@@ -25,10 +25,10 @@
                 <target>Beschreibung</target>
             </trans-unit>
             <trans-unit id="jpfaq_showAll">
-                <target>Einblenden aller Antworten</target>
+                <target>Alle Antworten einblenden</target>
             </trans-unit>
             <trans-unit id="jpfaq_hideAll">
-                <target>Ausblenden aller Antworten</target>
+                <target>Alle Antworten ausblenden</target>
             </trans-unit>
             <trans-unit id="jpfaq_searchboxLabel">
                 <target>Schnellsuche FAQ</target>
@@ -52,10 +52,10 @@
                 <target>Welche Information fehlt Ihrer Meinung nach?</target>
             </trans-unit>
             <trans-unit id="tx_jpfaq_category_commentform_intro">
-                <target>Bitte sagen Sie uns, was Ihnen gefehlt hat</target>
+                <target>Bitte sagen Sie uns, was Ihnen gefehlt hat.</target>
             </trans-unit>
             <trans-unit id="tx_jpfaq_category_commentform_intro2">
-                <target>und helfen Sie uns diese Informationen hier zu ergänzen.</target>
+                <target>Damit helfen Sie uns, die Antworten zu verbessern.</target>
             </trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_categorycomment.name">
                 <target>Name</target>
@@ -64,16 +64,16 @@
                 <target>E-Mail</target>
             </trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_categorycomment.comment">
-                <target>Bemerkung</target>
+                <target>Anmerkung</target>
             </trans-unit>
             <trans-unit id="jpfaq_answerIsHelpfulThankYouText">
                 <target>Danke für Ihre Unterstützung</target>
             </trans-unit>
             <trans-unit id="tx_jpfaq_question_commentform_intro">
-                <target>Bitte sagen Sie uns, was Ihnen gefehlt hat</target>
+                <target>Bitte sagen Sie uns, was Ihnen gefehlt hat.</target>
             </trans-unit>
             <trans-unit id="tx_jpfaq_question_commentform_intro2">
-                <target>und helfen Sie uns diese Informationen hier zu ergänzen.</target>
+                <target>Damit helfen Sie uns, diese Antwort zu verbessern.</target>
             </trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_questioncomment.name">
                 <target>Name</target>
@@ -82,13 +82,13 @@
                 <target>E-Mail</target>
             </trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_questioncomment.comment">
-                <target>Bemerkung</target>
+                <target>Anmerkung</target>
             </trans-unit>
             <trans-unit id="tx_jpfaq_submit_comment">
                 <target>Absenden</target>
             </trans-unit>
             <trans-unit id="tx_jpfaq_comment_thanks">
-                <target>Vielen Dank. Wir haben Ihre Bemerkung erhalten.</target>
+                <target>Vielen Dank! Wir haben Ihre Anmerkung erhalten.</target>
             </trans-unit>
         </body>
     </file>
