@@ -9,7 +9,7 @@ namespace Jp\Jpfaq\Controller;
  *  (c) 2016
  ***/
 
-use \Jp\Jpfaq\Domain\Model\Question;
+use Jp\Jpfaq\Domain\Model\Question;
 
 /**
  * QuestionController
@@ -103,7 +103,7 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
             if (!$helpful) {
                 // Show comment form
-                $this->forward('comment', 'QuestionComment', null);
+                $this->forward('comment', 'Questioncomment', null);
             }
         } else {
             # Do not render helpfulness view

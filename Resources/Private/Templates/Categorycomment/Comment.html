@@ -10,9 +10,9 @@
         <div class="form-group">
             <f:render partial="FormErrors" arguments="{object:Categorycomment}"/>
 
-            <f:form action="addComment" controller="CategoryComment" class="jpfaqCatComment" id="jpfaqCatCommentForm{currentUid}" name="newCategorycomment"
+            <f:form action="addComment" controller="Categorycomment" class="jpfaqCatComment" id="jpfaqCatCommentForm{currentUid}" name="newCategorycomment"
                     object="{newCategorycomment}" arguments="{catUids: catUids, pluginUid: currentUid}">
-                <f:render partial="CategoryComment/FormFields"/>
+                <f:render partial="Categorycomment/FormFields"/>
                 <f:form.submit value="{f:translate(key: 'tx_jpfaq_submit_comment')}" class="jpfaqSubmitCatComment btn btn-primary" id="jpfaqSubmitCatComment{currentUid}"/>
             </f:form>
         </div>

@@ -14,8 +14,8 @@ namespace Jp\Jpfaq\Controller;
  ***/
 
 use Jp\Jpfaq\Service\SendMailService;
-use \Jp\Jpfaq\Domain\Model\Question;
-use \Jp\Jpfaq\Domain\Model\Questioncomment;
+use Jp\Jpfaq\Domain\Model\Question;
+use Jp\Jpfaq\Domain\Model\Questioncomment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**

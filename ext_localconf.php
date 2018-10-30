@@ -9,14 +9,14 @@ call_user_func(
             'Faq',
             [
                 'Question' => 'list, helpfulness',
-                'QuestionComment' => 'comment, addComment',
-                'CategoryComment' => 'comment, addComment'
+                'Questioncomment' => 'comment, addComment',
+                'Categorycomment' => 'comment, addComment'
             ],
             // non-cacheable actions
             [
                 'Question' => 'helpfulness',
-                'QuestionComment' => 'comment, addComment',
-                'CategoryComment' => 'comment, addComment'
+                'Questioncomment' => 'comment, addComment',
+                'Categorycomment' => 'comment, addComment'
             ]
         );
     },
