@@ -87,6 +87,7 @@ $questionTca = [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'eval' => 'datetime',
+                'default' => 0,
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
@@ -100,6 +101,7 @@ $questionTca = [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'eval' => 'datetime',
+                'default' => 0,
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
@@ -190,7 +192,8 @@ $questionTca = [
             'config' => [
                 'type' => 'input',
                 'size' => 6,
-                'eval' => 'num'
+                'eval' => 'num',
+                'default' => 0,
             ],
 
         ],
@@ -200,7 +203,8 @@ $questionTca = [
             'config' => [
                 'type' => 'input',
                 'size' => 6,
-                'eval' => 'num'
+                'eval' => 'num',
+                'default' => 0,
             ],
 
         ],

@@ -53,6 +53,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Additional tt_content for Answer
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\TtContent>
+     * @cascade remove
      * @lazy
      */
     protected $additionalContentAnswer;

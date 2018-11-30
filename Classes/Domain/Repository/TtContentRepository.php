@@ -20,5 +20,5 @@ namespace Jp\Jpfaq\Domain\Repository;
  */
 class TtContentRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-    protected $objectType = '\Jp\Jpfaq\Domain\Model\Ttcontent';
+    protected $objectType = '\Jp\Jpfaq\Domain\Model\TtContent';
 }

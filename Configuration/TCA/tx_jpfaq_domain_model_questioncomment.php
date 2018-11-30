@@ -154,6 +154,7 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_jpfaq_domain_model_question',
+                'foreign_field' => 'question',
                 'minitems' => 0,
                 'maxitems' => 1,
             ],
