@@ -1,4 +1,4 @@
 # jpfaq
-Frequently Asked Questions (FAQ) or definitions plugin with rich text answers and / or tt_content IRRE answers. Optional categories and searchform.
+Frequently Asked Questions (FAQ) plugin. With categories, on-the-fly search, customer helpfulness tracking and comments.
 
 For TYPO3 9.5
