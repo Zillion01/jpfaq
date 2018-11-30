@@ -12,8 +12,8 @@ ChangeLog
 =========
 8.8.2
 """""
-Make compatible with Linux case-sensitivity and MySQL Strict Mode (thx to Ferdinand Kasper)
-Improved German translation (thx to Ferdinand Kasper)
+#. Make compatible with Linux case-sensitivity and MySQL Strict Mode (thx to Ferdinand Kasper)
+#. Improved German translation (thx to Ferdinand Kasper)
 
 8.8.1
 """""
