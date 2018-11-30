@@ -10,6 +10,10 @@
 
 ChangeLog
 =========
+9.5.0
+"""""
+For TYPO3 9.5
+
 8.8.2
 """""
 #. Make compatible with Linux case-sensitivity and MySQL Strict Mode (thx to Ferdinand Kasper)
