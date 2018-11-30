@@ -10,6 +10,11 @@
 
 ChangeLog
 =========
+8.8.2
+"""""
+Make compatible with Linux case-sensitivity and MySQL Strict Mode (thx to Ferdinand Kasper)
+Improved German translation (thx to Ferdinand Kasper)
+
 8.8.1
 """""
 Bugfix TCA sorting of comments. This produced an error when copying a page with jpFAQ. (Thx to Michael Ecker).
