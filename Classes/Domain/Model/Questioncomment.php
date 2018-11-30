@@ -35,7 +35,7 @@ class Questioncomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * comment
      *
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $comment = '';
 
@@ -57,7 +57,7 @@ class Questioncomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * question
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Question>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $question = null;
 

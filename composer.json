@@ -1,7 +1,7 @@
 {
     "name": "jp/jpfaq",
     "type": "typo3-cms-extension",
-    "description": "Easy Frequently Asked Questions (FAQ) plugin. With categories and on-the-fly search.",
+    "description": "Frequently Asked Questions (FAQ) plugin. With categories, on-the-fly search, customer helpfulness tracking and comments.",
     "homepage": "http://www.id-webdesign.nl",
     "authors": [
         {
@@ -11,12 +11,12 @@
     ],
     "license": ["GPL-2.0+"],
     "keywords": ["FAQ", "frequently", "asked", "questions", "help", "glossary", "definitions"],
-    "version": "8.8.2",
+    "version": "9.5.0",
     "support": {
         "issues": "https://forge.typo3.org/projects/extension-jpfaq/"
     },
     "require": {
-        "typo3/cms-core": "^8.7"
+        "typo3/cms-core": "^9.5"
     },
     "autoload": {
         "psr-4": {

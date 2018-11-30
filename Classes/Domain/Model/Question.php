@@ -1,6 +1,8 @@
 <?php
 namespace Jp\Jpfaq\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+
 /***
  *
  * This file is part of the "jpFAQ" Extension for TYPO3 CMS.
@@ -21,7 +23,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * question
      *
      * @var string
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $question = '';
 
@@ -29,7 +31,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * answer
      *
      * @var string
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $answer = '';
 
@@ -37,7 +39,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * helpful
      *
      * @var int
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $helpful = '';
 
@@ -45,7 +47,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * nothelpful
      *
      * @var int
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $nothelpful = '';
 
@@ -53,8 +55,8 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Additional tt_content for Answer
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\TtContent>
-     * @cascade remove
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $additionalContentAnswer;
 
@@ -69,8 +71,8 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * comments
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Questioncomment>
-     * @cascade remove
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $questioncomment = null;
 

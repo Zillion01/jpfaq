@@ -21,7 +21,7 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * questionRepository
      *
      * @var \Jp\Jpfaq\Domain\Repository\QuestionRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $questionRepository = null;
 
@@ -29,7 +29,7 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * categoryRepository
      *
      * @var \Jp\Jpfaq\Domain\Repository\CategoryRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $categoryRepository = null;
 

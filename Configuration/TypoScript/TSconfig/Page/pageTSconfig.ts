@@ -1,6 +1,6 @@
 # Choose in backend sysfolder with FAQ articles "Contains Plugin" and set on jpFAQ!
 
-[page|module = jpfaq]
+[page["module"] == "jpfaq"]
     TCEFORM {
         tt_content {
             # Hide columns
@@ -14,4 +14,4 @@
 
     # Hide the tt_content records in list view
     mod.web_list.hideTables = tt_content
-[end]
+[END]

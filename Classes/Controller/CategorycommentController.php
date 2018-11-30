@@ -26,7 +26,7 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * categorycommentRepository
      *
      * @var \Jp\Jpfaq\Domain\Repository\CategorycommentRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $categorycommentRepository = null;
 
@@ -34,7 +34,7 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * categoryRepository
      *
      * @var \Jp\Jpfaq\Domain\Repository\CategoryRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $categoryRepository = null;
 

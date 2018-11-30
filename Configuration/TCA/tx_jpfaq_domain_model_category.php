@@ -1,5 +1,4 @@
 <?php
-use Jp\Jpfaq\Utility\ConfigurationUtility;
 
 $categoryTca = [
     'ctrl' => [
@@ -91,7 +90,9 @@ $categoryTca = [
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
-                'allowLanguageSynchronization' => true,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
             ],
         ],
         'endtime' => [
@@ -105,7 +106,9 @@ $categoryTca = [
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
-                'allowLanguageSynchronization' => true,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
             ],
         ],
 
@@ -132,14 +135,5 @@ $categoryTca = [
         ],
     ],
 ];
-
-// Todo: Can be removed with 7.6 support drop
-if (ConfigurationUtility::isOlderThan8Lts()) {
-    unset($categoryTca['columns']['starttime']['config']['renderType']);
-    $categoryTca['columns']['starttime']['config']['size'] = 13;
-
-    unset($categoryTca['columns']['endtime']['config']['renderType']);
-    $categoryTca['columns']['endtime']['config']['size'] = 13;
-}
 
 return $categoryTca;

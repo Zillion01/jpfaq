@@ -1,5 +1,4 @@
 <?php
-use Jp\Jpfaq\Utility\ConfigurationUtility;
 
 $questionTca = [
     'ctrl' => [
@@ -10,7 +9,7 @@ $questionTca = [
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => 1,
         'sortby' => 'sorting',
-        'versioningWS' => 1,
+        'versioningWS' => true,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
@@ -91,7 +90,9 @@ $questionTca = [
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
-                'allowLanguageSynchronization' => true,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
             ],
         ],
         'endtime' => [
@@ -105,7 +106,9 @@ $questionTca = [
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
-                'allowLanguageSynchronization' => true,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
             ],
         ],
 
@@ -228,19 +231,7 @@ $questionTca = [
             ],
         ],
 
-    ],
+    ]
 ];
-
-// Todo: Can be removed with 7.6 support drop
-if (ConfigurationUtility::isOlderThan8Lts()) {
-    unset($questionTca['columns']['starttime']['config']['renderType']);
-    $questionTca['columns']['starttime']['config']['size'] = 13;
-
-    unset($questionTca['columns']['endtime']['config']['renderType']);
-    $questionTca['columns']['endtime']['config']['size'] = 13;
-
-    unset($questionTca['columns']['answer']['config']['enableRichtext']);
-    $questionTca['columns']['answer']['defaultExtras'] = 'richtext:rte_transform[mode=ts_css]';
-}
 
 return $questionTca;
