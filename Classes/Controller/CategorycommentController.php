@@ -73,6 +73,12 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * @param array $catUids
      * @param int $pluginUid
      *
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     *
      * @return bool
      */
     public function addCommentAction(Categorycomment $newCategorycomment, array $catUids, int $pluginUid)

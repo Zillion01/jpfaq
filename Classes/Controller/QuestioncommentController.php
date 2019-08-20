@@ -65,6 +65,13 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * @param Questioncomment $newQuestioncomment
      * @param int $pluginUid
      *
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
+     *
      * @return bool
      */
     public function addCommentAction(Question $question, Questioncomment $newQuestioncomment, int $pluginUid)

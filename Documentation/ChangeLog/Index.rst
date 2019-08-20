@@ -10,9 +10,13 @@
 
 ChangeLog
 =========
+9.5.2
+"""""
+Some code improvements, added settings for manual
+
 9.5.1
 """""
-Added to packagist
+Added to packagist, updated schema.org
 
 9.5.0
 """""

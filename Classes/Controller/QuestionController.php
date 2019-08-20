@@ -53,6 +53,8 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     /**
      * action list
      *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     *
      * @return void
      */
     public function listAction()
@@ -92,7 +94,11 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @param bool $helpful
      * @param int $pluginUid
      *
-     * @return bool
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     *
+     * @return void|bool
      */
     public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid)
     {
@@ -130,6 +136,9 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      *
      * @param Question $question
      * @param bool $helpful
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
      *
      * @return void
      */

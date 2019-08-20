@@ -32,9 +32,11 @@ class QuestionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param array $categories
      * @param bool $excludeAlreadyDisplayedQuestions
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @return array|QueryResultInterface
      */
-    public function findQuestionsWithConstraints(array $categories = [], bool $excludeAlreadyDisplayedQuestions)
+    public function findQuestionsWithConstraints(array $categories = [], bool $excludeAlreadyDisplayedQuestions = false)
     {
         $query = $this->createQuery();
 
