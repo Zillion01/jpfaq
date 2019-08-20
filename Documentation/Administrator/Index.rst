@@ -32,3 +32,5 @@ To install the extension, perform the following steps:
 #. Include static template jpFAQ
 #. Then... see Users manual
 
+Since 9.5.1. the extension can be installed via composer require jvdp/jpfaq
+

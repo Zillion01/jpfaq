@@ -10,6 +10,10 @@
 
 ChangeLog
 =========
+9.5.1
+"""""
+Added to packagist
+
 9.5.0
 """""
 For TYPO3 9.5
