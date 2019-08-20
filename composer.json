@@ -11,7 +11,6 @@
     ],
     "license": ["GPL-2.0+"],
     "keywords": ["FAQ", "frequently", "asked", "questions", "help", "glossary", "definitions"],
-    "version": "8.8.2",
     "support": {
         "issues": "https://forge.typo3.org/projects/extension-jpfaq/"
     },
