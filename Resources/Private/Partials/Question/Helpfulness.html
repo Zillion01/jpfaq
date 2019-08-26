@@ -1,20 +1,22 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     <div class="jpfaqQuestionCommentContainer{question.uid} jpfaqQuestionCommentContainer">
-        <p class="jpfaqQuestionHelpfulText">
-            <f:translate key="tx_jpfaq_domain_model_question.helpfulText"/>
+        <form>
+            <p class="jpfaqQuestionHelpfulText">
+                <f:translate key="tx_jpfaq_domain_model_question.helpfulText"/>
 
-            <f:link.action action="helpfulness" arguments="{question:question, helpful:1, pluginUid:currentUid}"
-                           class="jpfaqQuestionHelpful"
-                           additionalAttributes="{f:if(condition:'{gtag.enable}', then: '{data-gtagevent: gtag.event, data-gtagcategory: gtag.category, data-gtaglabel: question.question, data-gtagvalue: gtag.valueHelpful}', else: '{data:0}')}">
-                <f:translate key="tx_jpfaq_domain_model_question.helpful"/>
-            </f:link.action>
-            /
-            <f:link.action action="helpfulness" arguments="{question:question, helpful:0, pluginUid:currentUid}"
-                           class="jpfaqQuestionNotHelpful"
-                           additionalAttributes="{f:if(condition:'{gtag.enable}', then: '{data-gtagevent: gtag.event, data-gtagcategory: gtag.category, data-gtaglabel: question.question, data-gtagvalue: gtag.valueUnhelpful}', else: '{data:0}')}">
-                <f:translate key="tx_jpfaq_domain_model_question.notHelpful"/>
-            </f:link.action>
-        </p>
+                <f:form.button type="submit" class="jpfaqQuestionHelpful"
+                               formaction="{f:uri.action(action: 'helpfulness', arguments: {question:question, helpful:1, pluginUid:currentUid})}"
+                               additionalAttributes="{f:if(condition:'{gtag.enable}', then: '{data-gtagevent: gtag.event, data-gtagcategory: gtag.category, data-gtaglabel: question.question, data-gtagvalue: gtag.valueHelpful}', else: '{data:0}')}">
+                    <f:translate key="tx_jpfaq_domain_model_question.helpful"/>
+                </f:form.button>
+                /
+                <f:form.button type="submit" class="jpfaqQuestionHelpful"
+                               formaction="{f:uri.action(action: 'helpfulness', arguments: {question:question, helpful:0, pluginUid:currentUid})}"
+                               additionalAttributes="{f:if(condition:'{gtag.enable}', then: '{data-gtagevent: gtag.event, data-gtagcategory: gtag.category, data-gtaglabel: question.question, data-gtagvalue: gtag.valueUnhelpful}', else: '{data:0}')}">
+                    <f:translate key="tx_jpfaq_domain_model_question.notHelpful"/>
+                </f:form.button>
+            </p>
+        </form>
 
         <div class="jpfaqAddCommentForm"></div>
     </div>

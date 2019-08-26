@@ -159,13 +159,14 @@ var jpFaq = jpFaq || {};
         questionIsHelpful: function () {
             $(jpfaqQuestionHelpful).click(function (event) {
                 event.preventDefault();
-                $(this).closest(jpfaqQuestionHelpfulText).hide();
+                var $link = $(this);
+                $link.closest(jpfaqQuestionHelpfulText).hide();
 
-                var loadUri = $(this).attr('href') + jpfaqCommentPageType;
-                var contentContainer = $(this).closest(jpfaqQuestionCommentContainer);
+                var loadUri = ($link.attr('href') || $link.attr('formaction')) + jpfaqCommentPageType;
+                var contentContainer = $link.closest(jpfaqQuestionCommentContainer);
                 jpFaq.Main.ajaxPost(loadUri, contentContainer);
 
-                var gtagData = $(this).data();
+                var gtagData = $link.data();
                 if (gtagData['gtagevent']) {
                     jpFaq.Main.sendGtag(gtagData);
                 }
@@ -185,14 +186,15 @@ var jpFaq = jpFaq || {};
         questionIsNotHelpful: function () {
             $(jpfaqQuestionNotHelpful).click(function (event) {
                 event.preventDefault();
-                $(this).closest(jpfaqQuestionHelpfulText).hide();
+                let $link = $(this);
+                $link.closest(jpfaqQuestionHelpfulText).hide();
 
-                var loadUri = $(this).attr('href') + jpfaqCommentPageType;
-                var contentContainer = $(this).closest(jpfaqQuestionCommentContainer).find(jpfaqAddCommentForm);
+                var loadUri = ($link.attr('href') || $link.attr('formaction')) + jpfaqCommentPageType;
+                var contentContainer = $link.closest(jpfaqQuestionCommentContainer).find(jpfaqAddCommentForm);
 
                 jpFaq.Main.ajaxPost(loadUri, contentContainer);
 
-                var gtagData = $(this).data();
+                var gtagData = $link.data();
                 if (gtagData['gtagevent']) {
                     jpFaq.Main.sendGtag(gtagData);
                 }
