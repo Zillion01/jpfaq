@@ -1,7 +1,7 @@
 {
     "name": "jp/jpfaq",
     "type": "typo3-cms-extension",
-    "description": "Easy Frequently Asked Questions (FAQ) plugin. With categories and on-the-fly search.",
+    "description": "Frequently Asked Questions (FAQ) plugin. With categories, on-the-fly search, customer helpfulness tracking and comments.",
     "homepage": "http://www.id-webdesign.nl",
     "authors": [
         {

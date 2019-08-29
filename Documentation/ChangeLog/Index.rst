@@ -10,6 +10,10 @@
 
 ChangeLog
 =========
+8.8.3
+"""""
+#. Can now be installed with composer require jvdp/jpfaq
+
 8.8.2
 """""
 #. Make compatible with Linux case-sensitivity and MySQL Strict Mode (thx to Ferdinand Kasper)
