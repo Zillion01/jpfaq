@@ -10,13 +10,17 @@
 
 ChangeLog
 =========
+9.5.3
+"""""
+Prevent search engine indexing of helpful links and comment form (thx to Nemo64)
+
 9.5.2
 """""
 Some code improvements, added settings for manual
 
 9.5.1
 """""
-Added to packagist, updated schema.org
+Added to packagist, updated schema.org (thx to Cristian Fries and Starkmann)
 
 9.5.0
 """""

@@ -74,7 +74,7 @@ plugin.tx_jpfaq_faq {
 page {
     # First include jQuery! Unset tx_jpfaq_jquery if you have your own jQuery lib
     includeJSFooter {
-        tx_jpfaq_jquery = https://code.jquery.com/jquery-3.3.1.min.js
+        tx_jpfaq_jquery = https://code.jquery.com/jquery-3.4.1.min.js
         tx_jpfaq_jquery {
             disableCompression = 1
             excludeFromConcatenation = 1
