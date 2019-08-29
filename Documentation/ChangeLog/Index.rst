@@ -13,6 +13,7 @@ ChangeLog
 8.8.3
 """""
 #. Can now be installed with composer require jvdp/jpfaq
+#. Prevent search engine indexing of helpful links and comment form
 
 8.8.2
 """""
