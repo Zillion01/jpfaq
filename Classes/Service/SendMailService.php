@@ -36,7 +36,7 @@ class SendMailService
         } else {
             $mail->setBody('<html><head></head><body>' . $body . ' </body></html>', 'text/html');
         }
-        
+
         $mail->send();
 
         return $mail->isSent();
