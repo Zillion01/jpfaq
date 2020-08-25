@@ -255,6 +255,16 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the Questioncomment
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Questioncomment>
+     */
+    public function getQuestioncomment()
+    {
+        return $this->questioncomment;
+    }
+
+    /**
      * Adds a questioncomment
      *
      * @param \Jp\Jpfaq\Domain\Model\Questioncomment $questioncomment
