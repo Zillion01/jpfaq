@@ -122,7 +122,7 @@ var jpFaq = jpFaq || {};
                     $(jpFaqFilterCount).hide();
                 }
 
-                $(txJpfaq + ' li').each(function () {
+                $(txJpfaq + ' .jpfaqList > li').each(function () {
                     if ($(this).text().search(new RegExp(searchFilter, 'i')) < 0) {
                         $(this).fadeOut('fast');
                     } else {

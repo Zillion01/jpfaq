@@ -10,6 +10,10 @@
 
 ChangeLog
 =========
+10.4.0
+"""""
+For TYPO3 CMS versions 9.5 and 10.4. (thx to Cristian Fries)
+
 9.5.3
 """""
 Prevent search engine indexing of helpful links and comment form (thx to Nemo64)
