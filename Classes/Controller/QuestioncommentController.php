@@ -16,6 +16,7 @@ namespace Jp\Jpfaq\Controller;
 use Jp\Jpfaq\Service\SendMailService;
 use Jp\Jpfaq\Domain\Model\Question;
 use Jp\Jpfaq\Domain\Model\Questioncomment;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -85,7 +86,7 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
 
         if ($currentUid == $pluginUid) {
             // Set comment IP
-            $extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['jpfaq']);
+            $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('jpfaq');
             $anonymizeIpSetting = $extensionConfiguration['anonymizeIp'];
             $commentIp= (string)GeneralUtility::getIndpEnv('REMOTE_ADDR');
 

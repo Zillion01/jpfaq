@@ -29,7 +29,14 @@ class SendMailService
         $mail->setTo($receivers);
         $mail->setFrom($sender);
         $mail->setSubject($subject);
-        $mail->setBody('<html><head></head><body>' . $body . ' </body></html>', 'text/html');
+
+        // TYPO3 10 uses Mailer whereas TYPO3 9 uses SwiftMailer
+        if (method_exists($mail, 'html')) {
+            $mail->html('<html><head></head><body>' . $body . ' </body></html>');
+        } else {
+            $mail->setBody('<html><head></head><body>' . $body . ' </body></html>', 'text/html');
+        }
+
         $mail->send();
 
         return $mail->isSent();

@@ -21,20 +21,6 @@ namespace Jp\Jpfaq\Domain\Model;
 class TtContent extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
-     * uid
-     *
-     * @var string
-     */
-    protected $uid = '';
-
-    /**
-     * pid
-     *
-     * @var string
-     */
-    protected $pid = '';
-
-    /**
      * @var \DateTime
      */
     protected $crdate;
@@ -617,23 +603,4 @@ class TtContent extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setContentType($contentType) {
         $this->contentType = $contentType;
     }
-
-    /**
-     * Gets the uid
-     *
-     * @return string $uid
-     */
-    public function getUid() {
-        return $this->uid;
-    }
-
-    /**
-     * Gets the pid
-     *
-     * @return string $pid
-     */
-    public function getPid() {
-        return $this->pid;
-    }
-
 }
