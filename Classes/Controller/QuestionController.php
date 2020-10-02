@@ -53,12 +53,18 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     /**
      * action list
      *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     *
+     * @param Question|null $question
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listAction()
+    public function listAction(Question $question = null)
     {
+
+        if (!is_null($question)){
+            $this->forward('detail', null, null, ['question' => $question]);
+        }
+
         $restrictToCategories = $this->settings['questions']['categories'];
         $excludeAlreadyDisplayedQuestions = intval($this->settings['excludeAlreadyDisplayedQuestions']);
         $questions = $this->questionRepository->findQuestionsWithConstraints($restrictToCategories, $excludeAlreadyDisplayedQuestions);
@@ -84,6 +90,25 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             'currentUid' => $currentUid,
             'gtag' => $this->settings['gtag'],
             'questions' => $questions
+        ));
+    }
+
+    /**
+     * action detail
+     *
+     * @param Question $question
+     *
+     * @return void
+     */
+    public function detailAction(Question $question)
+    {
+        $currentUid = $this->getCurrentUid();
+
+        $this->view->assignMultiple(array(
+            'question' => $question,
+            'showQuestionCommentForm' => intval($this->settings['flexform']['showQuestionCommentForm']),
+            'currentUid' => $currentUid,
+            'gtag' => $this->settings['gtag']
         ));
     }
 

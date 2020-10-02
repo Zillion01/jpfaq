@@ -60,6 +60,15 @@
             <trans-unit id="tx_jpfaq_flexform.showCategoriesCommentForm">
                 <source>Show a (categories) comment form under this list of questions</source>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.answerView">
+                <source>Answer View</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.answerCollapsible">
+                <source>Collapsible</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.answerSingleView">
+                <source>Single view</source>
+            </trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_question.questioncomment">
                 <source>Comments</source>
             </trans-unit>

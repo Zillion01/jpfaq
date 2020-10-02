@@ -4,6 +4,7 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
+    <f:debug>{_all}</f:debug>
     <f:if condition="{showSearchForm}">
         <f:render partial="SearchForm" arguments="{showNumberOfResults: showNumberOfResults}"/>
     </f:if>
