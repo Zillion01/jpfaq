@@ -29,7 +29,7 @@ var jpFaq = jpFaq || {};
     var jpfaqRequiredField = '.jpfaqRequired';
     var jpfaqCommentFieldWarning = 'jpfaqCommentFieldWarning';
     var jpfaqSubmitComment = '.jpfaqSubmitComment';
-    var jpfaqCommentPageType = '&type=88188';
+    var jpfaqCommentPageType = '&eID=ajax_dispatcher';
     var jpfaqSpinner = '.jpfaqSpinner';
     var jpfaqSpinnerHtml = '<div class="jpfaqSpinner"></div>';
     var jpfaqCatCommentContainerLink = '.jpfaqCatCommentContainerLink';
