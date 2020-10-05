@@ -63,7 +63,7 @@
                                     </numIndex>
                                     <numIndex index="1">
                                         <numIndex index="0">LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.answerSingleView</numIndex>
-                                        <numIndex index="1">list</numIndex>
+                                        <numIndex index="1">detail</numIndex>
                                     </numIndex>
                                 </items>
                             </config>

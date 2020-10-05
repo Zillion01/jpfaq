@@ -16,6 +16,8 @@ plugin.tx_jpfaq_faq {
     settings {
         excludeAlreadyDisplayedQuestions = 0
 
+        singleViewPid = {$plugin.tx_jpfaq_faq.settings.singleViewPid}
+
         gtag {
             # Google Analytics Event tracking for helpful / unhelpfulresponse
             # First install gtag.js snippet https://developers.google.com/analytics/devguides/collection/gtagjs/
@@ -145,9 +147,9 @@ jpfaqAjaxComment {
         stdWrap.trim = 1
 
         select {
-            where = list_type = "jpfaq_faq"
+            where = (list_type = "jpfaq_faq" OR list_type = "jpfaq_singleview")
         }
 
-        renderObj < tt_content.list.20.jpfaq_faq
+        renderObj < tt_content.list.20.jpfaq_singleview
     }
 }

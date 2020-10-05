@@ -9,6 +9,12 @@ call_user_func(
             'jpFAQ'
         );
 
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'Jp.' . $extKey,
+            'SingleView',
+            'jpFAQSingle'
+        );
+
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($extKey, 'Configuration/TypoScript', 'jpFAQ');
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_jpfaq_domain_model_question',

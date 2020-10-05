@@ -97,10 +97,11 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * action detail
      *
      * @param Question $question
+     * @param array $gtag
      *
      * @return void
      */
-    public function detailAction(Question $question)
+    public function detailAction(Question $question, array $gtag)
     {
         $currentUid = $this->getCurrentUid();
 
@@ -108,7 +109,7 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             'question' => $question,
             'showQuestionCommentForm' => intval($this->settings['flexform']['showQuestionCommentForm']),
             'currentUid' => $currentUid,
-            'gtag' => $this->settings['gtag']
+            'gtag' => $gtag
         ));
     }
 
