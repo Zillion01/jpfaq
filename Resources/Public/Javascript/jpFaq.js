@@ -21,15 +21,17 @@ var jpFaq = jpFaq || {};
     var jpfaqQuestionCommentContainer = '.jpfaqQuestionCommentContainer';
     var jpfaqAddCommentForm = '.jpfaqAddCommentForm';
     var jpfaqQuestionHelpfulText = '.jpfaqQuestionHelpfulText';
+    var jpFaqThankYou = '.jpFaqThankYou';
     var jpfaqQuestionNotHelpful = '.jpfaqQuestionNotHelpful';
     var jpfaqQuestionHelpful = '.jpfaqQuestionHelpful';
     var jpfaqCommentFormClose = '.jpfaqCommentFormClose';
     var jpfaqQuestionCommentForm = '#jpfaqQuestionCommentForm';
+    var jpfaqAddCommentCategoryForm = '.jpfaqAddCommentCategoryForm';
     var jpfaqEmailField = '.jpfaqEmailField';
     var jpfaqRequiredField = '.jpfaqRequired';
     var jpfaqCommentFieldWarning = 'jpfaqCommentFieldWarning';
     var jpfaqSubmitComment = '.jpfaqSubmitComment';
-    var jpfaqCommentPageType = '&eID=ajax_dispatcher';
+    var jpfaqCommentPageType = '&eID=jpfaq_feedback';
     var jpfaqSpinner = '.jpfaqSpinner';
     var jpfaqSpinnerHtml = '<div class="jpfaqSpinner"></div>';
     var jpfaqCatCommentContainerLink = '.jpfaqCatCommentContainerLink';
@@ -160,10 +162,10 @@ var jpFaq = jpFaq || {};
             $(jpfaqQuestionHelpful).click(function (event) {
                 event.preventDefault();
                 $(this).closest(jpfaqQuestionHelpfulText).hide();
+                $(jpFaqThankYou).show();
 
                 var loadUri = $(this).attr('href') + jpfaqCommentPageType;
-                var contentContainer = $(this).closest(jpfaqQuestionCommentContainer);
-                jpFaq.Main.ajaxPost(loadUri, contentContainer);
+                jpFaq.Main.ajaxPost(loadUri);
 
                 var gtagData = $(this).data();
                 if (gtagData['gtagevent']) {
@@ -186,11 +188,12 @@ var jpFaq = jpFaq || {};
             $(jpfaqQuestionNotHelpful).click(function (event) {
                 event.preventDefault();
                 $(this).closest(jpfaqQuestionHelpfulText).hide();
+                $(jpfaqAddCommentForm).slideDown('fast', function () {
+                    $(jpfaqAddCommentForm).show();
+                })
 
                 var loadUri = $(this).attr('href') + jpfaqCommentPageType;
-                var contentContainer = $(this).closest(jpfaqQuestionCommentContainer).find(jpfaqAddCommentForm);
-
-                jpFaq.Main.ajaxPost(loadUri, contentContainer);
+                jpFaq.Main.ajaxPost(loadUri);
 
                 var gtagData = $(this).data();
                 if (gtagData['gtagevent']) {
@@ -226,7 +229,7 @@ var jpFaq = jpFaq || {};
 
                 var formContainer = $(this).closest(jpfaqQuestionCommentContainer).find(jpfaqAddCommentForm);
                 formContainer.slideUp('fast', function () {
-                    formContainer.empty();
+                    formContainer.hide();
                 });
             })
         },
@@ -277,10 +280,9 @@ var jpFaq = jpFaq || {};
             $(jpfaqCatCommentContainerLink).click(function (event) {
                 event.preventDefault();
                 $(this).closest(jpfaqCatCommentContainerIntro).hide();
-
-                var loadUri = $(this).attr('href') + jpfaqCommentPageType;
-                var contentContainer = $(this).closest(jpfaqCatCommentContainer).find(jpfaqAddCommentForm);
-                jpFaq.Main.ajaxPost(loadUri, contentContainer);
+                $(jpfaqAddCommentCategoryForm).slideDown('fast', function () {
+                    $(jpfaqAddCommentCategoryForm).show();
+                })
             })
         },
 
@@ -293,9 +295,9 @@ var jpFaq = jpFaq || {};
             $(txJpfaq).on('click', jpfaqCatCommentFormClose, function () {
                 $(this).closest(jpfaqCatCommentContainer).find(jpfaqCatCommentContainerIntro).show();
 
-                var formContainer = $(this).closest(jpfaqCatCommentContainer).find(jpfaqAddCommentForm);
+                var formContainer = $(this).closest(jpfaqCatCommentContainer).find(jpfaqAddCommentCategoryForm);
                 formContainer.slideUp('fast', function () {
-                    formContainer.empty();
+                    formContainer.hide();
                 });
             })
         },
@@ -384,21 +386,12 @@ var jpFaq = jpFaq || {};
          *
          * @return void
          */
-        ajaxPost: function (loadUri, contentContainer) {
+        ajaxPost: function (loadUri) {
             $.ajax({
                 type: 'POST',
                 url: loadUri,
                 data: {},
 
-                success: function (response) {
-                    $(contentContainer).append(response);
-                    contentContainer.slideDown('fast');
-                },
-
-                error: function (xhr, thrownError) {
-                    $(contentContainer).append('fail');
-                    //console.log(xhr.status + ' ' + xhr.responseText + ' ' + thrownError);
-                }
             });
         },
 

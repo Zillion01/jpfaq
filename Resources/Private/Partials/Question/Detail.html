@@ -20,5 +20,9 @@
         <f:if condition="{showQuestionCommentForm}">
             <f:render partial="Question/Helpfulness" arguments="{question: question, currentUid: currentUid, gtag: gtag}"/>
         </f:if>
+
+        <f:if condition="{showCategoriesCommentForm}">
+            <f:render partial="Categorycomment/LoadCommentFormLink" arguments="{currentUid: currentUid, restrictToCategories: restrictToCategories}"/>
+        </f:if>
     </div>
 </div>

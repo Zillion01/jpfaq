@@ -76,8 +76,8 @@ if (TYPO3_MODE === 'BE') {
     }
 }
 
-$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['ajax_dispatcher'] =
-    \Jp\Jpfaq\Ajax\AjaxDispatcher::class . '::processRequest';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['jpfaq_feedback'] =
+    \Jp\Jpfaq\Ajax\FeedbackProcessor::class . '::processRequest';
 
 // Example Signal Slot registering
 //$signalSlotDispatcher->connect(
