@@ -127,29 +127,3 @@ lib.tx_jpfaq.contentElementRendering {
     source.current = 1
     dontCheckPid = 1
 }
-
-# Pagetype for ajaxComment, must be unique
-jpfaqAjaxComment = PAGE
-jpfaqAjaxComment {
-    typeNum = 88188
-
-    config {
-        disableAllHeaderCode = 1
-        disableCharsetHeader = 1
-        disablePrefixComment = 1
-        additionalHeaders = Content-type:text/html
-        admPanel = 0
-        debug = 0
-    }
-
-    10 < styles.content.get
-    10 {
-        stdWrap.trim = 1
-
-        select {
-            where = (list_type = "jpfaq_faq" OR list_type = "jpfaq_singleview")
-        }
-
-        renderObj < tt_content.list.20.jpfaq_singleview
-    }
-}

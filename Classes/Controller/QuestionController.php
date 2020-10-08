@@ -122,7 +122,8 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             'currentUid' => $currentUid,
             'gtag' => $gtag,
             'showCategoriesCommentForm' => intval($this->settings['flexform']['showCategoriesCommentForm']),
-            'restrictToCategories' => $restrictToCategories
+            'restrictToCategories' => $restrictToCategories,
+            'categories' => $categories
         ));
     }
 

@@ -4,7 +4,6 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
-    <f:debug>{_all}</f:debug>
     <f:if condition="{showSearchForm}">
         <f:render partial="SearchForm" arguments="{showNumberOfResults: showNumberOfResults}"/>
     </f:if>
@@ -13,14 +12,16 @@
         <f:for each="{categories}" as="category">{category.category}<br/></f:for>
     </h2>
 
-    <div class="jpfaqAll">
-        <div class="jpfaqShowAll">
-            <f:translate key="jpfaq_showAll"/>
+    <f:if condition="({settings.flexform.answerView} == '0')">
+        <div class="jpfaqAll">
+            <div class="jpfaqShowAll">
+                <f:translate key="jpfaq_showAll"/>
+            </div>
+            <div class="jpfaqHideAll">
+                <f:translate key="jpfaq_hideAll"/>
+            </div>
         </div>
-        <div class="jpfaqHideAll">
-            <f:translate key="jpfaq_hideAll"/>
-        </div>
-    </div>
+    </f:if>
 
     <ul class="jpfaqList">
         <f:for each="{questions}" as="question">

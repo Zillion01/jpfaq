@@ -152,3 +152,7 @@ Date: may 2011 - sep 2016
 	margin-bottom: 16px;
 	border: 1px solid #ccc;
 }
+
+.jpfaqAddThankYouMessage {
+	display: none;
+}

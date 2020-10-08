@@ -3,7 +3,6 @@
 
 <div class="detailContainer" itemprop="suggestedAnswer acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
     <div class="jpfaqAnswer" itemprop="text">
-        <f:debug>{_all}</f:debug>
         <h3 class="questionHeader" itemprop="text">{question.question}</h3>
         <f:if condition="{question.answer}">
             <f:format.html>{question.answer}</f:format.html>
@@ -22,7 +21,7 @@
         </f:if>
 
         <f:if condition="{showCategoriesCommentForm}">
-            <f:render partial="Categorycomment/LoadCommentFormLink" arguments="{currentUid: currentUid, restrictToCategories: restrictToCategories}"/>
+            <f:render partial="Categorycomment/LoadCommentFormLink" arguments="{question:question, currentUid: currentUid, restrictToCategories: restrictToCategories}"/>
         </f:if>
     </div>
 </div>

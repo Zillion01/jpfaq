@@ -21,7 +21,7 @@ var jpFaq = jpFaq || {};
     var jpfaqQuestionCommentContainer = '.jpfaqQuestionCommentContainer';
     var jpfaqAddCommentForm = '.jpfaqAddCommentForm';
     var jpfaqQuestionHelpfulText = '.jpfaqQuestionHelpfulText';
-    var jpFaqThankYou = '.jpFaqThankYou';
+    var jpFaqThankYou = '.jpfaqThankYou';
     var jpfaqQuestionNotHelpful = '.jpfaqQuestionNotHelpful';
     var jpfaqQuestionHelpful = '.jpfaqQuestionHelpful';
     var jpfaqCommentFormClose = '.jpfaqCommentFormClose';
@@ -31,7 +31,8 @@ var jpFaq = jpFaq || {};
     var jpfaqRequiredField = '.jpfaqRequired';
     var jpfaqCommentFieldWarning = 'jpfaqCommentFieldWarning';
     var jpfaqSubmitComment = '.jpfaqSubmitComment';
-    var jpfaqCommentPageType = '&eID=jpfaq_feedback';
+    var jpfaqCommentPageEiD = '&eID=jpfaq_feedback';
+    var jpfaqCommentPageType = '&type=88188';
     var jpfaqSpinner = '.jpfaqSpinner';
     var jpfaqSpinnerHtml = '<div class="jpfaqSpinner"></div>';
     var jpfaqCatCommentContainerLink = '.jpfaqCatCommentContainerLink';
@@ -39,7 +40,8 @@ var jpFaq = jpFaq || {};
     var jpfaqCatCommentContainer = '.jpfaqCatCommentContainer';
     var jpfaqCatCommentFormClose = '.jpfaqCatCommentFormClose';
     var jpfaqSubmitCatComment = '.jpfaqSubmitCatComment';
-    var jpfaqCatCommentForm = '#jpfaqCatCommentForm';
+    var jpfaqCatCommentForm = '#jpfaqCategoryCommentForm';
+    var jpfaqAddThankYouMessage = '.jpfaqAddThankYouMessage';
 
     /**
      * Plugins
@@ -164,7 +166,7 @@ var jpFaq = jpFaq || {};
                 $(this).closest(jpfaqQuestionHelpfulText).hide();
                 $(jpFaqThankYou).show();
 
-                var loadUri = $(this).attr('href') + jpfaqCommentPageType;
+                var loadUri = $(this).attr('href') + jpfaqCommentPageEiD;
                 jpFaq.Main.ajaxPost(loadUri);
 
                 var gtagData = $(this).data();
@@ -192,7 +194,7 @@ var jpFaq = jpFaq || {};
                     $(jpfaqAddCommentForm).show();
                 })
 
-                var loadUri = $(this).attr('href') + jpfaqCommentPageType;
+                var loadUri = $(this).attr('href') + jpfaqCommentPageEiD;
                 jpFaq.Main.ajaxPost(loadUri);
 
                 var gtagData = $(this).data();
@@ -279,6 +281,7 @@ var jpFaq = jpFaq || {};
         addCategoryCommentForm: function () {
             $(jpfaqCatCommentContainerLink).click(function (event) {
                 event.preventDefault();
+
                 $(this).closest(jpfaqCatCommentContainerIntro).hide();
                 $(jpfaqAddCommentCategoryForm).slideDown('fast', function () {
                     $(jpfaqAddCommentCategoryForm).show();
@@ -316,13 +319,15 @@ var jpFaq = jpFaq || {};
                 var questionNumber = submitButtonId.replace('jpfaqSubmitCatComment', '');
                 // Get the correct plugin when multiple plugins with same questions on a page
                 var pluginId = $(this).closest(txJpfaq).attr('id');
-                var commentContainer = '#' + pluginId + ' ' + jpfaqCatCommentContainer + questionNumber;
                 var pluginUid = pluginId.replace('tx-jpfaq','');
-                var form = $(jpfaqCatCommentForm + pluginUid);
+                var categoryContainer = '#' + pluginId + ' ' + jpfaqCatCommentContainer + pluginUid;
+                var form = $(jpfaqCatCommentForm + questionNumber);
                 var formValidated = jpFaq.Main.validateForm(form);
 
+                $(jpfaqQuestionHelpfulText).hide();
+
                 if (formValidated) {
-                    jpFaq.Main.postComment(event, commentContainer, form);
+                    jpFaq.Main.postComment(event, categoryContainer, form);
                 }
             });
         },
@@ -358,6 +363,7 @@ var jpFaq = jpFaq || {};
                 }
             });
 
+
             // Validate email if filled in, else add warning class
             $(form).find(jpfaqEmailField).each(function () {
                 var email = $(this).val();
@@ -382,7 +388,6 @@ var jpFaq = jpFaq || {};
          * Used for helpful / not helpful
          *
          * @param {string} loadUri
-         * @param {string} contentContainer
          *
          * @return void
          */
@@ -408,7 +413,7 @@ var jpFaq = jpFaq || {};
          * @return void
          */
         postComment: function (event, commentContainer, form) {
-            var loadUri = $(form).attr('action') + jpfaqCommentPageType;
+            var loadUri = $(form).attr('action');
             $(commentContainer + ' ' + jpfaqAddCommentForm).fadeOut();
             $(commentContainer).append(jpfaqSpinnerHtml);
 
@@ -417,11 +422,15 @@ var jpFaq = jpFaq || {};
                 url: loadUri,
                 data: form.serialize(),
 
-                success: function (response) {
-                    $(commentContainer + ' ' + jpfaqAddCommentForm).empty();
+                success: function () {
+                    if (commentContainer.match(jpfaqCatCommentContainer)){
+                        $(commentContainer + ' ' + jpfaqAddCommentCategoryForm).remove();
+                    }else {
+                        $(commentContainer + ' ' + jpfaqAddCommentForm).remove();
+                    }
                     $(jpfaqSpinner).remove();
 
-                    $(commentContainer).append(response);
+                    $(jpfaqAddThankYouMessage).show();
                 },
 
                 error: function (xhr, thrownError) {

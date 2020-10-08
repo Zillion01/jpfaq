@@ -22,7 +22,10 @@
             <f:render partial="Questioncomment/ThankYou" />
         </div>
         <div class="jpfaqAddCommentForm">
-            <f:render partial="Questioncomment/Comment" />
+            <f:render partial="Questioncomment/Comment" arguments="{question:question, pluginUid:currentUid, type:'Questioncomment'}"/>
+        </div>
+        <div class="jpfaqAddThankYouMessage">
+            <f:render partial="Questioncomment/ThankForComment" arguments="{question:question, pluginUid:currentUid, type:'Questioncomment'}"/>
         </div>
     </div>
 </html>
