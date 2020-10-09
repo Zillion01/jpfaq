@@ -117,8 +117,14 @@ var jpFaq = jpFaq || {};
          * @return void
          */
         search: function () {
-            $(jpFaqSearchForm).keyup(function () {
+            $(jpFaqSearchForm).keyup(function (e) {
+                // Shift, Ctrl, Alt and Enter keys are ignored
+                if (e.which === 13 || e.which === 16 || e.which === 17 || e.which === 18 ){
+                    return;
+                }
                 var searchFilter = $(this).val(), count = 0;
+                var words = searchFilter.split(' ');
+                var questions = $(txJpfaq + ' .jpfaqList > li');
 
                 if (searchFilter.length > 0) {
                     $(jpFaqFilterCount).show();
@@ -126,12 +132,22 @@ var jpFaq = jpFaq || {};
                     $(jpFaqFilterCount).hide();
                 }
 
-                $(txJpfaq + ' .jpfaqList > li').each(function () {
-                    if ($(this).text().search(new RegExp(searchFilter, 'i')) < 0) {
+                questions.each(function () {
+                    let isMatch = false; // Match flag to prevent multiple script running
+
+                    for (let i = 0; i < words.length; i++){
+                        if (words[i] !== '') {
+                            if($(this).text().match(words[i])){
+                                $(this).show();
+                                count++;
+                                isMatch = true;
+                                break;
+                            }
+                        }
+                    }
+                    // Hiding element if there's no match and search field not empty
+                    if (!isMatch && words[0] !== ''){
                         $(this).fadeOut('fast');
-                    } else {
-                        $(this).show();
-                        count++;
                     }
                 });
 
