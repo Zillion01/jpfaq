@@ -8,6 +8,8 @@
             </f:link.action>
         </div>
 
-        <div class="jpfaqAddCommentForm"></div>
+        <div class="jpfaqAddCommentCategoryForm">
+            <f:render partial="Questioncomment/Comment" arguments="{question:question, pluginUid:currentUid, type:'Categorycomment', restrictToCategories: restrictToCategories}"/>
+        </div>
     </div>
 </html>

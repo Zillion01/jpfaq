@@ -53,12 +53,18 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     /**
      * action list
      *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     *
+     * @param Question|null $question
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listAction()
+    public function listAction(Question $question = null)
     {
+
+        if (!is_null($question)) {
+            $this->forward('detail', null, null, ['question' => $question]);
+        }
+
         $restrictToCategories = $this->settings['questions']['categories'];
         $excludeAlreadyDisplayedQuestions = intval($this->settings['excludeAlreadyDisplayedQuestions']);
         $questions = $this->questionRepository->findQuestionsWithConstraints($restrictToCategories, $excludeAlreadyDisplayedQuestions);
@@ -88,34 +94,37 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     }
 
     /**
-     * Action helpfulness
+     * action detail
      *
      * @param Question $question
-     * @param bool $helpful
-     * @param int $pluginUid
+     * @param array $gtag
      *
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
-     *
-     * @return void|bool
+     * @return void
      */
-    public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid)
+    public function detailAction(Question $question, array $gtag)
     {
         $currentUid = $this->getCurrentUid();
 
-        if ($currentUid == $pluginUid) {
-            $this->updateHelpful($question, $helpful);
+        $restrictToCategories = $this->settings['questions']['categories'];
 
-            if (!$helpful) {
-                // Show comment form
-                $this->forward('comment', 'Questioncomment', null);
-            }
-        } else {
-            # Do not render helpfulness view
-            # When multiple plugins on a page we want action for the one who called it
-            return false;
+        $categories = [];
+        foreach ($restrictToCategories as $uid) {
+            $categories[] = $this->categoryRepository->findByUid($uid);
         }
+
+        if (!$restrictToCategories) {
+            $restrictToCategories = ['no categories'];
+        }
+
+        $this->view->assignMultiple(array(
+            'question' => $question,
+            'showQuestionCommentForm' => intval($this->settings['flexform']['showQuestionCommentForm']),
+            'currentUid' => $currentUid,
+            'gtag' => $gtag,
+            'showCategoriesCommentForm' => intval($this->settings['flexform']['showCategoriesCommentForm']),
+            'restrictToCategories' => $restrictToCategories,
+            'categories' => $categories
+        ));
     }
 
     /**
@@ -131,51 +140,4 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         return $currentUid;
     }
 
-    /**
-     * Update helpful or nothelpful of a question in db and session
-     *
-     * @param Question $question
-     * @param bool $helpful
-     *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
-     *
-     * @return void
-     */
-    private function updateHelpful(Question $question, bool $helpful)
-    {
-        $questionUid = $question->getUid();
-        $questionHelpful = $question->getHelpful();
-        $questionNotHelpful = $question->getNothelpful();
-        $userClickedHelpfulness = $GLOBALS['TSFE']->fe_user->getKey('ses', $questionUid);
-
-        // User already clicked helpful for this question this session
-        if (isset($userClickedHelpfulness)) {
-            // User changes helpful to nothelpful
-            if ($userClickedHelpfulness & !$helpful) {
-                $question->setNothelpful($questionNotHelpful + 1);
-                if ($questionHelpful > 0) {
-                    $question->setHelpful($questionHelpful - 1);
-                }
-            } elseif (!$userClickedHelpfulness & $helpful) {
-                // User changes nothelpful to helpful
-                $question->setHelpful($questionHelpful + 1);
-                if ($questionNotHelpful > 0) {
-                    $question->setNothelpful($questionNotHelpful - 1);
-                }
-            }
-        } else {
-            // User has not clicked helpful or nothelpful for this question this session
-            if ($helpful) {
-                $question->setHelpful($questionHelpful + 1);
-            } else {
-                $question->setNothelpful($questionNotHelpful + 1);
-            }
-        }
-
-        $this->questionRepository->update($question);
-
-        // Store user interaction on helpfulness in session
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $questionUid, $helpful);
-    }
 }

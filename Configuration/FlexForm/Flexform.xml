@@ -50,6 +50,25 @@
                             </config>
                         </TCEforms>
                     </settings.flexform.showCategoriesCommentForm>
+                    <settings.flexform.answerView>
+                        <TCEforms>
+                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.answerView</label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items>
+                                    <numIndex index="0">
+                                        <numIndex index="0">LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.answerCollapsible</numIndex>
+                                        <numIndex index="1">0</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1">
+                                        <numIndex index="0">LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.answerSingleView</numIndex>
+                                        <numIndex index="1">detail</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.flexform.answerView>
                     <settings.flexform.selectCategory>
                         <TCEforms>
                             <exclude>1</exclude>

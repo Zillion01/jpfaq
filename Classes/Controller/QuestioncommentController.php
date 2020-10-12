@@ -117,33 +117,9 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
                     $body = $emailSettings['introText'] . $emailBodyCenterText . $emailSettings['closeText']
                 );
             }
-
-            $this->forward('thankForComment');
         } else {
             // Do not render view
             // When multiple plugins on a page we want action for the one who called it
-            return false;
-        }
-    }
-
-    /**
-     * Action thankForComment
-     *
-     * @param Questioncomment $newQuestioncomment
-     * @param int $pluginUid
-     *
-     * @return bool
-     */
-    public function thankForCommentAction(Questioncomment $newQuestioncomment, int $pluginUid)
-    {
-        $currentUid = $this->getCurrentUid();
-
-        if ($currentUid == $pluginUid) {
-            $this->view->assign('comment', $newQuestioncomment);
-        } else {
-            # Do not render view
-            # When multiple plugins on a page we want action for the one who called it
-            # The thank you message will however appear at every plugin
             return false;
         }
     }

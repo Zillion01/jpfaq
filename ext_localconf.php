@@ -19,6 +19,22 @@ call_user_func(
                 'Categorycomment' => 'comment, addComment'
             ]
         );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Jp.Jpfaq',
+            'SingleView',
+            [
+                'Question' => 'detail,helpfulness',
+                'Questioncomment' => 'comment, addComment',
+                'Categorycomment' => 'comment, addComment'
+            ],
+            // non-cacheable actions
+            [
+                'Question' => 'helpfulness',
+                'Questioncomment' => 'comment, addComment',
+                'Categorycomment' => 'comment, addComment'
+            ]
+        );
     },
     'jpfaq'
 );
@@ -59,6 +75,9 @@ if (TYPO3_MODE === 'BE') {
         );
     }
 }
+
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['jpfaq_feedback'] =
+    \Jp\Jpfaq\Ajax\FeedbackProcessor::class . '::processRequest';
 
 // Example Signal Slot registering
 //$signalSlotDispatcher->connect(

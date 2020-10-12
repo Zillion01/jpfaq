@@ -3,21 +3,29 @@
         <p class="jpfaqQuestionHelpfulText">
             <f:translate key="tx_jpfaq_domain_model_question.helpfulText"/>
 
-            <f:link.action action="helpfulness" arguments="{question:question, helpful:1, pluginUid:currentUid}"
+            <f:link.page pageUid="{singlePid}" additionalParams="{eID: 'jpfaq_feedback', question: question, helpful:1, pluginUid:currentUid}"
                            class="jpfaqQuestionHelpful"
                            rel="nofollow"
                            additionalAttributes="{f:if(condition:'{gtag.enable}', then: '{data-gtagevent: gtag.event, data-gtagcategory: gtag.category, data-gtaglabel: question.question, data-gtagvalue: gtag.valueHelpful}', else: '{data:0}')}">
                 <f:translate key="tx_jpfaq_domain_model_question.helpful"/>
-            </f:link.action>
+            </f:link.page>
             /
-            <f:link.action action="helpfulness" arguments="{question:question, helpful:0, pluginUid:currentUid}"
+            <f:link.page pageUid="{singlePid}" additionalParams="{eID: 'jpfaq_feedback', question:question, helpful:0, pluginUid:currentUid}"
                            class="jpfaqQuestionNotHelpful"
                            rel="nofollow"
                            additionalAttributes="{f:if(condition:'{gtag.enable}', then: '{data-gtagevent: gtag.event, data-gtagcategory: gtag.category, data-gtaglabel: question.question, data-gtagvalue: gtag.valueUnhelpful}', else: '{data:0}')}">
                 <f:translate key="tx_jpfaq_domain_model_question.notHelpful"/>
-            </f:link.action>
+            </f:link.page>
         </p>
 
-        <div class="jpfaqAddCommentForm"></div>
+        <div class="jpfaqThankYou">
+            <f:render partial="Questioncomment/ThankYou" />
+        </div>
+        <div class="jpfaqAddCommentForm">
+            <f:render partial="Questioncomment/Comment" arguments="{question:question, pluginUid:currentUid, type:'Questioncomment'}"/>
+        </div>
+        <div class="jpfaqAddThankYouMessage">
+            <f:render partial="Questioncomment/ThankForComment" arguments="{question:question, pluginUid:currentUid, type:'Questioncomment'}"/>
+        </div>
     </div>
 </html>

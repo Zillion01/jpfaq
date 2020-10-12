@@ -1,0 +1,38 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    <div class="jpfaqCommentForm">
+        <h4 class="jpfaqCommentFormIntroHeader">
+            <f:translate key="tx_jpfaq_question_commentform_intro"/>
+        </h4>
+        <p class="jpfaqCommentFormIntroText">
+            <f:translate key="tx_jpfaq_question_commentform_intro2"/>
+        </p>
+
+        <f:if condition="({type} == 'Questioncomment')">
+            <f:then>
+                <span class="jpfaqCommentFormClose"><i class="fas fa-times"></i></span>
+
+                <div class="form-group">
+                    <f:render partial="FormErrors" arguments="{object:Questioncomment}"/>
+
+                    <f:form action="addComment" controller="Questioncomment" class="jpfaqQuestionComment" id="jpfaqQuestionCommentForm{question.uid}" name="newQuestioncomment" object="{newQuestioncomment}" arguments="{question:question, newQuestioncomment:newQuestioncomment, pluginUid:pluginUid}">
+                        <f:render partial="Questioncomment/FormFields"/>
+                        <f:form.submit value="{f:translate(key: 'tx_jpfaq_submit_comment')}" class="jpfaqSubmitComment btn btn-primary" id="jpfaqSubmitComment{question.uid}"/>
+                    </f:form>
+                </div>
+            </f:then>
+            <f:else>
+                <span class="jpfaqCatCommentFormClose"><i class="fas fa-times"></i></span>
+
+                <div class="form-group">
+                    <f:render partial="FormErrors" arguments="{object:Categorycomment}"/>
+
+                    <f:form action="addComment" controller="Categorycomment" class="jpfaqCategoryComment" id="jpfaqCategoryCommentForm{question.uid}" name="newCategorycomment" object="{newCategorycomment}" arguments="{newCategorycomment:newCategorycomment, catUids:restrictToCategories, pluginUid:pluginUid}">
+                        <f:render partial="Questioncomment/FormFields"/>
+                        <f:form.submit value="{f:translate(key: 'tx_jpfaq_submit_comment')}" class="jpfaqSubmitCatComment btn btn-primary" id="jpfaqSubmitCatComment{question.uid}"/>
+                    </f:form>
+                </div>
+            </f:else>
+        </f:if>
+
+    </div>
+</html>

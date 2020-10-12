@@ -141,3 +141,18 @@ Date: may 2011 - sep 2016
 .jpfaqThanksNameEmail {
 	font-size: 80%;
 }
+
+.jpfaqThankYou {
+	display: none;
+}
+
+.jpfaqAddCommentCategoryForm {
+	display: none;
+	padding: 16px;
+	margin-bottom: 16px;
+	border: 1px solid #ccc;
+}
+
+.jpfaqAddThankYouMessage {
+	display: none;
+}
