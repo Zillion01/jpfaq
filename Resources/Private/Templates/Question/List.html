@@ -4,6 +4,7 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
+    <f:debug>{_all}</f:debug>
     <f:if condition="{showSearchForm}">
         <f:render partial="SearchForm" arguments="{showNumberOfResults: showNumberOfResults}"/>
     </f:if>
@@ -46,7 +47,7 @@
                                     <n:excludeAlreadyDisplayedQuestions question="{question}"/>
                                     <f:render partial="Question/Question" arguments="{_all}"/>
 
-                                    <f:link.action action="categoryDetail" controller="Question" arguments="{_all}">
+                                    <f:link.action action="categoryDetail" controller="Question" pageUid="{settings.categorySingleView}" arguments="{selectCategory: '{settings.flexform.selectCategory}'}">
                                         <f:translate key="tx_jpfaq_comment_viewAll" />
                                     </f:link.action>
                                 </f:else>

@@ -128,6 +128,17 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     }
 
     /**
+     * action categoryDetail
+     *
+     * @param string $selectCategory
+     * @return void
+     */
+
+    public function categoryDetailAction(string $selectCategory){
+        $this->forward('list', null, null, ['selectCategory' => $selectCategory]);
+    }
+
+    /**
      * Get current uid of content element
      *
      * @return int

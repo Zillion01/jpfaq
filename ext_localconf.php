@@ -40,7 +40,7 @@ call_user_func(
             'Jp.Jpfaq',
             'SingleViewCategory',
             [
-                'Question' => 'detail,helpfulness',
+                'Question' => 'categoryDetail,helpfulness',
                 'Questioncomment' => 'comment, addComment',
                 'Categorycomment' => 'comment, addComment'
             ],
