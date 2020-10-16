@@ -4,7 +4,6 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
-    <f:debug>{_all}</f:debug>
     <f:if condition="{showSearchForm}">
         <f:render partial="SearchForm" arguments="{showNumberOfResults: showNumberOfResults}"/>
     </f:if>
@@ -37,20 +36,20 @@
                     <f:if condition="({iterator.total} > 3)">
                         <f:then>
                             <f:if condition="({iterator.cycle} <= 3)">
-                                <f:then>
-                                    <f:if condition="({iterator.index} < 2)">
+                                <f:if condition="({iterator.index} < 2)">
+                                    <f:then>
                                         <n:excludeAlreadyDisplayedQuestions question="{question}"/>
                                         <f:render partial="Question/Question" arguments="{_all}"/>
-                                    </f:if>
-                                </f:then>
-                                <f:else>
-                                    <n:excludeAlreadyDisplayedQuestions question="{question}"/>
-                                    <f:render partial="Question/Question" arguments="{_all}"/>
+                                    </f:then>
+                                    <f:else>
+                                        <n:excludeAlreadyDisplayedQuestions question="{question}"/>
+                                        <f:render partial="Question/Question" arguments="{_all}"/>
 
-                                    <f:link.action action="categoryDetail" controller="Question" pageUid="{settings.categorySingleView}" arguments="{selectCategory: '{settings.flexform.selectCategory}'}">
-                                        <f:translate key="tx_jpfaq_comment_viewAll" />
-                                    </f:link.action>
-                                </f:else>
+                                        <f:link.action action="categoryDetail" controller="Question" pageUid="{settings.categorySingleView}" arguments="{selectCategory: '{settings.flexform.selectCategory}'}">
+                                            <f:translate key="tx_jpfaq_comment_viewAll" />
+                                        </f:link.action>
+                                    </f:else>
+                                </f:if>
                             </f:if>
                         </f:then>
                         <f:else>
