@@ -35,6 +35,22 @@ call_user_func(
                 'Categorycomment' => 'comment, addComment'
             ]
         );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Jp.Jpfaq',
+            'SingleViewCategory',
+            [
+                'Question' => 'categoryDetail,helpfulness',
+                'Questioncomment' => 'comment, addComment',
+                'Categorycomment' => 'comment, addComment'
+            ],
+            // non-cacheable actions
+            [
+                'Question' => 'helpfulness',
+                'Questioncomment' => 'comment, addComment',
+                'Categorycomment' => 'comment, addComment'
+            ]
+        );
     },
     'jpfaq'
 );

@@ -17,6 +17,7 @@ plugin.tx_jpfaq_faq {
         excludeAlreadyDisplayedQuestions = 0
 
         singleViewPid = {$plugin.tx_jpfaq_faq.settings.singleViewPid}
+        categorySingleView = {$plugin.tx_jpfaq_faq.settings.categorySingleView}
 
         gtag {
             # Google Analytics Event tracking for helpful / unhelpfulresponse

@@ -54,18 +54,19 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * action list
      *
      * @param Question|null $question
+     * @param string $selectCategory
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listAction(Question $question = null)
+    public function listAction(Question $question = null, string $selectCategory = '')
     {
 
         if (!is_null($question)) {
             $this->forward('detail', null, null, ['question' => $question]);
         }
 
-        $restrictToCategories = $this->settings['questions']['categories'];
+        $restrictToCategories = ($selectCategory) ? [0 => intval($selectCategory)] : $this->settings['questions']['categories'];
         $excludeAlreadyDisplayedQuestions = intval($this->settings['excludeAlreadyDisplayedQuestions']);
         $questions = $this->questionRepository->findQuestionsWithConstraints($restrictToCategories, $excludeAlreadyDisplayedQuestions);
 
@@ -125,6 +126,17 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             'restrictToCategories' => $restrictToCategories,
             'categories' => $categories
         ));
+    }
+
+    /**
+     * action categoryDetail
+     *
+     * @param string $selectCategory
+     * @return void
+     */
+
+    public function categoryDetailAction(string $selectCategory){
+        $this->forward('list', null, null, ['selectCategory' => $selectCategory]);
     }
 
     /**

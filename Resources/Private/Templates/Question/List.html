@@ -12,7 +12,7 @@
         <f:for each="{categories}" as="category">{category.category}<br/></f:for>
     </h2>
 
-    <f:if condition="({settings.flexform.answerView} == '0')">
+    <f:if condition="({settings.flexform.answerView} == 'collapse')">
         <div class="jpfaqAll">
             <div class="jpfaqShowAll">
                 <f:translate key="jpfaq_showAll"/>
@@ -24,10 +24,42 @@
     </f:if>
 
     <ul class="jpfaqList">
-        <f:for each="{questions}" as="question">
-            <n:excludeAlreadyDisplayedQuestions question="{question}"/>
-            <f:render partial="Question/Question" arguments="{_all}"/>
-        </f:for>
+        <f:if condition="({settings.flexform.categoryView} == 'collapse')">
+            <f:then>
+                <f:for each="{questions}" as="question">
+                    <n:excludeAlreadyDisplayedQuestions question="{question}"/>
+                    <f:render partial="Question/Question" arguments="{_all}"/>
+                </f:for>
+            </f:then>
+            <f:else>
+                <f:for each="{questions}" as="question" iteration="iterator">
+                    <f:if condition="({iterator.total} > 3)">
+                        <f:then>
+                            <f:if condition="({iterator.cycle} <= 3)">
+                                <f:if condition="({iterator.index} < 2)">
+                                    <f:then>
+                                        <n:excludeAlreadyDisplayedQuestions question="{question}"/>
+                                        <f:render partial="Question/Question" arguments="{_all}"/>
+                                    </f:then>
+                                    <f:else>
+                                        <n:excludeAlreadyDisplayedQuestions question="{question}"/>
+                                        <f:render partial="Question/Question" arguments="{_all}"/>
+
+                                        <f:link.action action="categoryDetail" controller="Question" pageUid="{settings.categorySingleView}" arguments="{selectCategory: '{settings.flexform.selectCategory}'}">
+                                            <f:translate key="tx_jpfaq_comment_viewAll" />
+                                        </f:link.action>
+                                    </f:else>
+                                </f:if>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <n:excludeAlreadyDisplayedQuestions question="{question}"/>
+                            <f:render partial="Question/Question" arguments="{_all}"/>
+                        </f:else>
+                    </f:if>
+                </f:for>
+            </f:else>
+        </f:if>
     </ul>
 
     <f:if condition="{showCategoriesCommentForm}">
