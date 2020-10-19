@@ -61,13 +61,13 @@
                 <source>Show a (categories) comment form under this list of questions</source>
             </trans-unit>
             <trans-unit id="tx_jpfaq_flexform.answerView">
-                <source>Answer View</source>
+                <source>Answers layout</source>
             </trans-unit>
             <trans-unit id="tx_jpfaq_flexform.answerCollapsible">
-                <source>Collapsible</source>
+                <source>Collapsible list</source>
             </trans-unit>
             <trans-unit id="tx_jpfaq_flexform.answerSingleView">
-                <source>Single view</source>
+                <source>Single page</source>
             </trans-unit>
             <trans-unit id="tx_jpfaq_flexform.categoryView">
                 <source>Show questions in category</source>
