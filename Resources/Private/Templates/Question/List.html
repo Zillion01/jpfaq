@@ -4,6 +4,7 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
+    <f:debug>{_all}</f:debug>
     <f:if condition="{showSearchForm}">
         <f:render partial="SearchForm" arguments="{showNumberOfResults: showNumberOfResults}"/>
     </f:if>
@@ -13,52 +14,58 @@
     </h2>
 
     <f:if condition="({settings.flexform.answerView} == 'collapse')">
-        <div class="jpfaqAll">
-            <div class="jpfaqShowAll">
-                <f:translate key="jpfaq_showAll"/>
+        <f:then>
+            <div class="jpfaqAll">
+                <div class="jpfaqShowAll">
+                    <f:translate key="jpfaq_showAll"/>
+                </div>
+                <div class="jpfaqHideAll">
+                    <f:translate key="jpfaq_hideAll"/>
+                </div>
             </div>
-            <div class="jpfaqHideAll">
-                <f:translate key="jpfaq_hideAll"/>
-            </div>
-        </div>
-    </f:if>
-
-    <ul class="jpfaqList">
-        <f:if condition="({settings.flexform.categoryView} == 'collapse')">
-            <f:then>
+            <ul class="jpfaqList">
                 <f:for each="{questions}" as="question">
                     <n:excludeAlreadyDisplayedQuestions question="{question}"/>
                     <f:render partial="Question/Question" arguments="{_all}"/>
                 </f:for>
-            </f:then>
-            <f:else>
-                <f:for each="{questions}" as="question" iteration="iterator">
-                    <f:if condition="({iterator.total} > 3)">
-                        <f:then>
-                            <f:if condition="({iterator.cycle} <= 3)">
-                                <f:if condition="({iterator.index} < 2)">
-                                    <f:then>
-                                        <n:excludeAlreadyDisplayedQuestions question="{question}"/>
-                                        <f:render partial="Question/Question" arguments="{_all}"/>
-                                    </f:then>
-                                    <f:else>
-                                        <n:excludeAlreadyDisplayedQuestions question="{question}"/>
-                                        <f:render partial="Question/Question" arguments="{_all}"/>
+            </ul>
+        </f:then>
+        <f:else>
+            <f:for each="{questions}" as="question" iteration="iterator">
+                <f:if condition="({iterator.total} > 3)">
+                    <f:then>
+                        <f:if condition="({iterator.cycle} <= 3)">
+                            <f:if condition="({iterator.index} < 2)">
+                                <f:then>
+                                    <n:excludeAlreadyDisplayedQuestions question="{question}"/>
+                                    <f:render partial="Question/Question" arguments="{_all}"/>
+                                </f:then>
+                                <f:else>
+                                    <n:excludeAlreadyDisplayedQuestions question="{question}"/>
+                                    <f:render partial="Question/Question" arguments="{_all}"/>
 
-                                        <f:link.action action="categoryDetail" controller="Question" pageUid="{settings.categorySingleView}" arguments="{selectCategory: '{settings.flexform.selectCategory}'}">
-                                            <f:translate key="tx_jpfaq_comment_viewAll" />
-                                        </f:link.action>
-                                    </f:else>
-                                </f:if>
+                                    <f:link.action action="categoryDetail" controller="Question" pageUid="{settings.categorySingleView}" arguments="{selectCategory: '{settings.flexform.selectCategory}'}">
+                                        <f:translate key="tx_jpfaq_comment_viewAll" />
+                                    </f:link.action>
+                                </f:else>
                             </f:if>
-                        </f:then>
-                        <f:else>
-                            <n:excludeAlreadyDisplayedQuestions question="{question}"/>
-                            <f:render partial="Question/Question" arguments="{_all}"/>
-                        </f:else>
-                    </f:if>
-                </f:for>
-            </f:else>
+                        </f:if>
+                    </f:then>
+                    <f:else>
+                        <n:excludeAlreadyDisplayedQuestions question="{question}"/>
+                        <f:render partial="Question/Question" arguments="{_all}"/>
+                    </f:else>
+                </f:if>
+            </f:for>
+        </f:else>
+    </f:if>
+
+    <ul class="jpfaqList">
+        <f:if condition="({settings.flexform.categoryView} == 'collapse')">
+            <f:for each="{questions}" as="question">
+                <n:excludeAlreadyDisplayedQuestions question="{question}"/>
+                <f:render partial="Question/Question" arguments="{_all}"/>
+            </f:for>
         </f:if>
     </ul>
 
