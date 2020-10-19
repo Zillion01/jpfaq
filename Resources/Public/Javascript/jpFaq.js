@@ -126,6 +126,12 @@ var jpFaq = jpFaq || {};
                 var words = searchFilter.split(' ');
                 var questions = $(txJpfaq + ' .jpfaqList > li');
 
+                for (let i = 0; i < words.length; i++){ // Remove space like element of array
+                    if (words[i] === ''){
+                        words.pop();
+                    }
+                }
+
                 if (searchFilter.length > 0) {
                     $(jpFaqFilterCount).show();
                 } else {
@@ -136,18 +142,21 @@ var jpFaq = jpFaq || {};
                     let isMatch = false; // Match flag to prevent multiple script running
 
                     for (let i = 0; i < words.length; i++){
-                        if (words[i] !== '') {
                             if($(this).text().match(words[i])){
-                                $(this).show();
-                                count++;
-                                isMatch = true;
+                                if (i === words.length-1){
+                                    isMatch = true;
+                                    count++;
+                                }
+                            }else {
                                 break;
                             }
                         }
-                    }
+
                     // Hiding element if there's no match and search field not empty
-                    if (!isMatch && words[0] !== ''){
+                    if (!isMatch && words.length > 0){
                         $(this).fadeOut('fast');
+                    }else if(isMatch){
+                        $(this).show();
                     }
                 });
 
