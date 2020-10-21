@@ -51,6 +51,15 @@ call_user_func(
                 'Categorycomment' => 'comment, addComment'
             ]
         );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'Jp.Jpfaq',
+            'Search',
+            [
+                'Search' => 'search'
+            ]
+        );
+
     },
     'jpfaq'
 );
