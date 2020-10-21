@@ -82,13 +82,13 @@
                                     </numIndex>
                                     <numIndex index="1">
                                         <numIndex index="0">LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.answerSingleView</numIndex>
-                                        <numIndex index="1">detail</numIndex>
+                                        <numIndex index="1">singleview</numIndex>
                                     </numIndex>
                                 </items>
                             </config>
                         </TCEforms>
                     </settings.flexform.answerView>
-                    <settings.flexform.selectCategory>
+                    <settings.flexform.selectedCategory>
                         <TCEforms>
                             <exclude>1</exclude>
                             <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.selectCategory</label>
@@ -102,7 +102,7 @@
                                 <maxitems>100</maxitems>
                             </config>
                         </TCEforms>
-                    </settings.flexform.selectCategory>
+                    </settings.flexform.selectedCategory>
                 </el>
             </ROOT>
         </main>

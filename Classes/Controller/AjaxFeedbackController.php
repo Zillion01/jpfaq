@@ -1,6 +1,6 @@
 <?php
 
-namespace Jp\Jpfaq\Ajax;
+namespace Jp\Jpfaq\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -10,9 +10,9 @@ use Jp\Jpfaq\Domain\Repository\QuestionRepository;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 /**
- * FeedbackProcessor
+ * AjaxFeedbackController
  */
-class FeedbackProcessor
+class AjaxFeedbackController
 {
     /**
      * questionRepository
@@ -78,11 +78,11 @@ class FeedbackProcessor
      */
     private function updateHelpful(string $questionUid, bool $helpful)
     {
-        $questionUid = intval($questionUid);
-        $question = $this->questionRepository->findByUid(intval($questionUid));
+        $questionUid = (int)$questionUid;
+        $question = $this->questionRepository->findByUid((int)$questionUid);
         $questionHelpful = $question->getHelpful();
         $questionNotHelpful = $question->getNothelpful();
-        $userClickedHelpfulness = $this->frontendAuthentication->getKey('ses', $questionUid);
+        $userClickedHelpfulness = $this->frontendAuthentication->getKey('ses', 'tx_jpfaq_helpfulness_' . $questionUid);
         $isHelpful = false;
 
         // User already clicked helpful for this question this session
@@ -116,7 +116,7 @@ class FeedbackProcessor
         $this->questionRepository->update($question);
 
         // Store user interaction on helpfulness in session
-        $this->frontendAuthentication->setKey('ses', $questionUid, $helpful);
+        $this->frontendAuthentication->setKey('ses', 'tx_jpfaq_helpfulness_' . $questionUid, $helpful);
         return $isHelpful;
     }
 }

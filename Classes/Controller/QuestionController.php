@@ -42,8 +42,8 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     {
         # Avoid code injection
         $this->settings['questions']['categories'] = [];
-        if ($this->settings['flexform']['selectCategory']) {
-            $categories = explode(',', $this->settings['flexform']['selectCategory']);
+        if ($this->settings['flexform']['selectedCategory']) {
+            $categories = explode(',', $this->settings['flexform']['selectedCategory']);
             foreach ($categories as $category) {
                 $this->settings['questions']['categories'][] = (int)$category;
             }
@@ -54,20 +54,21 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * action list
      *
      * @param Question|null $question
-     * @param string $selectCategory
+     * @param string $selectedCategory
+     * @param int $categoryDetail
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listAction(Question $question = null, string $selectCategory = '')
+    public function listAction(Question $question = null, string $selectedCategory = '', int $categoryDetail = 0)
     {
 
-        if (!is_null($question)) {
+        if ($question !== null) {
             $this->forward('detail', null, null, ['question' => $question]);
         }
 
-        $restrictToCategories = ($selectCategory) ? [0 => intval($selectCategory)] : $this->settings['questions']['categories'];
-        $excludeAlreadyDisplayedQuestions = intval($this->settings['excludeAlreadyDisplayedQuestions']);
+        $restrictToCategories = ($selectedCategory) ? [(int)$selectedCategory] : $this->settings['questions']['categories'];
+        $excludeAlreadyDisplayedQuestions = (int)$this->settings['excludeAlreadyDisplayedQuestions'];
         $questions = $this->questionRepository->findQuestionsWithConstraints($restrictToCategories, $excludeAlreadyDisplayedQuestions);
 
         $categories = [];
@@ -76,19 +77,20 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         }
 
         if (!$restrictToCategories) {
-            $restrictToCategories = ['no categories'];
+            $restrictToCategories = [];
         }
 
         $currentUid = $this->getCurrentUid();
 
         $this->view->assignMultiple(array(
-            'showSearchForm' => intval($this->settings['flexform']['showSearch']),
-            'showNumberOfResults' => intval($this->settings['flexform']['showNumberOfResults']),
-            'showQuestionCommentForm' => intval($this->settings['flexform']['showQuestionCommentForm']),
-            'showCategoriesCommentForm' => intval($this->settings['flexform']['showCategoriesCommentForm']),
+            'showSearchForm' => (int)$this->settings['flexform']['showSearch'],
+            'showNumberOfResults' => (int)$this->settings['flexform']['showNumberOfResults'],
+            'showQuestionCommentForm' => (int)$this->settings['flexform']['showQuestionCommentForm'],
+            'showCategoriesCommentForm' => (int)$this->settings['flexform']['showCategoriesCommentForm'],
             'categories' => $categories,
             'restrictToCategories' => $restrictToCategories,
             'currentUid' => $currentUid,
+            'categoryDetail' => $categoryDetail,
             'gtag' => $this->settings['gtag'],
             'questions' => $questions
         ));
@@ -114,15 +116,15 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         }
 
         if (!$restrictToCategories) {
-            $restrictToCategories = ['no categories'];
+            $restrictToCategories = [''];
         }
 
         $this->view->assignMultiple(array(
             'question' => $question,
-            'showQuestionCommentForm' => intval($this->settings['flexform']['showQuestionCommentForm']),
+            'showQuestionCommentForm' => (int)$this->settings['flexform']['showQuestionCommentForm'],
             'currentUid' => $currentUid,
             'gtag' => $gtag,
-            'showCategoriesCommentForm' => intval($this->settings['flexform']['showCategoriesCommentForm']),
+            'showCategoriesCommentForm' => (int)$this->settings['flexform']['showCategoriesCommentForm'],
             'restrictToCategories' => $restrictToCategories,
             'categories' => $categories
         ));
@@ -131,12 +133,12 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     /**
      * action categoryDetail
      *
-     * @param string $selectCategory
+     * @param string $selectedCategory
+     * @param int $categoryDetail
      * @return void
      */
-
-    public function categoryDetailAction(string $selectCategory){
-        $this->forward('list', null, null, ['selectCategory' => $selectCategory]);
+    public function categoryDetailAction(string $selectedCategory, int $categoryDetail = 0){
+        $this->forward('list', null, null, ['selectedCategory' => $selectedCategory, 'categoryDetail' => $categoryDetail]);
     }
 
     /**
