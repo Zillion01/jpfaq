@@ -5,9 +5,6 @@
 
 <f:section name="main">
     <f:debug>{_all}</f:debug>
-    <f:if condition="{showSearchForm}">
-        <f:render partial="SearchForm" arguments="{showNumberOfResults: showNumberOfResults}"/>
-    </f:if>
 
     <h2 class="jpfaqCategory" itemprop="about">
         <f:for each="{categories}" as="category">{category.category}<br/></f:for>
