@@ -83,7 +83,6 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
         $this->view->assignMultiple(array(
             'showSearchForm' => intval($this->settings['flexform']['showSearch']),
-            'showNumberOfResults' => intval($this->settings['flexform']['showNumberOfResults']),
             'showQuestionCommentForm' => intval($this->settings['flexform']['showQuestionCommentForm']),
             'showCategoriesCommentForm' => intval($this->settings['flexform']['showCategoriesCommentForm']),
             'categories' => $categories,
