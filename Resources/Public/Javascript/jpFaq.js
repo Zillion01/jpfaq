@@ -155,7 +155,7 @@ var jpFaq = jpFaq || {};
                     // Hiding element if there's no match and search field not empty
                     if (!isMatch && words.length > 0){
                         $(this).fadeOut('fast');
-                    }else if(isMatch){
+                    }else{
                         $(this).show();
                     }
                 });
