@@ -56,15 +56,25 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @param Question|null $question
      * @param string $selectedCategory
      * @param int $categoryDetail
+     * @param string $singleViewPid
+     * @param array $gtag
      * @return void
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function listAction(Question $question = null, string $selectedCategory = '', int $categoryDetail = 0)
+    public function listAction(Question $question = null, string $selectedCategory = '', int $categoryDetail = 0, string $singleViewPid = '0', array $gtag = [])
     {
 
         if ($question !== null) {
             $this->forward('detail', null, null, ['question' => $question]);
+        }
+
+        if ($this->settings['singleViewPid']) {
+            $singleViewPid = $this->settings['singleViewPid'];
+        }
+
+        if ($this->settings['gtag']) {
+            $gtag = $this->settings['gtag'];
         }
 
         $restrictToCategories = ($selectedCategory) ? [(int)$selectedCategory] : $this->settings['questions']['categories'];
@@ -91,7 +101,8 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
             'restrictToCategories' => $restrictToCategories,
             'currentUid' => $currentUid,
             'categoryDetail' => $categoryDetail,
-            'gtag' => $this->settings['gtag'],
+            'singleViewPid' => (int)$singleViewPid,
+            'gtag' => $gtag,
             'questions' => $questions
         ));
     }
@@ -134,11 +145,14 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * action categoryDetail
      *
      * @param string $selectedCategory
+     * @param array $gtag
      * @param int $categoryDetail
+     * @param string $singleViewPid
      * @return void
      */
-    public function categoryDetailAction(string $selectedCategory, int $categoryDetail = 0){
-        $this->forward('list', null, null, ['selectedCategory' => $selectedCategory, 'categoryDetail' => $categoryDetail]);
+    public function categoryDetailAction(string $selectedCategory, array $gtag, int $categoryDetail = 0, string $singleViewPid = '0'){
+        $this->forward('list', null, null,
+            ['selectedCategory' => $selectedCategory, 'categoryDetail' => $categoryDetail, 'singleViewPid' => $singleViewPid, 'gtag' => $gtag]);
     }
 
     /**

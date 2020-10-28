@@ -4,8 +4,6 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
-    <f:debug>{_all}</f:debug>
-
     <h2 class="jpfaqCategory" itemprop="about">
         <f:for each="{categories}" as="category">{category.category}<br/></f:for>
     </h2>
@@ -52,7 +50,7 @@
                                                 <n:excludeAlreadyDisplayedQuestions question="{question}"/>
                                                 <f:render partial="Question/Question" arguments="{_all}"/>
 
-                                                <f:link.action action="categoryDetail" controller="Question" pageUid="{settings.categorySingleViewPid}" arguments="{selectedCategory: '{settings.flexform.selectedCategory}',  categoryDetail: 1}">
+                                                <f:link.action action="categoryDetail" controller="Question" pageUid="{settings.categorySingleViewPid}" arguments="{selectedCategory: '{settings.flexform.selectedCategory}',  categoryDetail: 1, singleViewPid: '{settings.singleViewPid}', gtag: gtag}">
                                                     <f:translate key="tx_jpfaq_comment_viewAll" />
                                                 </f:link.action>
                                             </f:else>
