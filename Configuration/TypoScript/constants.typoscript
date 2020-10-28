@@ -14,7 +14,7 @@ plugin.tx_jpfaq_faq {
     }
 
     settings{
-        singleViewPid = 2032
-        categorySingleViewPid = 2033
+        singleViewPid = 2147
+        categorySingleViewPid = 2148
     }
 }

@@ -1,0 +1,36 @@
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <main>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.sheet_main</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.flexform.answerView>
+                        <TCEforms>
+                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.answerView</label>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items>
+                                    <numIndex index="0">
+                                        <numIndex index="0">LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.answerCollapsible</numIndex>
+                                        <numIndex index="1">collapse</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1">
+                                        <numIndex index="0">LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.answerSingleView</numIndex>
+                                        <numIndex index="1">singleview</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.flexform.answerView>
+                </el>
+            </ROOT>
+        </main>
+    </sheets>
+</T3DataStructure>
