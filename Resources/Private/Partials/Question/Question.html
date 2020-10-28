@@ -5,7 +5,7 @@
                 <h3 class="toggleTrigger" itemprop="text">{question.question}</h3>
             </f:then>
             <f:else>
-                <f:link.action action="{settings.flexform.answerView}" pageUid="{settings.singleViewPid}" arguments="{question: '{question}', gtag: '{settings.gtag}'}">{question.question}</f:link.action>
+                <f:link.action action="detail" pageUid="{singleViewPid}" arguments="{question: '{question}', gtag: gtag}">{question.question}</f:link.action>
             </f:else>
         </f:if>
 

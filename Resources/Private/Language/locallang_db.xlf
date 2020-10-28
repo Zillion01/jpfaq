@@ -69,9 +69,6 @@
             <trans-unit id="tx_jpfaq_flexform.answerSingleView">
                 <source>Single page</source>
             </trans-unit>
-            <trans-unit id="tx_jpfaq_flexform.categoryView">
-                <source>Show questions in category</source>
-            </trans-unit>
             <trans-unit id="tx_jpfaq_flexform.categoryCollapsible">
                 <source>Collapsible</source>
             </trans-unit>

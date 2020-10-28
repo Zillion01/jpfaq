@@ -41,6 +41,7 @@ call_user_func(
 
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['jpfaq_faq'] = 'pi_flexform';
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['jpfaq_search'] = 'pi_flexform';
+        $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['jpfaq_singleviewcategory'] = 'pi_flexform';
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
             'jpfaq_faq',
@@ -50,6 +51,11 @@ call_user_func(
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
             'jpfaq_search',
             'FILE:EXT:' . $extKey . '/Configuration/FlexForm/flexform_search.xml'
+        );
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+            'jpfaq_singleviewcategory',
+            'FILE:EXT:' . $extKey . '/Configuration/FlexForm/flexform_category.xml'
         );
 
         $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = array('jpFAQ', $extKey, 'apps-pagetree-folder-contains-board');
