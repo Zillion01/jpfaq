@@ -35,7 +35,6 @@
     }
   },
   "replace": {
-    "jpfaq": "self.version",
     "typo3-ter/jpfaq": "self.version"
   },
   "extra": {
