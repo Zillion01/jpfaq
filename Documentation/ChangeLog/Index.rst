@@ -10,6 +10,11 @@
 
 ChangeLog
 =========
+10.4.1
+"""""
+#. TCA fixes for TYPO3 10.4. (thx to Sven Wappler)
+#. Add extension key to composer.json (thx to Klaus Hörmann-Engl)
+
 10.4.0
 """""
 For TYPO3 CMS versions 9.5 and 10.4. (thx to Cristian Fries)
