@@ -1,7 +1,7 @@
-# jpfaq
+# jpfaq ALPHA
 Frequently Asked Questions (FAQ) plugin. Optional features: categories, on-the-fly search, customer helpfulness tracking and comments.
 
-For TYPO3 9.5 and TYPO3 10.4
+For TYPO3 11 LTS under construction
 
 ## Install
 
