@@ -9,8 +9,8 @@ plugin.tx_jpfaq_faq {
     }
 
     persistence {
-        storagePid <
-        recursive <
+        storagePid >
+        recursive >
     }
 
     settings {
@@ -90,30 +90,6 @@ page {
         tx_jpfaq_fontAwesome {
             disableCompression = 1
             excludeFromConcatenation = 1
-        }
-    }
-}
-
-# Mapping tt_content
-config.tx_extbase {
-    persistence {
-        enableAutomaticCacheClearing = 1
-        updateReferenceIndex = 0
-
-        classes {
-            Jp\Jpfaq\Domain\Model\TtContent {
-                mapping {
-                    tableName = tt_content
-
-                    columns {
-                        uid.mapOnProperty = uid
-                        pid.mapOnProperty = pid
-                        sorting.mapOnProperty = sorting
-                        CType.mapOnProperty = contentType
-                        header.mapOnProperty = header
-                    }
-                }
-            }
         }
     }
 }

@@ -2,39 +2,43 @@
 
 namespace Jp\Jpfaq\Controller;
 
-/***
- * This file is part of the "jpFAQ" Extension for TYPO3 CMS.
- * For the full copyright and license information, please read the
- * LICENSE file that was distributed with this source code.
- *  (c) 2016
- ***/
-
 use Jp\Jpfaq\Domain\Model\Question;
+use Jp\Jpfaq\Domain\Repository\CategoryRepository;
+use Jp\Jpfaq\Domain\Repository\QuestionRepository;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * QuestionController
  */
 class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
     /**
-     * questionRepository
-     *
-     * @var \Jp\Jpfaq\Domain\Repository\QuestionRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var QuestionRepository
      */
-    protected $questionRepository = null;
+    protected $questionRepository;
 
     /**
-     * categoryRepository
-     *
-     * @var \Jp\Jpfaq\Domain\Repository\CategoryRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var CategoryRepository
      */
-    protected $categoryRepository = null;
+    protected $categoryRepository;
+
 
     /**
-     * Initialize basic variables
+     * @param QuestionRepository $questionRepository
+     * @param CategoryRepository $categoryRepository
+     */
+    public function __construct(
+        QuestionRepository $questionRepository,
+        CategoryRepository $categoryRepository
+    ) {
+        $this->questionRepository = $questionRepository;
+        $this->categoryRepository = $categoryRepository;
+    }
+
+    /**
+     * Initialize
      *
      * @return void
      */
@@ -53,15 +57,16 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
     /**
      * action list
      *
+     * @return ResponseInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      *
-     * @return void
      */
-    public function listAction()
+    public function listAction(): ResponseInterface
     {
         $restrictToCategories = $this->settings['questions']['categories'];
-        $excludeAlreadyDisplayedQuestions = intval($this->settings['excludeAlreadyDisplayedQuestions']);
-        $questions = $this->questionRepository->findQuestionsWithConstraints($restrictToCategories, $excludeAlreadyDisplayedQuestions);
+        $excludeAlreadyDisplayedQuestions = (int)$this->settings['excludeAlreadyDisplayedQuestions'];
+        $questions = $this->questionRepository->findQuestionsWithConstraints($restrictToCategories,
+            $excludeAlreadyDisplayedQuestions);
 
         $categories = [];
         foreach ($restrictToCategories as $uid) {
@@ -74,17 +79,19 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
         $currentUid = $this->getCurrentUid();
 
-        $this->view->assignMultiple(array(
-            'showSearchForm' => intval($this->settings['flexform']['showSearch']),
-            'showNumberOfResults' => intval($this->settings['flexform']['showNumberOfResults']),
-            'showQuestionCommentForm' => intval($this->settings['flexform']['showQuestionCommentForm']),
-            'showCategoriesCommentForm' => intval($this->settings['flexform']['showCategoriesCommentForm']),
+        $this->view->assignMultiple([
+            'showSearchForm' => (int)$this->settings['flexform']['showSearch'],
+            'showNumberOfResults' => (int)$this->settings['flexform']['showNumberOfResults'],
+            'showQuestionCommentForm' => (int)$this->settings['flexform']['showQuestionCommentForm'],
+            'showCategoriesCommentForm' => (int)$this->settings['flexform']['showCategoriesCommentForm'],
             'categories' => $categories,
             'restrictToCategories' => $restrictToCategories,
             'currentUid' => $currentUid,
             'gtag' => $this->settings['gtag'],
             'questions' => $questions
-        ));
+        ]);
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -94,11 +101,10 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @param bool $helpful
      * @param int $pluginUid
      *
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @return ResponseInterface|ForwardResponse
+     *
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
-     *
-     * @return void|bool
      */
     public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid)
     {
@@ -109,13 +115,18 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
             if (!$helpful) {
                 // Show comment form
-                $this->forward('comment', 'Questioncomment', null);
+                return (new ForwardResponse('comment'))
+                    ->withControllerName('Questioncomment');
             }
-        } else {
-            # Do not render helpfulness view
-            # When multiple plugins on a page we want action for the one who called it
-            return false;
+
+            // Show helpfullness template
+            return $this->htmlResponse();
         }
+
+        // Else do not render view
+        // When multiple plugins on a page we want action for the one who called it
+        return $this->responseFactory
+            ->createResponse();
     }
 
     /**
@@ -137,10 +148,10 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @param Question $question
      * @param bool $helpful
      *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
-     *
      * @return void
+     *
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      */
     private function updateHelpful(Question $question, bool $helpful)
     {

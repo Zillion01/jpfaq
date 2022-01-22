@@ -2,43 +2,41 @@
 
 namespace Jp\Jpfaq\Controller;
 
-/***
- *
- * This file is part of the "Test Faq" Extension for TYPO3 CMS.
- *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- *  (c) 2018
- *
- ***/
-
+use Jp\Jpfaq\Domain\Repository\QuestioncommentRepository;
+use Jp\Jpfaq\Domain\Repository\QuestionRepository;
 use Jp\Jpfaq\Service\SendMailService;
 use Jp\Jpfaq\Domain\Model\Question;
 use Jp\Jpfaq\Domain\Model\Questioncomment;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
+use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
-/**
- * QuestioncommentController
- */
 class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
-     * questioncommentRepository
-     *
-     * @var \Jp\Jpfaq\Domain\Repository\QuestioncommentRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var QuestioncommentRepository
      */
-    protected $questioncommentRepository = null;
+    protected $questioncommentRepository;
 
     /**
-     * questionRepository
-     *
-     * @var \Jp\Jpfaq\Domain\Repository\QuestionRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var QuestionRepository
      */
-    protected $questionRepository = null;
+    protected $questionRepository;
+
+    /**
+     * @param QuestioncommentRepository $questioncommentRepository
+     * @param QuestionRepository $questionRepository
+     */
+    public function __construct(
+        QuestioncommentRepository $questioncommentRepository,
+        QuestionRepository $questionRepository
+    ) {
+        $this->questioncommentRepository = $questioncommentRepository;
+        $this->questionRepository = $questionRepository;
+    }
 
     /**
      * Action comment
@@ -47,14 +45,18 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      *
      * @param Question $question
      *
+     * @return ResponseInterface
      */
-    public function commentAction(Question $question) {
+    public function commentAction(Question $question): ResponseInterface
+    {
         $currentUid = $this->getCurrentUid();
 
-        $this->view->assignMultiple(array(
+        $this->view->assignMultiple([
             'currentUid' => $currentUid,
             'question' => $question
-        ));
+        ]);
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -66,14 +68,9 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * @param Questioncomment $newQuestioncomment
      * @param int $pluginUid
      *
+     * @return ResponseInterface
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
-     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
-     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      *
-     * @return bool
      */
     public function addCommentAction(Question $question, Questioncomment $newQuestioncomment, int $pluginUid)
     {
@@ -83,12 +80,19 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
         }
 
         $currentUid = $this->getCurrentUid();
+        $anonymizeIpSetting = null;
 
         if ($currentUid == $pluginUid) {
             // Set comment IP
-            $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('jpfaq');
-            $anonymizeIpSetting = $extensionConfiguration['anonymizeIp'];
-            $commentIp= (string)GeneralUtility::getIndpEnv('REMOTE_ADDR');
+            try {
+                $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('jpfaq');
+
+                $anonymizeIpSetting = $extensionConfiguration['anonymizeIp'];
+            } catch (\Exception $exception) {
+                // do nothing
+            }
+
+            $commentIp = (string)GeneralUtility::getIndpEnv('REMOTE_ADDR');
 
             if ($anonymizeIpSetting) {
                 $parts = explode(".", $commentIp);
@@ -98,10 +102,19 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
             }
 
             $question->addComment($newQuestioncomment);
-            $this->questionRepository->update($question);
+
+            try {
+                $this->questionRepository->update($question);
+            } catch (IllegalObjectTypeException $e) {
+            } catch (UnknownObjectException $e) {
+            }
 
             // SignalSlotDispatcher, connect with this to run a custom action after comment creation
-            $this->signalSlotDispatcher->dispatch(__CLASS__, 'NewFaqComment', [$question, $newQuestioncomment]);
+            try {
+                $this->signalSlotDispatcher->dispatch(__CLASS__, 'NewFaqComment', [$question, $newQuestioncomment]);
+            } catch (\Exception $exception) {
+                // do nothing
+            }
 
             // Send a simple email
             // To do implement with ext:form
@@ -118,12 +131,13 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
                 );
             }
 
-            $this->forward('thankForComment');
-        } else {
-            // Do not render view
-            // When multiple plugins on a page we want action for the one who called it
-            return false;
+            return new ForwardResponse('thankForComment');
         }
+
+        // Else do not render view
+        // When multiple plugins on a page we want action for the one who called it
+        return $this->responseFactory
+            ->createResponse();
     }
 
     /**
@@ -132,7 +146,7 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * @param Questioncomment $newQuestioncomment
      * @param int $pluginUid
      *
-     * @return bool
+     * @return ResponseInterface
      */
     public function thankForCommentAction(Questioncomment $newQuestioncomment, int $pluginUid)
     {
@@ -140,12 +154,15 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
 
         if ($currentUid == $pluginUid) {
             $this->view->assign('comment', $newQuestioncomment);
-        } else {
-            # Do not render view
-            # When multiple plugins on a page we want action for the one who called it
-            # The thank you message will however appear at every plugin
-            return false;
+
+            return $this->htmlResponse();
         }
+
+        # Else do not render view
+        # When multiple plugins on a page we want action for the one who called it
+        # The thank you message will however appear at every plugin
+        return $this->responseFactory
+            ->createResponse();
     }
 
     /**

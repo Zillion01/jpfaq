@@ -6,16 +6,16 @@ $EM_CONF[$_EXTKEY] = array(
     'category' => 'plugin',
     'author' => 'Jacco van der Post',
     'author_email' => 'jacco@id-webdesign.nl',
-    'state' => 'stable',
+    'state' => 'alpha',
     'uploadfolder' => false,
     'createDirs' => '',
     'clearCacheOnLoad' => 0,
-    'version' => '10.4.1',
+    'version' => '11.5.0',
     'constraints' =>
         array(
             'depends' =>
                 array(
-                    'typo3' => '9.5.0-10.4.99',
+                    'typo3' => '11.5.5-11.5.99',
                 ),
             'conflicts' =>
                 array(),

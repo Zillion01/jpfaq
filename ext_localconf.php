@@ -1,34 +1,28 @@
 <?php
 defined('TYPO3_MODE') || die('Access denied.');
 
-call_user_func(
-    function ($extKey) {
+$boot = static function (): void {
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'Jpfaq',
+        'Faq',
+        [
+            \Jp\Jpfaq\Controller\QuestionController::class => 'list, helpfulness',
+            \Jp\Jpfaq\Controller\QuestioncommentController::class => 'comment, addComment',
+            \Jp\Jpfaq\Controller\CategorycommentController::class => 'comment, addComment'
+        ],
+        // non-cacheable actions
+        [
+            \Jp\Jpfaq\Controller\QuestionController::class => 'helpfulness',
+            \Jp\Jpfaq\Controller\QuestioncommentController::class => 'comment, addComment',
+            \Jp\Jpfaq\Controller\CategorycommentController::class => 'comment, addComment'
+        ]
+    );
 
-        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-            'Jp.Jpfaq',
-            'Faq',
-            [
-                'Question' => 'list, helpfulness',
-                'Questioncomment' => 'comment, addComment',
-                'Categorycomment' => 'comment, addComment'
-            ],
-            // non-cacheable actions
-            [
-                'Question' => 'helpfulness',
-                'Questioncomment' => 'comment, addComment',
-                'Categorycomment' => 'comment, addComment'
-            ]
-        );
-    },
-    'jpfaq'
-);
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE: EXT:jpfaq/Configuration/TsConfig/includePageTSconfig.tsconfig">');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE: EXT:jpfaq/Configuration/TsConfig/includePageTSconfig.tsconfig">');
-
-/**
- *  Icon registry
- */
-if (TYPO3_MODE === 'BE') {
+    /**
+     *  Icon registry
+     */
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Core\Imaging\IconRegistry::class);
     $iconPath = 'EXT:jpfaq/Resources/Public/Icons/';
 
@@ -58,12 +52,16 @@ if (TYPO3_MODE === 'BE') {
             ['source' => $path]
         );
     }
-}
 
-// Example Signal Slot registering
-//$signalSlotDispatcher->connect(
-//    \Jp\Jpfaq\Controller\QuestionController::class,  // Signal class name
-//    'NewFaqComment',                                  // Signal name
-//    'bla::class',        // Slot class name
-//    'yourslot'           // Slot name
-//);
+    // Example Signal Slot registering
+    //$signalSlotDispatcher->connect(
+    //    \Jp\Jpfaq\Controller\QuestionController::class,  // Signal class name
+    //    'NewFaqComment',                                  // Signal name
+    //    'bla::class',        // Slot class name
+    //    'yourslot'           // Slot name
+    //);
+
+};
+
+$boot();
+unset($boot);

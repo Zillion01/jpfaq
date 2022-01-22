@@ -1,18 +1,6 @@
 <?php
+
 namespace Jp\Jpfaq\Domain\Model;
-
-use TYPO3\CMS\Extbase\Annotation as Extbase;
-
-/***
- *
- * This file is part of the "jpFAQ" Extension for TYPO3 CMS.
- *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- *  (c) 2016
- *
- ***/
 
 /**
  * Question
@@ -22,41 +10,46 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * question
      *
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     *
      * @var string
-     * @Extbase\Validate("NotEmpty")
      */
     protected $question = '';
 
     /**
      * answer
      *
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     *
      * @var string
-     * @Extbase\Validate("NotEmpty")
      */
     protected $answer = '';
 
     /**
      * helpful
      *
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     *
      * @var int
-     * @Extbase\Validate("NotEmpty")
      */
     protected $helpful = '';
 
     /**
      * nothelpful
      *
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     *
      * @var int
-     * @Extbase\Validate("NotEmpty")
      */
     protected $nothelpful = '';
 
     /**
      * Additional tt_content for Answer
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\TtContent>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\TtContent>
      */
     protected $additionalContentAnswer;
 
@@ -70,9 +63,10 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * comments
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Questioncomment>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Questioncomment>
      */
     protected $questioncomment = null;
 
@@ -274,6 +268,4 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->questioncomment->attach($questioncomment);
     }
-
-
 }

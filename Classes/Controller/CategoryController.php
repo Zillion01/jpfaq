@@ -1,16 +1,9 @@
 <?php
+
 namespace Jp\Jpfaq\Controller;
 
-/***
- *
- * This file is part of the "jpFAQ" Extension for TYPO3 CMS.
- *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- *  (c) 2016
- *
- ***/
+use Jp\Jpfaq\Domain\Repository\CategoryRepository;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * CategoryController
@@ -18,21 +11,30 @@ namespace Jp\Jpfaq\Controller;
 class CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
-     * categoryRepository
-     *
-     * @var \Jp\Jpfaq\Domain\Repository\CategoryRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var CategoryRepository
      */
-    protected $categoryRepository = null;
+    protected $categoryRepository;
+
+    /**
+     * @param CategoryRepository $categoryRepository
+     */
+    public function __construct(
+        CategoryRepository $categoryRepository
+    ) {
+        $this->categoryRepository = $categoryRepository;
+    }
 
     /**
      * action list
      *
-     * @return void
+     * @return ResponseInterface
      */
-    public function listAction()
+    public function listAction(): ResponseInterface
     {
         $categories = $this->categoryRepository->findAll();
+
         $this->view->assign('categories', $categories);
+
+        return $this->htmlResponse();
     }
 }

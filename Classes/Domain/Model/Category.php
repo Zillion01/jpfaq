@@ -1,18 +1,6 @@
 <?php
+
 namespace Jp\Jpfaq\Domain\Model;
-
-use TYPO3\CMS\Extbase\Annotation as Extbase;
-
-/***
- *
- * This file is part of the "jpFAQ" Extension for TYPO3 CMS.
- *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- *  (c) 2016
- *
- ***/
 
 /**
  * Category
@@ -22,8 +10,9 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * category
      *
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     *
      * @var string
-     * @Extbase\Validate("NotEmpty")
      */
     protected $category = '';
 
