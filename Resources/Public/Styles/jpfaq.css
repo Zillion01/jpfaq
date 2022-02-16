@@ -2,34 +2,39 @@
 ***********************************************************
 Title: jpfaq.css
 Author: Jacco van der Post - www.id-webdesign.nl
-Date: may 2011 - sep 2016
+Date: may 2011 - feb 2022
 ***********************************************************
 */
 
-.tx-jpfaq ul {
+ul.jpfaqList {
 	margin: 0;
 	padding: 0 0 10px 0;
 }
 
-.tx-jpfaq li {
+.jpfaqList > li {
 	list-style: none;
 	margin: 0 0 10px 0;
 	padding: 0;
 }
 
-.tx-jpfaq li h3 {
+.jpfaqList > li h3.toggleTrigger {
 	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/plus.png') no-repeat left center;
 	padding-left: 20px;
 	margin-bottom: 3px;
 	cursor: pointer;
 }
 
-.tx-jpfaq li h3.questionUnfolded {
+.jpfaqList > li h3.questionUnfolded {
 	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/min.png') no-repeat left center;
 }
 
+.jpfaqList li ul {
+	list-style-type: disc;
+	margin-bottom: 1rem;
+}
+
 .tx-jpfaq .jpfaqAll {
-	margin-bottom: 10px;
+	margin-bottom: 1rem;
 }
 
 .tx-jpfaq .jpfaqShowAll,
@@ -72,9 +77,9 @@ Date: may 2011 - sep 2016
 
 .jpfaqAddCommentForm {
 	display: none;
-	padding: 16px;
-	margin-bottom: 16px;
-	border: 1px solid #ccc;
+	padding: 1rem;
+	margin-bottom: 1rem;
+	border: 1px solid #cccccc;
 }
 
 .jpfaqAddCommentForm textarea {
@@ -117,8 +122,8 @@ Date: may 2011 - sep 2016
 .jpfaqCommentFormClose .fa-times,
 .jpfaqThanks .fa-times {
 	position: absolute;
-	top: 16px;
-	right: 16px;
+	top: 1rem;
+	right: 1rem;
 	cursor: pointer;
 	font-size: 120%;
 }

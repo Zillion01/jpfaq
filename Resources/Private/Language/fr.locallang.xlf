@@ -36,6 +36,9 @@
             <trans-unit id="jpfaq_filterCount">
                 <target>Nombre de questions trouvé: </target>
             </trans-unit>
+            <trans-unit id="jpfaq_toggleAnswer">
+                <target>Afficher ou masquer la réponse</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

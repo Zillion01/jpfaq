@@ -90,6 +90,9 @@
             <trans-unit id="tx_jpfaq_comment_thanks">
                 <target>Vielen Dank! Wir haben Ihre Anmerkung erhalten.</target>
             </trans-unit>
+            <trans-unit id="jpfaq_toggleAnswer">
+                <target>Antwort ein- oder ausblenden</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

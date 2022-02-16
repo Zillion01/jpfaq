@@ -90,6 +90,9 @@
             <trans-unit id="tx_jpfaq_comment_thanks">
                 <target>Bedankt, wij hebben uw reactie ontvangen.</target>
             </trans-unit>
+            <trans-unit id="jpfaq_toggleAnswer">
+                <target>Toon of verberg het antwoord</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

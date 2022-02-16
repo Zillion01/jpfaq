@@ -68,7 +68,7 @@ var jpFaq = jpFaq || {};
             jpFaq.Main.closeThanks4CategoryComment();
 
             // For testing
-            $(jpfaqShow).click();
+            //$(jpfaqShow).click();
         },
 
         /**

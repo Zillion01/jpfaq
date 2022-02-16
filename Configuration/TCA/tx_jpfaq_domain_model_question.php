@@ -1,8 +1,8 @@
 <?php
 
-$questionTca = [
+return [
     'ctrl' => [
-        'title'	=> 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question',
+        'title' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question',
         'label' => 'question',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -23,29 +23,16 @@ $questionTca = [
             'default' => 'tx_jpfaq_domain_model_question'
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, answer, additional_content_answer, categories, helpful, nothelpful, questioncomment',
-    ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, question, answer, additional_content_answer, categories, helpful, nothelpful, questioncomment, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'question, answer, additional_content_answer, categories, helpful, nothelpful, questioncomment, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'special' => 'languages',
-                'items' => [
-                    [
-                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages',
-                        -1,
-                        'flags-multiple'
-                    ],
-                ],
-                'default' => 0,
-            ]
+                'type' => 'language',
+            ],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -53,22 +40,22 @@ $questionTca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
+                'default' => 0,
                 'items' => [
                     ['', 0],
                 ],
                 'foreign_table' => 'tx_jpfaq_domain_model_question',
-                'foreign_table_where' => 'AND tx_jpfaq_domain_model_question.pid=###CURRENT_PID### AND tx_jpfaq_domain_model_question.sys_language_uid IN (-1,0)',
+                'foreign_table_where' => 'AND {#tx_jpfaq_domain_model_question}.{#pid}=###CURRENT_PID### AND {#tx_jpfaq_domain_model_question}.{#sys_language_uid} IN (-1,0)',
             ],
         ],
         'l10n_diffsource' => [
             'config' => [
                 'type' => 'passthrough',
-                'default' => ''
             ],
         ],
         'hidden' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.visible',
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
@@ -76,12 +63,13 @@ $questionTca = [
                     [
                         0 => '',
                         1 => '',
+                        'invertStateDisplay' => true
                     ]
                 ],
-            ]
+            ],
         ],
         'starttime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config' => [
                 'type' => 'input',
@@ -90,11 +78,11 @@ $questionTca = [
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
-                ],
+                ]
             ],
         ],
         'endtime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config' => [
                 'type' => 'input',
@@ -106,7 +94,7 @@ $questionTca = [
                 ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true
-                ],
+                ]
             ],
         ],
         'question' => [
@@ -154,7 +142,6 @@ $questionTca = [
                     'levelLinksPosition' => 'bottom',
                     'useSortable' => 1,
                     'showPossibleLocalizationRecords' => 1,
-                    'showRemovedLocalizationRecords' => 1,
                     'showAllLocalizationLink' => 1,
                     'showSynchronizationLink' => 1,
                     'enabledControls' => [
@@ -206,7 +193,6 @@ $questionTca = [
                 'eval' => 'num',
                 'default' => 0,
             ],
-
         ],
         'questioncomment' => [
             'exclude' => true,
@@ -229,5 +215,3 @@ $questionTca = [
         ],
     ]
 ];
-
-return $questionTca;

@@ -7,7 +7,6 @@ use Jp\Jpfaq\Domain\Repository\CategoryRepository;
 use Jp\Jpfaq\Domain\Repository\QuestionRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * QuestionController
