@@ -4,10 +4,10 @@
 
 ---
 conf.py:
-  copyright: 2021
+  copyright: 2022
   project: jpFAQ
-  version: 10.4
-  release: 10.4.1
+  version: 11.5
+  release: 11.5.0
   intersphinx_mapping:
     t3tsref:
     - http://docs.typo3.org/typo3cms/TyposcriptReference/

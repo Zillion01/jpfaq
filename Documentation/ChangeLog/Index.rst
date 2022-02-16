@@ -10,6 +10,10 @@
 
 ChangeLog
 =========
+11.5.0
+"""""
+Update to TYPO3 11 LTS
+
 10.4.1
 """""
 #. TCA fixes for TYPO3 10.4. (thx to Sven Wappler)
