@@ -75,6 +75,7 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
         $currentUid = $this->getCurrentUid();
 
         $this->view->assignMultiple(array(
+            'showCategories' => intval($this->settings['flexform']['showCategories']),
             'showSearchForm' => intval($this->settings['flexform']['showSearch']),
             'showNumberOfResults' => intval($this->settings['flexform']['showNumberOfResults']),
             'showQuestionCommentForm' => intval($this->settings['flexform']['showQuestionCommentForm']),

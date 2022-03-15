@@ -8,9 +8,11 @@
         <f:render partial="SearchForm" arguments="{showNumberOfResults: showNumberOfResults}"/>
     </f:if>
 
-    <h2 class="jpfaqCategory" itemprop="about">
-        <f:for each="{categories}" as="category">{category.category}<br/></f:for>
-    </h2>
+    <f:if condition="{showCategories}">
+        <h2 class="jpfaqCategory" itemprop="about">
+            <f:for each="{categories}" as="category">{category.category}<br/></f:for>
+        </h2>
+    </f:if>
 
     <div class="jpfaqAll">
         <div class="jpfaqShowAll">
@@ -29,7 +31,8 @@
     </ul>
 
     <f:if condition="{showCategoriesCommentForm}">
-        <f:render partial="Categorycomment/LoadCommentFormLink" arguments="{currentUid: currentUid, restrictToCategories: restrictToCategories}"/>
+        <f:render partial="Categorycomment/LoadCommentFormLink"
+                  arguments="{currentUid: currentUid, restrictToCategories: restrictToCategories}"/>
     </f:if>
 </f:section>
 </html>

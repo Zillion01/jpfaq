@@ -42,6 +42,9 @@
             <trans-unit id="tx_jpfaq_flexform.selectPid">
                 <target>Sélectionnez le dossier avec des records</target>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showCategories">
+                <target>Afficher la liste des catégories</target>
+            </trans-unit>
             <trans-unit id="tx_jpfaq_flexform.showSearch">
                 <target>Moteur de recherche d'affichage (recherche de questions sur la page)</target>
             </trans-unit>

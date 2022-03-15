@@ -10,6 +10,16 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
+                    <settings.flexform.showCategories>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xml:tx_jpfaq_flexform.showCategories</label>
+                            <config>
+                                <type>check</type>
+                                <default>0</default>
+                            </config>
+                        </TCEforms>
+                    </settings.flexform.showCategories>
                     <settings.flexform.showSearch>
                         <TCEforms>
                             <exclude>1</exclude>

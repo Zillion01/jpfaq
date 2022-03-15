@@ -48,6 +48,9 @@
             <trans-unit id="tx_jpfaq_flexform.selectPid">
                 <source>Choose folder with records</source>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.showCategories">
+                <target>Shwo the categories list</target>
+            </trans-unit>
             <trans-unit id="tx_jpfaq_flexform.showSearch">
                 <source>Show searchbox (searches all questions on this page)</source>
             </trans-unit>
