@@ -10,6 +10,12 @@
 
 ChangeLog
 =========
+11.5.1
+"""""
+#. Condition uses `traverse()` to avoid errors
+#. Replace old import with `@import` syntax
+(thx toMathias Bolt Lesniak)
+
 11.5.0
 """""
 Update to TYPO3 11 LTS
