@@ -1,6 +1,6 @@
 # Choose in backend sysfolder with FAQ articles "Contains Plugin" and set on jpFAQ!
 
-[page["module"] == "jpfaq"]
+[traverse(page, 'module') == "jpfaq"]
     TCEFORM {
         tt_content {
             # Hide columns

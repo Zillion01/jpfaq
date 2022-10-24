@@ -1,1 +1,2 @@
-<INCLUDE_TYPOSCRIPT: source="DIR: EXT:jpfaq/Configuration/TsConfig/Page/" extension="tsconfig">
+@import 'EXT:jpfaq/Configuration/TsConfig/Page/contentElementWizard.tsconfig'
+@import 'EXT:jpfaq/Configuration/TsConfig/Page/pageTSconfig.tsconfig'
