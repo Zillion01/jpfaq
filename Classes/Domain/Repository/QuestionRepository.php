@@ -28,25 +28,34 @@ class QuestionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     public function findQuestionsWithConstraints(array $categories = [], bool $excludeAlreadyDisplayedQuestions = false)
     {
         $query = $this->createQuery();
+        $constraintsOr = [];
+        $constraintsAnd = [];
 
         if (!empty($categories)) {
-            # categories can be multi-valued
+            # categories can be multi-valued, show questions which belong to one of the choosen categories
             foreach ($categories as $demandedCategory) {
-                $constraintsCategories[] = $query->contains('categories', $demandedCategory);
+                $constraintsOr[] = $query->contains('categories', $demandedCategory);
             }
         }
 
-        if (!empty($constraintsCategories)) {
-            $query->matching($query->logicalOr($constraintsCategories));
-        }
-
         if ($excludeAlreadyDisplayedQuestions && isset($GLOBALS['EXT']['jpfaq']['alreadyDisplayed']) && !empty($GLOBALS['EXT']['jpfaq']['alreadyDisplayed'])) {
-            $query->matching($query->logicalNot(
+            $constraintsAnd[] = $query->logicalNot(
                 $query->in(
                     'uid',
                     $GLOBALS['EXT']['jpfaq']['alreadyDisplayed']
                 )
-            ));
+            );
+        }
+
+        if (!empty($constraintsOr) && !empty($constraintsAnd)) {
+            $query->matching($query->logicalAnd([
+                $query->logicalOr($constraintsOr),
+                $query->logicalOr($constraintsAnd)
+            ]));
+        } elseif (!empty($constraintsOr)) {
+            $query->matching($query->logicalOr($constraintsOr));
+        } elseif (!empty($constraintsAnd)) {
+            $query->matching($query->logicalAnd($constraintsAnd));
         }
 
         return $query->execute();

@@ -17,7 +17,7 @@ Administrator Manual
 #. If you like to restrict at the answers the additional IRRE tt_content types (for example allow only textmedia), check out Configuration/TsConfig/Page/pageTSconfig.tsconfig
 #. Check out Configuration/TypoScript/setup.typoscript for settings to exclude already displayed questions, configuring comment emails and Google Analytics tracking
 #. In the extension manager you can go to 'Configure' at jpFAQ to anonymize comment IP addresses. This is needed in for example Germany.
-#. If you want name and email in the comment form to be required (there is a simple JS frontend validation), just add the class jpfaqRequired at the fields in the FormFields.html files.
+#. Required fields the comment forms (there is a simple JS frontend validation), are determined by the class jpfaqRequired in the FormFields.html files.
 
 
 .. _admin-installation:

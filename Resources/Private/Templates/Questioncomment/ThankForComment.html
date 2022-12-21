@@ -2,6 +2,9 @@
     <div class="jpfaqThanks">
         <span class="jpfaqCommentClose"><i class="fas fa-times"></i></span>
         <p class="jpfaqThanksText"><f:translate key="tx_jpfaq_comment_thanks"/></p>
+        <f:if condition="{emailNotification}">
+            <p class="jpfaqThanksTextWithNotificationEmail"><f:translate key="tx_jpfaq_comment_thanks_with_notification_email"/></p>
+        </f:if>
         <blockquote class="jpfaqThanksComment"><f:format.nl2br>{comment.comment}</f:format.nl2br></blockquote>
         <p class="jpfaqThanksNameEmail">{comment.name}<br/>{comment.email}</p>
     </div>

@@ -96,6 +96,9 @@
             <trans-unit id="tx_jpfaq_comment_thanks">
                 <source>Thank you, we have received your comment</source>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_comment_thanks_with_notification_email" xml:space="preserve">
+                <source>You will receive a confirmation of your comment in your email.</source>
+            </trans-unit>
             <trans-unit id="jpfaq_toggleAnswer">
                 <source>Show or hide the answer</source>
             </trans-unit>

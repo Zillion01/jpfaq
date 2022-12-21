@@ -6,22 +6,18 @@ use Jp\Jpfaq\Domain\Repository\CategorycommentRepository;
 use Jp\Jpfaq\Domain\Repository\CategoryRepository;
 use Jp\Jpfaq\Service\SendMailService;
 use Jp\Jpfaq\Domain\Model\Categorycomment;
+use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 
 class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-    /**
-     * @var CategorycommentRepository
-     */
-    protected $categorycommentRepository;
+    protected CategorycommentRepository $categorycommentRepository;
 
-    /**
-     * @var CategoryRepository
-     */
-    protected $categoryRepository;
+    protected CategoryRepository $categoryRepository;
 
     /**
      * @param CategorycommentRepository $categorycommentRepository
@@ -29,10 +25,37 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      */
     public function __construct(
         CategorycommentRepository $categorycommentRepository,
-        CategoryRepository $categoryRepository
-    ) {
+        CategoryRepository        $categoryRepository
+    )
+    {
         $this->categorycommentRepository = $categorycommentRepository;
         $this->categoryRepository = $categoryRepository;
+    }
+
+    /**
+     * Initialize
+     *
+     * @return void
+     */
+    public function initializeAction(): void
+    {
+        // Override empty flexform settings
+        $tsSettings = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+            'jpfaq_faq',
+            'Faq'
+        );
+
+        $originalSettings = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+        );
+
+        if (isset($tsSettings['settings']['overrideFlexformSettingsIfEmpty'])) {
+            $typoScriptUtility = GeneralUtility::makeInstance(TypoScript::class);
+            $originalSettings = $typoScriptUtility->override($originalSettings, $tsSettings);
+        }
+
+        $this->settings = $originalSettings;
     }
 
     /**
@@ -80,9 +103,10 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      */
     public function addCommentAction(
         Categorycomment $newCategorycomment,
-        array $catUids,
-        int $pluginUid
-    ): ResponseInterface {
+        array           $catUids,
+        int             $pluginUid
+    ): ResponseInterface
+    {
         // If honeypot field 'finfo' is filled by spambot do not add new comment
         if ($newCategorycomment->getFinfo()) {
             $this->redirect('list', 'Question');
@@ -134,19 +158,31 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
                 // do nothing
             }
 
-            // Send a simple email
-            // To do implement with ext:form
+            // Send notification emails
             $emailSettings = $this->settings['category']['comment']['email'];
 
             if ($emailSettings['enable']) {
-                $emailBodyCenterText = '<br/><strong>' . $categoryNames . '</strong>' . '<p><i>' . nl2br($newCategorycomment->getComment()) . '</i></p><p><i>' . $newCategorycomment->getName() . '<br/>' . $newCategorycomment->getEmail() . '</i></p><br/>';
+                $sender = [htmlspecialchars($emailSettings['sender']['email']) => htmlspecialchars($emailSettings['sender']['name'])];
+
+                $emailBodyCenterText = '<br/><strong>' . $categoryNames . '</strong>' . '<p><i>' . $this->formatRte($newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
 
                 SendMailService::sendMail(
-                    $receivers = $emailSettings['receivers']['email'],
-                    $sender = [$emailSettings['sender']['email'] => $emailSettings['sender']['name']],
+                    $receivers = htmlspecialchars($emailSettings['receivers']['email']),
+                    $sender,
                     $subject = $emailSettings['subject'],
-                    $body = $emailSettings['introText'] . $emailBodyCenterText . $emailSettings['closeText']
+                    $body = $this->formatRte($emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['closeText'])
                 );
+
+                if ($emailSettings['sendCommenterNotification']) {
+                    $emailBodyCenterText = '<br/>' . '<p><i>' . $this->formatRte($newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
+
+                    SendMailService::sendMail(
+                        $receivers = htmlspecialchars($newCategorycomment->getEmail()),
+                        $sender,
+                        $subject = htmlspecialchars($emailSettings['commenter']['subject']),
+                        $body = $this->formatRte($emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['commenter']['closeText'])
+                    );
+                }
             }
 
             return new ForwardResponse('thankForComment');
@@ -170,8 +206,18 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
     {
         $currentUid = $this->getCurrentUid();
 
+        $emailNotification = (int)$this->settings['category']['comment']['email']['sendCommenterNotification'];
+
+        // First tab of flexform
+        if ((int)$this->settings['category']['comment']['email']['enable'] == 0) {
+            $emailNotification = 0;
+        }
+
         if ($currentUid == $pluginUid) {
-            $this->view->assign('comment', $newCategorycomment);
+            $this->view->assignMultiple([
+                'comment' => $newCategorycomment,
+                'emailNotification' => $emailNotification
+            ]);
 
             return $this->htmlResponse();
         }
@@ -194,5 +240,17 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
         $currentUid = $cObj->data['uid'];
 
         return $currentUid;
+    }
+
+    /**
+     * Format / clean a string with parseFunc
+     *
+     * @param $str
+     *
+     * @return string
+     */
+    private function formatRte($str): string
+    {
+        return $this->configurationManager->getContentObject()->parseFunc($str, array(), '< lib.parseFunc_RTE');
     }
 }

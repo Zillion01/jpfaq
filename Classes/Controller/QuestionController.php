@@ -5,24 +5,23 @@ namespace Jp\Jpfaq\Controller;
 use Jp\Jpfaq\Domain\Model\Question;
 use Jp\Jpfaq\Domain\Repository\CategoryRepository;
 use Jp\Jpfaq\Domain\Repository\QuestionRepository;
+use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
+use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
 /**
  * QuestionController
  */
 class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-    /**
-     * @var QuestionRepository
-     */
-    protected $questionRepository;
+    protected QuestionRepository $questionRepository;
 
-    /**
-     * @var CategoryRepository
-     */
-    protected $categoryRepository;
-
+    protected CategoryRepository $categoryRepository;
 
     /**
      * @param QuestionRepository $questionRepository
@@ -41,8 +40,26 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      *
      * @return void
      */
-    public function initializeListAction()
+    public function initializeAction(): void
     {
+        # Override empty flexform settings
+        $tsSettings = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+            'jpfaq_faq',
+            'Faq'
+        );
+
+        $originalSettings = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+        );
+
+        if (isset($tsSettings['settings']['overrideFlexformSettingsIfEmpty'])) {
+            $typoScriptUtility = GeneralUtility::makeInstance(TypoScript::class);
+            $originalSettings = $typoScriptUtility->override($originalSettings, $tsSettings);
+        }
+
+        $this->settings = $originalSettings;
+
         # Avoid code injection
         $this->settings['questions']['categories'] = [];
         if ($this->settings['flexform']['selectCategory']) {
@@ -51,13 +68,17 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
                 $this->settings['questions']['categories'][] = (int)$category;
             }
         }
+
+
+//        $str = $this->cObj->parseFunc($str, [], '< lib.parseFunc_RTE');
+//        return $str;
     }
 
     /**
      * action list
      *
      * @return ResponseInterface
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws InvalidQueryException
      *
      */
     public function listAction(): ResponseInterface
@@ -102,10 +123,10 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      *
      * @return ResponseInterface|ForwardResponse
      *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws IllegalObjectTypeException
+     * @throws UnknownObjectException
      */
-    public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid)
+    public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid): ResponseInterface|ForwardResponse
     {
         $currentUid = $this->getCurrentUid();
 
@@ -133,12 +154,10 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      *
      * @return int
      */
-    private function getCurrentUid()
+    private function getCurrentUid(): int
     {
         $cObj = $this->configurationManager->getContentObject();
-        $currentUid = $cObj->data['uid'];
-
-        return $currentUid;
+        return $cObj->data['uid'];
     }
 
     /**
@@ -149,10 +168,10 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      *
      * @return void
      *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws UnknownObjectException
+     * @throws IllegalObjectTypeException
      */
-    private function updateHelpful(Question $question, bool $helpful)
+    private function updateHelpful(Question $question, bool $helpful): void
     {
         $questionUid = $question->getUid();
         $questionHelpful = $question->getHelpful();

@@ -14,7 +14,7 @@ plugin.tx_jpfaq_faq {
     }
 
     settings {
-        excludeAlreadyDisplayedQuestions = 0
+        overrideFlexformSettingsIfEmpty = question.comment.email.subject,question.comment.email.sender.name,question.comment.email.sender.email,question.comment.email.receivers.email,question.comment.email.introText,question.comment.email.closeText,question.comment.email.commenter.subject,question.comment.email.commenter.introText,question.comment.email.commenter.closeText,category.comment.email.subject,category.comment.email.sender.name,category.comment.email.sender.email,category.comment.email.receivers.email,category.comment.email.introText,category.comment.email.closeText,category.comment.email.commenter.subject,category.comment.email.commenter.introText,category.comment.email.commenter.closeText
 
         gtag {
             # Google Analytics Event tracking for helpful / unhelpfulresponse
@@ -27,10 +27,10 @@ plugin.tx_jpfaq_faq {
             valueUnhelpful = unhelpful
         }
 
+        # Note that if you leave these fields empty in the flexform the values below will be used
         question {
             comment {
                 email {
-                    enable = 0
                     subject = New FAQ comment
 
                     sender {
@@ -44,6 +44,12 @@ plugin.tx_jpfaq_faq {
 
                     introText = <p>Hi, you have received a new comment on a FAQ question / answer!</p>
                     closeText = <p>Friendly regards,<br/>Your website</p>
+
+                    commenter {
+                        subject = Your comment
+                        introText = <p>Hi,</p><p>Thank you for your comment on our website xxxx.com<br/></p>
+                        closeText = <p>Friendly regards,<br/>xxxx.com</p>
+                    }
                 }
             }
         }
@@ -51,7 +57,6 @@ plugin.tx_jpfaq_faq {
         category {
             comment {
                 email {
-                    enable = 0
                     subject = New FAQ comment
 
                     sender {
@@ -65,6 +70,12 @@ plugin.tx_jpfaq_faq {
 
                     introText = <p>Hi, you have received a new comment on the FAQ!</p>
                     closeText = <p>Friendly regards,<br/>Your website</p>
+
+                    commenter {
+                        subject = Your comment
+                        introText = <p>Hi,</p><p>Thank you for your comment on our website xxxx.com<br/></p>
+                        closeText = <p>Friendly regards,<br/>xxxx.com</p>
+                    }
                 }
             }
         }
@@ -74,19 +85,19 @@ plugin.tx_jpfaq_faq {
 page {
     # First include jQuery! Unset tx_jpfaq_jquery if you have your own jQuery lib
     includeJSFooter {
-        tx_jpfaq_jquery = https://code.jquery.com/jquery-3.4.1.min.js
+        tx_jpfaq_jquery = {$plugin.tx_jpfaq_faq.settings.jquery}
         tx_jpfaq_jquery {
             disableCompression = 1
             excludeFromConcatenation = 1
         }
-        tx_jpfaq = EXT:jpfaq/Resources/Public/Javascript/jpFaq.js
+        tx_jpfaq = {$plugin.tx_jpfaq_faq.settings.js}
     }
 
     includeCSS {
-        tx_jpfaq = EXT:jpfaq/Resources/Public/Styles/jpfaq.css
+        tx_jpfaq = {$plugin.tx_jpfaq_faq.settings.css}
 
         # Unset if you already have Fontawesome included or do not wish to use it in the templates
-        tx_jpfaq_fontAwesome = https://use.fontawesome.com/releases/v5.5.0/css/all.css
+        tx_jpfaq_fontAwesome = {$plugin.tx_jpfaq_faq.settings.fontAwesome}
         tx_jpfaq_fontAwesome {
             disableCompression = 1
             excludeFromConcatenation = 1

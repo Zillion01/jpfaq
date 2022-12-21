@@ -57,8 +57,53 @@
             <trans-unit id="tx_jpfaq_flexform.showQuestionCommentForm">
                 <source>Show a comment form under each question</source>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.question.comment.email.enable">
+                <source>Send notification email(s) after a question comment</source>
+            </trans-unit>
             <trans-unit id="tx_jpfaq_flexform.showCategoriesCommentForm">
                 <source>Show a (categories) comment form under this list of questions</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.category.comment.email.enable">
+                <source>Send notification email(s) after a category / list of questions comment</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.excludeAlreadyDisplayedQuestions" xml:space="preserve">
+				<source>Exclude already displayed questions</source>
+			</trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_questionCommentForm">
+                <source>Question comments email</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_questionCommentForm.subject">
+                <source>Subject</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_questionCommentForm.senderName">
+                <source>Sender name</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_questionCommentForm.senderEmail">
+                <source>Sender email</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_questionCommentForm.receivers">
+                <source>Comma separated receiver email addresses</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_questionCommentForm.introText">
+                <source>Intro text email</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_questionCommentForm.closeText">
+                <source>Close text email</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_questionCommentForm.closeText">
+                <source>Close text email</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_questionCommentForm.sendCommenterNotification">
+                <source>Send the commenter a confirmation email</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_questionCommentForm.commenter.introText">
+                <source>Confirmation email introtext</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_questionCommentForm.commenter.closeText">
+                <source>Confirmation email closetext</source>
+            </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.sheet_categoryCommentForm">
+                <source>Category comments email</source>
             </trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_question.questioncomment">
                 <source>Comments</source>

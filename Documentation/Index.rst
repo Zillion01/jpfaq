@@ -29,7 +29,7 @@ jpFAQ
     		FAQ, frequently, asked, questions, help, glossary, feedback, definitions, customer
 
     	:Copyright:
-    		2018
+    		2013
 
     	:Author:
             	Jacco van der Post

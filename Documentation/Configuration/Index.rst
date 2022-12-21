@@ -13,10 +13,13 @@ Configuration Reference
 
 .. _configuration-typoscript:
 
-TypoScript Reference
---------------------
+TypoScript / Flexform Reference
+-------------------------------
 
 Prefix TypoScript view and settings with plugin.tx_jpfaq_faq.
+
+.. important::
+   Some settings can be overridden by the flexform. If sucha setting field is empty in the flexform, the typoscript setting will be used. See for the fieldnames the setting :confval:`overrideFlexformSettingsIfEmpty`.
 
 Property details
 ^^^^^^^^^^^^^^^^
@@ -79,6 +82,21 @@ persistence.storagePid
          int
    Description
          Disabled, to be able to use the Record Storage Page at the plugin properties.
+
+.. _settings.overrideFlexformSettingsIfEmpty
+
+settings.overrideFlexformSettingsIfEmpty
+"""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.overrideFlexformSettingsIfEmpty
+   Data type
+         string
+   Description
+         The default behaviour of extbase is to override settings from TypoScript by the one of the flexforms. This is even valid if the setting is left empty in the flexforms. Therefore you can define those settings which’s value should be taken from TypoScript if nothing is set in the plugin.
+   Default
+        question.comment.email.subject,question.comment.email.sender.name,question.comment.email.sender.email,question.comment.email.receivers.email,question.comment.email.introText,question.comment.email.closeText,question.comment.email.commenter.introText,question.comment.email.commenter.closeText,category.comment.email.subject,category.comment.email.sender.name,category.comment.email.sender.email,category.comment.email.receivers.email,category.comment.email.introText,category.comment.email.closeText,category.comment.email.commenter.introText,category.comment.email.commenter.closeText
 
 .. _settings.excludeAlreadyDisplayedQuestions:
 
@@ -249,6 +267,45 @@ settings.question.comment.email.closeText
    Description
          Simple HTML text at the bottom of the question comment email.
 
+.. _settings.question.comment.email.sendCommenterNotification:
+
+settings.question.comment.email.sendCommenterNotification
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.question.comment.email.sendCommenterNotification
+   Data type
+         int
+   Description
+         Send the commenter a confirmation email.
+
+.. _settings.question.comment.email.commenter.introText:
+
+settings.question.comment.email.commenter.introText
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.question.comment.email.commenter.introText
+   Data type
+         string
+   Description
+         Confirmation email introtext.
+
+.. _settings.question.comment.email.commenter.closeText:
+
+settings.question.comment.email.commenter.closeText
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.question.comment.email.commenter.closeText
+   Data type
+         string
+   Description
+         Simple HTML text at the bottom of the question comment email.
+
 .. _settings.category.comment.email.enable:
 
 settings.category.comment.email.enable
@@ -339,6 +396,45 @@ settings.category.comment.email.closeText
          string
    Description
          Simple HTML text at the bottom of the categories comment email.
+
+.. _settings.category.comment.email.sendCommenterNotification:
+
+settings.category.comment.email.sendCommenterNotification
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.category.comment.email.sendCommenterNotification
+   Data type
+         int
+   Description
+         Send the commenter a confirmation email.
+
+.. _settings.category.comment.email.commenter.introText:
+
+settings.category.comment.email.commenter.introText
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.category.comment.email.commenter.introText
+   Data type
+         string
+   Description
+         Confirmation email introtext.
+
+.. _settings.category.comment.email.commenter.closeText:
+
+settings.category.comment.email.commenter.closeText
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.category.comment.email.commenter.closeText
+   Data type
+         string
+   Description
+         Simple HTML text at the bottom of the question comment email.
 
 .. _page.includeJSFooter.tx_jpfaq_jquery:
 

@@ -10,23 +10,33 @@
 
 ChangeLog
 =========
-11.5.1
+11.6.0
 """""
+#. Constants for libs, CSS
+#. Comment settings now available in the flexform
+#. Empty flexform fields for the comments will default to the typoscript settings
+#. New feature, confirmation email to the commenter
+#. Additional security in the form handling
+#. Fixed a bug with excludeAlreadyDisplayedQuestions
+#. excludeAlreadyDisplayedQuestions is moved to the flexform
+#. Sponsored by h_da - Hochschule Darmstadt
+
+11.5.1
+""""""
 #. Condition uses `traverse()` to avoid errors
-#. Replace old import with `@import` syntax
-(thx toMathias Bolt Lesniak)
+#. Replace old import with `@import` syntax (thx toMathias Bolt Lesniak)
 
 11.5.0
-"""""
+""""""
 Update to TYPO3 11 LTS
 
 10.4.1
-"""""
+""""""
 #. TCA fixes for TYPO3 10.4. (thx to Sven Wappler)
 #. Add extension key to composer.json (thx to Klaus Hörmann-Engl)
 
 10.4.0
-"""""
+""""""
 For TYPO3 CMS versions 9.5 and 10.4. (thx to Cristian Fries)
 
 9.5.3

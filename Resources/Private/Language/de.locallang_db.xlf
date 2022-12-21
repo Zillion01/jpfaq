@@ -60,6 +60,9 @@
             <trans-unit id="tx_jpfaq_flexform.showCategoriesCommentForm">
                 <target>Eingabefeld Bemerkung am Ende einer Kategorie anzeigen</target>
             </trans-unit>
+            <trans-unit id="tx_jpfaq_flexform.excludeAlreadyDisplayedQuestions" xml:space="preserve">
+				<target>Bereits angezeigte Fragen ausschließen</target>
+			</trans-unit>
             <trans-unit id="tx_jpfaq_domain_model_question.questioncomment">
                 <target>Bemerkungen</target>
             </trans-unit>

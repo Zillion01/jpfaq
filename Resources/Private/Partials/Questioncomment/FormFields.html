@@ -1,12 +1,14 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
     <label for="name">
         <f:translate key="tx_jpfaq_domain_model_questioncomment.name"/>
+        <span class="required">*</span>
     </label>
-    <f:form.textfield property="name" type="text" class="form-control"/>
+    <f:form.textfield property="name" type="text" class="form-control jpfaqRequired"/>
     <label for="email">
         <f:translate key="tx_jpfaq_domain_model_questioncomment.email"/>
+        <span class="required">*</span>
     </label>
-    <f:form.textfield property="email" type="email" class="form-control jpfaqEmailField"/>
+    <f:form.textfield property="email" type="email" class="form-control jpfaqRequired jpfaqEmailField"/>
     <label for="comment">
         <f:translate key="tx_jpfaq_domain_model_questioncomment.comment"/>
         <span class="required">*</span>

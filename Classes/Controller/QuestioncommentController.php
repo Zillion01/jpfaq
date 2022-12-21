@@ -7,35 +7,61 @@ use Jp\Jpfaq\Domain\Repository\QuestionRepository;
 use Jp\Jpfaq\Service\SendMailService;
 use Jp\Jpfaq\Domain\Model\Question;
 use Jp\Jpfaq\Domain\Model\Questioncomment;
+use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
 class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-    /**
-     * @var QuestioncommentRepository
-     */
-    protected $questioncommentRepository;
-
-    /**
-     * @var QuestionRepository
-     */
-    protected $questionRepository;
+    protected QuestioncommentRepository $questioncommentRepository;
+    protected QuestionRepository $questionRepository;
+    protected $configurationManager;
 
     /**
      * @param QuestioncommentRepository $questioncommentRepository
      * @param QuestionRepository $questionRepository
+     * @param ConfigurationManagerInterface $configurationManager
      */
     public function __construct(
         QuestioncommentRepository $questioncommentRepository,
-        QuestionRepository $questionRepository
+        QuestionRepository $questionRepository,
+        ConfigurationManagerInterface $configurationManager
     ) {
         $this->questioncommentRepository = $questioncommentRepository;
         $this->questionRepository = $questionRepository;
+        $this->configurationManager = $configurationManager;
+    }
+
+    /**
+     * Initialize
+     *
+     * @return void
+     */
+    public function initializeAction(): void
+    {
+        // Override empty flexform settings
+        $tsSettings = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+            'jpfaq_faq',
+            'Faq'
+        );
+
+        $originalSettings = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS
+        );
+
+        if (isset($tsSettings['settings']['overrideFlexformSettingsIfEmpty'])) {
+            $typoScriptUtility = GeneralUtility::makeInstance(TypoScript::class);
+            $originalSettings = $typoScriptUtility->override($originalSettings, $tsSettings);
+        }
+
+        $this->settings = $originalSettings;
     }
 
     /**
@@ -68,11 +94,10 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * @param Questioncomment $newQuestioncomment
      * @param int $pluginUid
      *
-     * @return ResponseInterface
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     *
+     * @return ResponseInterface|ForwardResponse
+     * @throws StopActionException
      */
-    public function addCommentAction(Question $question, Questioncomment $newQuestioncomment, int $pluginUid)
+    public function addCommentAction(Question $question, Questioncomment $newQuestioncomment, int $pluginUid): ResponseInterface|ForwardResponse
     {
         // If honeypot field 'finfo' is filled by spambot do not add new comment
         if ($newQuestioncomment->getFinfo()) {
@@ -105,8 +130,7 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
 
             try {
                 $this->questionRepository->update($question);
-            } catch (IllegalObjectTypeException $e) {
-            } catch (UnknownObjectException $e) {
+            } catch (IllegalObjectTypeException|UnknownObjectException $e) {
             }
 
             // SignalSlotDispatcher, connect with this to run a custom action after comment creation
@@ -116,19 +140,31 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
                 // do nothing
             }
 
-            // Send a simple email
-            // To do implement with ext:form
+            // Send notification emails
             $emailSettings = $this->settings['question']['comment']['email'];
-            if ($emailSettings['enable']) {
 
-                $emailBodyCenterText = '<br/><strong>' . $question->getUid() . '. ' . $question->getQuestion() . '</strong>' . '<p><i>' . nl2br($newQuestioncomment->getComment()) . '</i></p><p><i>' . $newQuestioncomment->getName() . '<br/>' . $newQuestioncomment->getEmail() . '</i></p><br/>';
+            if ($emailSettings['enable']) {
+                $emailBodyCenterText = '<br/><strong>' . $question->getUid() . '. ' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
+
+                $sender = [htmlspecialchars($emailSettings['sender']['email']) => htmlspecialchars($emailSettings['sender']['name'])];
 
                 SendMailService::sendMail(
-                    $receivers = $emailSettings['receivers']['email'],
-                    $sender = [$emailSettings['sender']['email'] => $emailSettings['sender']['name']],
-                    $subject = $emailSettings['subject'],
-                    $body = $emailSettings['introText'] . $emailBodyCenterText . $emailSettings['closeText']
+                    $receivers = htmlspecialchars($emailSettings['receivers']['email']),
+                    $sender,
+                    $subject = htmlspecialchars($emailSettings['subject']),
+                    $body = $this->formatRte($emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['closeText'])
                 );
+
+                if ($emailSettings['sendCommenterNotification']) {
+                    $emailBodyCenterText = '<br/><strong>' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
+
+                    SendMailService::sendMail(
+                        $receivers = htmlspecialchars($newQuestioncomment->getEmail()),
+                        $sender,
+                        $subject = htmlspecialchars($emailSettings['commenter']['subject']),
+                        $body = $this->formatRte($emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['commenter']['closeText'])
+                    );
+                }
             }
 
             return new ForwardResponse('thankForComment');
@@ -148,12 +184,22 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      *
      * @return ResponseInterface
      */
-    public function thankForCommentAction(Questioncomment $newQuestioncomment, int $pluginUid)
+    public function thankForCommentAction(Questioncomment $newQuestioncomment, int $pluginUid): ResponseInterface
     {
         $currentUid = $this->getCurrentUid();
 
+        $emailNotification = (int)$this->settings['question']['comment']['email']['sendCommenterNotification'];
+
+        // First tab of flexform
+        if ((int)$this->settings['question']['comment']['email']['enable'] == 0) {
+            $emailNotification = 0;
+        }
+
         if ($currentUid == $pluginUid) {
-            $this->view->assign('comment', $newQuestioncomment);
+            $this->view->assignMultiple([
+                'comment' => $newQuestioncomment,
+                'emailNotification' => $emailNotification
+            ]);
 
             return $this->htmlResponse();
         }
@@ -170,11 +216,21 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      *
      * @return int
      */
-    private function getCurrentUid()
+    private function getCurrentUid(): int
     {
         $cObj = $this->configurationManager->getContentObject();
-        $currentUid = $cObj->data['uid'];
+        return $cObj->data['uid'];
+    }
 
-        return $currentUid;
+    /**
+     * Format / clean a string with parseFunc
+     *
+     * @param $str
+     *
+     * @return string
+     */
+    private function formatRte($str): string
+    {
+        return $this->configurationManager->getContentObject()->parseFunc($str, array(), '< lib.parseFunc_RTE');
     }
 }
