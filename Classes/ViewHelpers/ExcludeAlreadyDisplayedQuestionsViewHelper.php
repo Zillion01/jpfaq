@@ -2,6 +2,7 @@
 
 namespace Jp\Jpfaq\ViewHelpers;
 
+use Jp\Jpfaq\Domain\Model\Question;
 /**
  * This file is part of the "jpFaq" Extension for TYPO3 CMS.
  *
@@ -10,8 +11,8 @@ namespace Jp\Jpfaq\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE file that was distributed with this source code.
  */
-use Jp\Jpfaq\Domain\Model\Question;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
@@ -25,9 +26,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  * <output>
  * None
  * </output>
- *
  */
-class ExcludeAlreadyDisplayedQuestionsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
+class ExcludeAlreadyDisplayedQuestionsViewHelper extends AbstractViewHelper
 {
     use CompileWithRenderStatic;
 

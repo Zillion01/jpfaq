@@ -2,18 +2,19 @@
 
 namespace Jp\Jpfaq\Controller;
 
+use Jp\Jpfaq\Domain\Model\Categorycomment;
 use Jp\Jpfaq\Domain\Repository\CategorycommentRepository;
 use Jp\Jpfaq\Domain\Repository\CategoryRepository;
 use Jp\Jpfaq\Service\SendMailService;
-use Jp\Jpfaq\Domain\Model\Categorycomment;
 use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
-class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class CategorycommentController extends ActionController
 {
     protected CategorycommentRepository $categorycommentRepository;
 
@@ -25,17 +26,14 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      */
     public function __construct(
         CategorycommentRepository $categorycommentRepository,
-        CategoryRepository        $categoryRepository
-    )
-    {
+        CategoryRepository $categoryRepository
+    ) {
         $this->categorycommentRepository = $categorycommentRepository;
         $this->categoryRepository = $categoryRepository;
     }
 
     /**
      * Initialize
-     *
-     * @return void
      */
     public function initializeAction(): void
     {
@@ -103,10 +101,9 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      */
     public function addCommentAction(
         Categorycomment $newCategorycomment,
-        array           $catUids,
-        int             $pluginUid
-    ): ResponseInterface
-    {
+        array $catUids,
+        int $pluginUid
+    ): ResponseInterface {
         // If honeypot field 'finfo' is filled by spambot do not add new comment
         if ($newCategorycomment->getFinfo()) {
             $this->redirect('list', 'Question');
@@ -138,7 +135,7 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
             $commentIp = (string)GeneralUtility::getIndpEnv('REMOTE_ADDR');
 
             if ($anonymizeIpSetting) {
-                $parts = explode(".", $commentIp);
+                $parts = explode('.', $commentIp);
                 $newCategorycomment->setIp($parts[0] . '.' . $parts[1] . '.x.x');
             } else {
                 $newCategorycomment->setIp($commentIp);
@@ -152,8 +149,11 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
 
             // SignalSlotDispatcher, connect with this to run a custom action after comment creation
             try {
-                $this->signalSlotDispatcher->dispatch(__CLASS__, 'NewCategoriesComment',
-                    [$categories, $newCategorycomment]);
+                $this->signalSlotDispatcher->dispatch(
+                    __CLASS__,
+                    'NewCategoriesComment',
+                    [$categories, $newCategorycomment]
+                );
             } catch (\Exception $exception) {
                 // do nothing
             }
@@ -222,9 +222,9 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
             return $this->htmlResponse();
         }
 
-        # Else do not render view
-        # When multiple plugins on a page we want action for the one who called it
-        # The thank you message will however appear at every plugin
+        // Else do not render view
+        // When multiple plugins on a page we want action for the one who called it
+        // The thank you message will however appear at every plugin
         return $this->responseFactory
             ->createResponse();
     }
@@ -251,6 +251,6 @@ class CategorycommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      */
     private function formatRte($str): string
     {
-        return $this->configurationManager->getContentObject()->parseFunc($str, array(), '< lib.parseFunc_RTE');
+        return $this->configurationManager->getContentObject()->parseFunc($str, [], '< lib.parseFunc_RTE');
     }
 }

@@ -2,22 +2,23 @@
 
 namespace Jp\Jpfaq\Controller;
 
+use Jp\Jpfaq\Domain\Model\Question;
+use Jp\Jpfaq\Domain\Model\Questioncomment;
 use Jp\Jpfaq\Domain\Repository\QuestioncommentRepository;
 use Jp\Jpfaq\Domain\Repository\QuestionRepository;
 use Jp\Jpfaq\Service\SendMailService;
-use Jp\Jpfaq\Domain\Model\Question;
-use Jp\Jpfaq\Domain\Model\Questioncomment;
 use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
-class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class QuestioncommentController extends ActionController
 {
     protected QuestioncommentRepository $questioncommentRepository;
     protected QuestionRepository $questionRepository;
@@ -40,8 +41,6 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
 
     /**
      * Initialize
-     *
-     * @return void
      */
     public function initializeAction(): void
     {
@@ -97,7 +96,7 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      * @return ResponseInterface|ForwardResponse
      * @throws StopActionException
      */
-    public function addCommentAction(Question $question, Questioncomment $newQuestioncomment, int $pluginUid): ResponseInterface|ForwardResponse
+    public function addCommentAction(Question $question, Questioncomment $newQuestioncomment, int $pluginUid)
     {
         // If honeypot field 'finfo' is filled by spambot do not add new comment
         if ($newQuestioncomment->getFinfo()) {
@@ -120,7 +119,7 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
             $commentIp = (string)GeneralUtility::getIndpEnv('REMOTE_ADDR');
 
             if ($anonymizeIpSetting) {
-                $parts = explode(".", $commentIp);
+                $parts = explode('.', $commentIp);
                 $newQuestioncomment->setIp($parts[0] . '.' . $parts[1] . '.x.x');
             } else {
                 $newQuestioncomment->setIp($commentIp);
@@ -204,9 +203,9 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
             return $this->htmlResponse();
         }
 
-        # Else do not render view
-        # When multiple plugins on a page we want action for the one who called it
-        # The thank you message will however appear at every plugin
+        // Else do not render view
+        // When multiple plugins on a page we want action for the one who called it
+        // The thank you message will however appear at every plugin
         return $this->responseFactory
             ->createResponse();
     }
@@ -231,6 +230,6 @@ class QuestioncommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\Action
      */
     private function formatRte($str): string
     {
-        return $this->configurationManager->getContentObject()->parseFunc($str, array(), '< lib.parseFunc_RTE');
+        return $this->configurationManager->getContentObject()->parseFunc($str, [], '< lib.parseFunc_RTE');
     }
 }

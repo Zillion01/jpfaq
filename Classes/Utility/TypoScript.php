@@ -7,7 +7,6 @@ namespace Jp\Jpfaq\Utility;
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with the source code of the news extension.
- *
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -26,7 +25,6 @@ class TypoScript
         $configuration = $overload['settings']['overrideFlexformSettingsIfEmpty'] ?? '';
         $validFields = GeneralUtility::trimExplode(',', $configuration, true);
         foreach ($validFields as $fieldName) {
-
             // Multilevel field
             if (strpos($fieldName, '.') !== false) {
                 $keyAsArray = explode('.', $fieldName);
@@ -102,8 +100,6 @@ class TypoScript
      * @param array $array
      * @param array $path
      * @param $value
-     *
-     * @return void
      */
     private function setValueByReference(array &$array, array $path, $value): void
     {

@@ -1,5 +1,9 @@
 <?php
+
 namespace Jp\Jpfaq\Domain\Model;
+
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /***
  *
@@ -11,11 +15,10 @@ namespace Jp\Jpfaq\Domain\Model;
  *  (c) 2018
  *
  ***/
-
 /**
  * Categorycomment
  */
-class Categorycomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Categorycomment extends AbstractEntity
 {
     /**
      * name
@@ -59,7 +62,7 @@ class Categorycomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected $category = null;
+    protected $category;
 
     /**
      * __construct
@@ -75,12 +78,10 @@ class Categorycomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Do not modify this method!
      * It will be rewritten on each save in the extension builder
      * You may modify the constructor of this class instead
-     *
-     * @return void
      */
     protected function initStorageObjects()
     {
-        $this->category = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->category = new ObjectStorage();
     }
 
     /**
@@ -97,7 +98,6 @@ class Categorycomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the name
      *
      * @param string $name
-     * @return void
      */
     public function setName($name)
     {
@@ -118,7 +118,6 @@ class Categorycomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the email
      *
      * @param string $email
-     * @return void
      */
     public function setEmail($email)
     {
@@ -139,7 +138,6 @@ class Categorycomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the comment
      *
      * @param string $comment
-     * @return void
      */
     public function setComment($comment)
     {
@@ -160,7 +158,6 @@ class Categorycomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the finfo
      *
      * @param string $finfo
-     * @return void
      */
     public function setFinfo($finfo)
     {
@@ -171,9 +168,8 @@ class Categorycomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a Category
      *
      * @param \Jp\Jpfaq\Domain\Model\Category $category
-     * @return void
      */
-    public function addCategory(\Jp\Jpfaq\Domain\Model\Category $category)
+    public function addCategory(Category $category)
     {
         $this->category->attach($category);
     }
@@ -182,9 +178,8 @@ class Categorycomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a Category
      *
      * @param \Jp\Jpfaq\Domain\Model\Category $categoryToRemove The Category to be removed
-     * @return void
      */
-    public function removeCategory(\Jp\Jpfaq\Domain\Model\Category $categoryToRemove)
+    public function removeCategory(Category $categoryToRemove)
     {
         $this->category->detach($categoryToRemove);
     }
@@ -203,7 +198,6 @@ class Categorycomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the category
      *
      * @param  \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category> $category
-     * @return void
      */
     public function setCategory($category)
     {
@@ -224,7 +218,6 @@ class Categorycomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the Ip
      *
      * @param string $ip
-     * @return void
      */
     public function setIp($ip)
     {

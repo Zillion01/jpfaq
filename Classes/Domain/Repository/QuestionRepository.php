@@ -2,19 +2,21 @@
 
 namespace Jp\Jpfaq\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * The repository for Questions
  */
-class QuestionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class QuestionRepository extends Repository
 {
     /**
      * @var array
      */
-    protected $defaultOrderings = array(
-        'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
-    );
+    protected $defaultOrderings = [
+        'sorting' => QueryInterface::ORDER_ASCENDING
+    ];
 
     /**
      * Find questions with constraints
@@ -32,7 +34,7 @@ class QuestionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $constraintsAnd = [];
 
         if (!empty($categories)) {
-            # categories can be multi-valued, show questions which belong to one of the choosen categories
+            // categories can be multi-valued, show questions which belong to one of the choosen categories
             foreach ($categories as $demandedCategory) {
                 $constraintsOr[] = $query->contains('categories', $demandedCategory);
             }

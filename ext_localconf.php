@@ -1,4 +1,5 @@
 <?php
+
 defined('TYPO3_MODE') || die('Access denied.');
 
 $boot = static function (): void {
@@ -60,7 +61,6 @@ $boot = static function (): void {
     //    'bla::class',        // Slot class name
     //    'yourslot'           // Slot name
     //);
-
 };
 
 $boot();
