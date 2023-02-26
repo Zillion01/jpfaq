@@ -10,6 +10,11 @@
 
 ChangeLog
 =========
+11.6.1
+"""""
+#. PHP 7.4 compatibility #41 (thx to Tobias Bünter)
+#. Possible fix for bug excludeAlreadyDisplayedQuestions #43
+
 11.6.0
 """""
 #. Constants for libs, CSS
