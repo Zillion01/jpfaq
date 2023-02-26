@@ -7,7 +7,7 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'Jacco van der Post',
     'author_email' => 'jacco@id-webdesign.nl',
     'state' => 'stable',
-    'version' => '11.6.1',
+    'version' => '11.6.2',
     'constraints' =>
         [
             'depends' =>
