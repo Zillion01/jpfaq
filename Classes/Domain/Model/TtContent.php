@@ -130,7 +130,7 @@ class TtContent extends AbstractEntity
     protected $listType = '';
 
     /**
-     * @return null|\DateTime
+     * @return \DateTime|null
      */
     public function getCrdate(): ?\DateTime
     {
@@ -139,8 +139,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param \DateTime $crdate
-     *
-     * @return void
      */
     public function setCrdate($crdate): void
     {
@@ -148,7 +146,7 @@ class TtContent extends AbstractEntity
     }
 
     /**
-     * @return null|\DateTime
+     * @return \DateTime|null
      */
     public function getTstamp(): ?\DateTime
     {
@@ -157,8 +155,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param \DateTime $tstamp
-     *
-     * @return void
      */
     public function setTstamp($tstamp): void
     {
@@ -175,8 +171,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $ctype
-     *
-     * @return void
      */
     public function setCType(string $ctype): void
     {
@@ -193,8 +187,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $header
-     *
-     * @return void
      */
     public function setHeader(string $header): void
     {
@@ -211,8 +203,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $headerPosition
-     *
-     * @return void
      */
     public function setHeaderPosition(string $headerPosition): void
     {
@@ -229,8 +219,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $bodytext
-     *
-     * @return void
      */
     public function setBodytext(string $bodytext): void
     {
@@ -251,8 +239,6 @@ class TtContent extends AbstractEntity
      * Set colpos
      *
      * @param int $colPos
-     *
-     * @return void
      */
     public function setColPos($colPos): void
     {
@@ -269,8 +255,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $image
-     *
-     * @return void
      */
     public function setImage(string $image): void
     {
@@ -287,8 +271,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param int $imagewidth
-     *
-     * @return void
      */
     public function setImagewidth(int $imagewidth): void
     {
@@ -305,8 +287,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param int $imageorient
-     *
-     * @return void
      */
     public function setImageorient(int $imageorient): void
     {
@@ -323,8 +303,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $imagecaption
-     *
-     * @return void
      */
     public function setImagecaption(string $imagecaption): void
     {
@@ -341,8 +319,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param int $imagecols
-     *
-     * @return void
      */
     public function setImagecols(int $imagecols): void
     {
@@ -359,8 +335,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param int $imageborder
-     *
-     * @return void
      */
     public function setImageborder(int $imageborder): void
     {
@@ -377,8 +351,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $media
-     *
-     * @return void
      */
     public function setMedia(string $media): void
     {
@@ -395,8 +367,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $layout
-     *
-     * @return void
      */
     public function setLayout(string $layout): void
     {
@@ -413,8 +383,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param int $cols
-     *
-     * @return void
      */
     public function setCols(int $cols): void
     {
@@ -431,8 +399,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $subheader
-     *
-     * @return void
      */
     public function setSubheader(string $subheader): void
     {
@@ -449,8 +415,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $headerLink
-     *
-     * @return void
      */
     public function setHeaderLink(string $headerLink): void
     {
@@ -467,8 +431,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $imageLink
-     *
-     * @return void
      */
     public function setImageLink(string $imageLink): void
     {
@@ -485,8 +447,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $imageZoom
-     *
-     * @return void
      */
     public function setImageZoom(string $imageZoom): void
     {
@@ -503,8 +463,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $altText
-     *
-     * @return void
      */
     public function setAltText(string $altText): void
     {
@@ -521,8 +479,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $titleText
-     *
-     * @return void
      */
     public function setTitleText(string $titleText): void
     {
@@ -539,8 +495,6 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $headerLayout
-     *
-     * @return void
      */
     public function setHeaderLayout(string $headerLayout): void
     {
@@ -557,9 +511,8 @@ class TtContent extends AbstractEntity
 
     /**
      * @param string $listType
-     * @return void
      */
-    public function setListType(string $listType):   void
+    public function setListType(string $listType): void
     {
         $this->listType = $listType;
     }

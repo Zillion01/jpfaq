@@ -24,7 +24,7 @@ return [
         ],
     ],
     'types' => [
-        '1' => ['showitem' => 'question, answer, additional_content_answer, categories, helpful, nothelpful, questioncomment, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
+        '1' => ['showitem' => 'question,answer,additional_content_answer,categories,helpful,nothelpful,questioncomment,--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,sys_language_uid,l10n_parent,l10n_diffsource,--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,hidden,starttime,endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [

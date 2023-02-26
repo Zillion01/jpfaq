@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 return [
     \Jp\Jpfaq\Domain\Model\TtContent::class => [

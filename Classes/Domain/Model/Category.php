@@ -2,10 +2,12 @@
 
 namespace Jp\Jpfaq\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * Category
  */
-class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Category extends AbstractEntity
 {
     /**
      * category
@@ -37,7 +39,6 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the category
      *
      * @param string $category
-     * @return void
      */
     public function setCategory($category)
     {
@@ -58,7 +59,6 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the description
      *
      * @param string $description
-     * @return void
      */
     public function setDescription($description)
     {

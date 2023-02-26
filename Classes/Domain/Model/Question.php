@@ -2,10 +2,13 @@
 
 namespace Jp\Jpfaq\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /**
  * Question
  */
-class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Question extends AbstractEntity
 {
     /**
      * question
@@ -58,7 +61,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category>
      */
-    protected $categories = null;
+    protected $categories;
 
     /**
      * comments
@@ -68,7 +71,7 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Questioncomment>
      */
-    protected $questioncomment = null;
+    protected $questioncomment;
 
     /**
      * __construct
@@ -84,14 +87,12 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Do not modify this method!
      * It will be rewritten on each save in the extension builder
      * You may modify the constructor of this class instead
-     *
-     * @return void
      */
     protected function initStorageObjects()
     {
-        $this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->additionalContentAnswer = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->questioncomment = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->categories = new ObjectStorage();
+        $this->additionalContentAnswer = new ObjectStorage();
+        $this->questioncomment = new ObjectStorage();
     }
 
     /**
@@ -108,7 +109,6 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the question
      *
      * @param string $question
-     * @return void
      */
     public function setQuestion($question)
     {
@@ -129,7 +129,6 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the answer
      *
      * @param string $answer
-     * @return void
      */
     public function setAnswer($answer)
     {
@@ -167,9 +166,8 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a Category
      *
      * @param \Jp\Jpfaq\Domain\Model\Category $category
-     * @return void
      */
-    public function addCategory(\Jp\Jpfaq\Domain\Model\Category $category)
+    public function addCategory(Category $category)
     {
         $this->categories->attach($category);
     }
@@ -178,9 +176,8 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a Category
      *
      * @param \Jp\Jpfaq\Domain\Model\Category $categoryToRemove The Category to be removed
-     * @return void
      */
-    public function removeCategory(\Jp\Jpfaq\Domain\Model\Category $categoryToRemove)
+    public function removeCategory(Category $categoryToRemove)
     {
         $this->categories->detach($categoryToRemove);
     }
@@ -199,9 +196,8 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the categories
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category> $categories
-     * @return void
      */
-    public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories)
+    public function setCategories(ObjectStorage $categories)
     {
         $this->categories = $categories;
     }
@@ -220,7 +216,6 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the Helpful
      *
      * @param int $helpful
-     * @return void
      */
     public function setHelpful($helpful)
     {
@@ -241,7 +236,6 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the Nothelpful
      *
      * @param int $nothelpful
-     * @return void
      */
     public function setNothelpful($nothelpful)
     {
@@ -262,9 +256,8 @@ class Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a questioncomment
      *
      * @param \Jp\Jpfaq\Domain\Model\Questioncomment $questioncomment
-     * @return void
      */
-    public function addComment(\Jp\Jpfaq\Domain\Model\Questioncomment $questioncomment)
+    public function addComment(Questioncomment $questioncomment)
     {
         $this->questioncomment->attach($questioncomment);
     }

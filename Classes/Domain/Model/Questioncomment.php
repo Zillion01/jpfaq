@@ -1,5 +1,9 @@
 <?php
+
 namespace Jp\Jpfaq\Domain\Model;
+
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /***
  *
@@ -11,11 +15,10 @@ namespace Jp\Jpfaq\Domain\Model;
  *  (c) 2018
  *
  ***/
-
 /**
  * Questioncomment
  */
-class Questioncomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Questioncomment extends AbstractEntity
 {
     /**
      * name
@@ -59,7 +62,7 @@ class Questioncomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Question>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected $question = null;
+    protected $question;
 
     /**
      * __construct
@@ -72,12 +75,10 @@ class Questioncomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Initializes all ObjectStorage properties
-     *
-     * @return void
      */
     protected function initStorageObjects()
     {
-        $this->question = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->question = new ObjectStorage();
     }
 
     /**
@@ -94,7 +95,6 @@ class Questioncomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the name
      *
      * @param string $name
-     * @return void
      */
     public function setName($name)
     {
@@ -115,7 +115,6 @@ class Questioncomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the email
      *
      * @param string $email
-     * @return void
      */
     public function setEmail($email)
     {
@@ -136,7 +135,6 @@ class Questioncomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the comment
      *
      * @param string $comment
-     * @return void
      */
     public function setComment($comment)
     {
@@ -157,7 +155,6 @@ class Questioncomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the finfo
      *
      * @param string $finfo
-     * @return void
      */
     public function setFinfo($finfo)
     {
@@ -178,7 +175,6 @@ class Questioncomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the question
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Question> $question
-     * @return void
      */
     public function setQuestion($question)
     {
@@ -199,7 +195,6 @@ class Questioncomment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the Ip
      *
      * @param string $ip
-     * @return void
      */
     public function setIp($ip)
     {

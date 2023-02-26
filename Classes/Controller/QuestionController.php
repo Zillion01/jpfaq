@@ -10,6 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
@@ -17,7 +18,7 @@ use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 /**
  * QuestionController
  */
-class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class QuestionController extends ActionController
 {
     protected QuestionRepository $questionRepository;
 
@@ -37,12 +38,10 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
     /**
      * Initialize
-     *
-     * @return void
      */
     public function initializeAction(): void
     {
-        # Override empty flexform settings
+        // Override empty flexform settings
         $tsSettings = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
             'jpfaq_faq',
@@ -60,7 +59,7 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
         $this->settings = $originalSettings;
 
-        # Avoid code injection
+        // Avoid code injection
         $this->settings['questions']['categories'] = [];
         if ($this->settings['flexform']['selectCategory']) {
             $categories = explode(',', $this->settings['flexform']['selectCategory']);
@@ -68,7 +67,6 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
                 $this->settings['questions']['categories'][] = (int)$category;
             }
         }
-
 
 //        $str = $this->cObj->parseFunc($str, [], '< lib.parseFunc_RTE');
 //        return $str;
@@ -79,14 +77,15 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      *
      * @return ResponseInterface
      * @throws InvalidQueryException
-     *
      */
     public function listAction(): ResponseInterface
     {
         $restrictToCategories = $this->settings['questions']['categories'];
         $excludeAlreadyDisplayedQuestions = (int)$this->settings['excludeAlreadyDisplayedQuestions'];
-        $questions = $this->questionRepository->findQuestionsWithConstraints($restrictToCategories,
-            $excludeAlreadyDisplayedQuestions);
+        $questions = $this->questionRepository->findQuestionsWithConstraints(
+            $restrictToCategories,
+            $excludeAlreadyDisplayedQuestions
+        );
 
         $categories = [];
         foreach ($restrictToCategories as $uid) {
@@ -126,7 +125,7 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
      */
-    public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid): ResponseInterface|ForwardResponse
+    public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid)
     {
         $currentUid = $this->getCurrentUid();
 
@@ -166,7 +165,6 @@ class QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @param Question $question
      * @param bool $helpful
      *
-     * @return void
      *
      * @throws UnknownObjectException
      * @throws IllegalObjectTypeException

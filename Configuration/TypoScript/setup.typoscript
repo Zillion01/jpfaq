@@ -7,12 +7,10 @@ plugin.tx_jpfaq_faq {
         layoutRootPaths.0 = EXT:jpfaq/Resources/Private/Layouts/
         layoutRootPaths.1 = {$plugin.tx_jpfaq_faq.view.layoutRootPath}
     }
-
     persistence {
         storagePid >
         recursive >
     }
-
     settings {
         overrideFlexformSettingsIfEmpty = question.comment.email.subject,question.comment.email.sender.name,question.comment.email.sender.email,question.comment.email.receivers.email,question.comment.email.introText,question.comment.email.closeText,question.comment.email.commenter.subject,question.comment.email.commenter.introText,question.comment.email.commenter.closeText,category.comment.email.subject,category.comment.email.sender.name,category.comment.email.sender.email,category.comment.email.receivers.email,category.comment.email.introText,category.comment.email.closeText,category.comment.email.commenter.subject,category.comment.email.commenter.introText,category.comment.email.commenter.closeText
 
@@ -26,7 +24,6 @@ plugin.tx_jpfaq_faq {
             valueHelpful = helpful
             valueUnhelpful = unhelpful
         }
-
         # Note that if you leave these fields empty in the flexform the values below will be used
         question {
             comment {
@@ -37,11 +34,9 @@ plugin.tx_jpfaq_faq {
                         name = Your website FAQ
                         email = no-reply@example.com
                     }
-
                     receivers {
                         email = info@yoursite.com,marketing@yoursite.com
                     }
-
                     introText = <p>Hi, you have received a new comment on a FAQ question / answer!</p>
                     closeText = <p>Friendly regards,<br/>Your website</p>
 
@@ -53,7 +48,6 @@ plugin.tx_jpfaq_faq {
                 }
             }
         }
-
         category {
             comment {
                 email {
@@ -63,11 +57,9 @@ plugin.tx_jpfaq_faq {
                         name = Your website FAQ
                         email = no-reply@example.com
                     }
-
                     receivers {
                         email = info@yoursite.com,marketing@yoursite.com
                     }
-
                     introText = <p>Hi, you have received a new comment on the FAQ!</p>
                     closeText = <p>Friendly regards,<br/>Your website</p>
 
@@ -92,7 +84,6 @@ page {
         }
         tx_jpfaq = {$plugin.tx_jpfaq_faq.settings.js}
     }
-
     includeCSS {
         tx_jpfaq = {$plugin.tx_jpfaq_faq.settings.css}
 
@@ -122,11 +113,10 @@ jpfaqAjaxComment {
         disableAllHeaderCode = 1
         disableCharsetHeader = 1
         disablePrefixComment = 1
-        additionalHeaders = Content-type:text/html
+        additionalHeaders.10.header = Content-type:text/html
         admPanel = 0
         debug = 0
     }
-
     10 < styles.content.get
     10 {
         stdWrap.trim = 1
@@ -134,7 +124,6 @@ jpfaqAjaxComment {
         select {
             where = list_type = "jpfaq_faq"
         }
-
         renderObj < tt_content.list.20.jpfaq_faq
     }
 }
