@@ -103,7 +103,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true,
             ],
 
         ],
@@ -112,8 +113,9 @@ return [
             'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.answer',
             'config' => [
                 'type' => 'text',
-                'eval' => 'trim,required',
-                'enableRichtext' => true
+                'eval' => 'trim',
+                'enableRichtext' => true,
+                'required' => true,
             ],
         ],
         'additional_content_answer' => [
