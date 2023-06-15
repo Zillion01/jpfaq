@@ -1,6 +1,6 @@
 <?php
+defined('TYPO3') or die();
 
-defined('TYPO3_MODE') or die();
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
     'tx_jpfaq_domain_model_question',
