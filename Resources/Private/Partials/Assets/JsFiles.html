@@ -1,0 +1,10 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<f:if condition="{settings.jquery}">
+    <f:asset.script identifier="jquery" src="EXT:jpfaq/Resources/Public/Javascript/jquery-3.6.2.min.js" />
+</f:if>
+<f:if condition="{settings.js}">
+    <f:asset.script identifier="jpfaq-main" src="EXT:jpfaq/Resources/Public/Javascript/jpFaq.js" />
+</f:if>
+
+</html>
