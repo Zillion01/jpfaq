@@ -14,6 +14,11 @@ plugin.tx_jpfaq_faq {
     settings {
         overrideFlexformSettingsIfEmpty = question.comment.email.subject,question.comment.email.sender.name,question.comment.email.sender.email,question.comment.email.receivers.email,question.comment.email.introText,question.comment.email.closeText,question.comment.email.commenter.subject,question.comment.email.commenter.introText,question.comment.email.commenter.closeText,category.comment.email.subject,category.comment.email.sender.name,category.comment.email.sender.email,category.comment.email.receivers.email,category.comment.email.introText,category.comment.email.closeText,category.comment.email.commenter.subject,category.comment.email.commenter.introText,category.comment.email.commenter.closeText
 
+        jquery = {$plugin.tx_jpfaq_faq.settings.jquery}
+        js = {$plugin.tx_jpfaq_faq.settings.js}
+        css = {$plugin.tx_jpfaq_faq.settings.css}
+        fontAwesome = {$plugin.tx_jpfaq_faq.settings.fontAwesome}
+
         gtag {
             # Google Analytics Event tracking for helpful / unhelpfulresponse
             # First install gtag.js snippet https://developers.google.com/analytics/devguides/collection/gtagjs/

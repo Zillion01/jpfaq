@@ -14,9 +14,9 @@ plugin.tx_jpfaq_faq {
     }
 
     settings {
-        jquery = https://code.jquery.com/jquery-3.6.2.min.js
+        jquery = EXT:jpfaq/Resources/Public/Javascript/jquery-3.6.2.min.js
         js = EXT:jpfaq/Resources/Public/Javascript/jpFaq.js
         css = EXT:jpfaq/Resources/Public/Styles/jpfaq.css
-        fontAwesome = https://use.fontawesome.com/releases/v5.5.0/css/all.css
+        fontAwesome = EXT:jpfaq/Resources/Public/Css/fontawesome/5.5.0/all.css
     }
 }
