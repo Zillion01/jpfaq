@@ -1,6 +1,5 @@
 <?php
-
-defined('TYPO3_MODE') || die('Access denied.');
+defined('TYPO3') || die('Access denied.');
 
 $boot = static function (): void {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -53,14 +52,6 @@ $boot = static function (): void {
             ['source' => $path]
         );
     }
-
-    // Example Signal Slot registering
-    //$signalSlotDispatcher->connect(
-    //    \Jp\Jpfaq\Controller\QuestionController::class,  // Signal class name
-    //    'NewFaqComment',                                  // Signal name
-    //    'bla::class',        // Slot class name
-    //    'yourslot'           // Slot name
-    //);
 };
 
 $boot();

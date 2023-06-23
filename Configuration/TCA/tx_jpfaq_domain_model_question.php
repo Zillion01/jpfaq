@@ -22,6 +22,9 @@ return [
         'typeicon_classes' => [
             'default' => 'tx_jpfaq_domain_model_question'
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => ['showitem' => 'question,answer,additional_content_answer,categories,helpful,nothelpful,questioncomment,--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,sys_language_uid,l10n_parent,l10n_diffsource,--div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,hidden,starttime,endtime'],
@@ -103,7 +106,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true,
             ],
 
         ],
@@ -112,8 +116,8 @@ return [
             'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_question.answer',
             'config' => [
                 'type' => 'text',
-                'eval' => 'trim,required',
-                'enableRichtext' => true
+                'eval' => 'trim',
+                'enableRichtext' => true,
             ],
         ],
         'additional_content_answer' => [

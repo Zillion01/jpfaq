@@ -14,9 +14,19 @@ plugin.tx_jpfaq_faq {
     }
 
     settings {
-        jquery = https://code.jquery.com/jquery-3.6.2.min.js
+        # cat=plugin.tx_jpfaq_faq/page; type=boolean; label=Load JS and CSS globally instead of only on plugin page
+        includeJsAndCssGlobal = 0
+
+        # cat=plugin.tx_jpfaq_faq/file; type=string; label=Path to jQuery (FE)
+        jquery = EXT:jpfaq/Resources/Public/Javascript/jquery-3.7.0.min.js
+        # cat=plugin.tx_jpfaq_faq/file; type=string; label=Path to jpFAQ js (FE)
         js = EXT:jpfaq/Resources/Public/Javascript/jpFaq.js
+        # cat=plugin.tx_jpfaq_faq/file; type=string; label=Path to CSS (FE)
         css = EXT:jpfaq/Resources/Public/Styles/jpfaq.css
-        fontAwesome = https://use.fontawesome.com/releases/v5.5.0/css/all.css
+        # cat=plugin.tx_jpfaq_faq/file; type=string; label=Path to FontAwesome CSS (FE)
+        fontAwesome = EXT:jpfaq/Resources/Public/Css/fontawesome/5.15.4/all.min.css
+
+        # cat=plugin.tx_jpfaq_faq/page; type=boolean; label=Set Schema.org/FAQPage as HTML attribute instead of at the FAQ plugin. See developers.google.com/search/docs/appearance/structured-data/faqpage
+        setSchemaOrgOnHtmlTag = 1
     }
 }

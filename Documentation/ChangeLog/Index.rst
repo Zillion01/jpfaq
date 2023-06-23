@@ -10,6 +10,14 @@
 
 ChangeLog
 =========
+12.4.0
+"""""
+#. For TYPO3 v12 (also thx to Christian-Hackl)
+#. Improved Schema.org validation
+#. Improved inclusion of JS and CSS
+#. Answer field is no longer required
+#. jQuery and FontAwesome now locally loaded
+
 11.6.2
 """""
 #. Possible fix for bug excludeAlreadyDisplayedQuestions #43

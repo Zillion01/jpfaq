@@ -24,6 +24,7 @@ plugin.tx_jpfaq_faq {
             valueHelpful = helpful
             valueUnhelpful = unhelpful
         }
+
         # Note that if you leave these fields empty in the flexform the values below will be used
         question {
             comment {
@@ -48,6 +49,7 @@ plugin.tx_jpfaq_faq {
                 }
             }
         }
+
         category {
             comment {
                 email {
@@ -71,30 +73,55 @@ plugin.tx_jpfaq_faq {
                 }
             }
         }
+
+        includeJsAndCssInTemplate = {$plugin.tx_jpfaq_faq.settings.includeJsAndCssInTemplate}
+        setSchemaOrgOnHtmlTag = {$plugin.tx_jpfaq_faq.settings.setSchemaOrgOnHtmlTag}
     }
 }
 
-page {
-    # First include jQuery! Unset tx_jpfaq_jquery if you have your own jQuery lib
-    includeJSFooter {
-        tx_jpfaq_jquery = {$plugin.tx_jpfaq_faq.settings.jquery}
-        tx_jpfaq_jquery {
-            disableCompression = 1
-            excludeFromConcatenation = 1
-        }
-        tx_jpfaq = {$plugin.tx_jpfaq_faq.settings.js}
-    }
-    includeCSS {
-        tx_jpfaq = {$plugin.tx_jpfaq_faq.settings.css}
-
-        # Unset if you already have Fontawesome included or do not wish to use it in the templates
-        tx_jpfaq_fontAwesome = {$plugin.tx_jpfaq_faq.settings.fontAwesome}
-        tx_jpfaq_fontAwesome {
-            disableCompression = 1
-            excludeFromConcatenation = 1
-        }
-    }
+# Unset jQuery and Fontawesome if already included within other config
+plugin.tx_jpfaq_faq.settings {
+    jquery = {$plugin.tx_jpfaq_faq.settings.jquery}
+    js = {$plugin.tx_jpfaq_faq.settings.js}
+    css = {$plugin.tx_jpfaq_faq.settings.css}
+    fontawesome = {$plugin.tx_jpfaq_faq.settings.fontAwesome}
 }
+
+[{$plugin.tx_jpfaq_faq.settings.includeJsAndCssGlobal} === 1]
+    page {
+        includeJSFooter {
+            tx_jpfaq_jquery = {$plugin.tx_jpfaq_faq.settings.jquery}
+            tx_jpfaq = {$plugin.tx_jpfaq_faq.settings.js}
+        }
+        includeCSS {
+            tx_jpfaq = {$plugin.tx_jpfaq_faq.settings.css}
+            tx_jpfaq_fontAwesome = {$plugin.tx_jpfaq_faq.settings.fontAwesome}
+        }
+    }
+
+    plugin.tx_jpfaq_faq.settings {
+        jquery >
+        js >
+        css >
+        fontawesome >
+    }
+[END]
+
+config.htmlTag.attributes {
+    itemscope=
+    itemtype=https://schema.org/FAQPage
+}
+
+[{$plugin.tx_jpfaq_faq.settings.setSchemaOrgOnHtmlTag} === 0]
+    config.htmlTag.attributes {
+        itemscope >
+        itemtype >
+    }
+
+    plugin.tx_jpfaq_faq.settings {
+        localSchemaOrgFaqPage = itemscope itemtype=https://schema.org/FAQPage
+    }
+[END]
 
 # Rendering of content elements in answer
 lib.tx_jpfaq.contentElementRendering = RECORDS
@@ -104,10 +131,9 @@ lib.tx_jpfaq.contentElementRendering {
     dontCheckPid = 1
 }
 
-# Pagetype for ajaxComment, must be unique
 jpfaqAjaxComment = PAGE
 jpfaqAjaxComment {
-    typeNum = 88188
+    typeNum = 1687523179
 
     config {
         disableAllHeaderCode = 1

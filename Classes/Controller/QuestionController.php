@@ -67,9 +67,6 @@ class QuestionController extends ActionController
                 $this->settings['questions']['categories'][] = (int)$category;
             }
         }
-
-//        $str = $this->cObj->parseFunc($str, [], '< lib.parseFunc_RTE');
-//        return $str;
     }
 
     /**
@@ -96,7 +93,7 @@ class QuestionController extends ActionController
             $restrictToCategories = ['no categories'];
         }
 
-        $currentUid = $this->getCurrentUid();
+        $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
         $this->view->assignMultiple([
             'showSearchForm' => (int)$this->settings['flexform']['showSearch'],
@@ -125,9 +122,9 @@ class QuestionController extends ActionController
      * @throws IllegalObjectTypeException
      * @throws UnknownObjectException
      */
-    public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid)
+    public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid): ResponseInterface|ForwardResponse
     {
-        $currentUid = $this->getCurrentUid();
+        $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
         if ($currentUid == $pluginUid) {
             $this->updateHelpful($question, $helpful);
@@ -146,17 +143,6 @@ class QuestionController extends ActionController
         // When multiple plugins on a page we want action for the one who called it
         return $this->responseFactory
             ->createResponse();
-    }
-
-    /**
-     * Get current uid of content element
-     *
-     * @return int
-     */
-    private function getCurrentUid(): int
-    {
-        $cObj = $this->configurationManager->getContentObject();
-        return $cObj->data['uid'];
     }
 
     /**

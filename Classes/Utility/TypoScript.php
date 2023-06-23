@@ -80,10 +80,9 @@ class TypoScript
      * Set value in array by path
      *
      * @param array $array
-     * @param array $path
-     * @param mixed $value
      * @param string[] $path
      *
+     * @param mixed $value
      * @return array
      */
     protected function setValue(array $array, array $path, $value): array

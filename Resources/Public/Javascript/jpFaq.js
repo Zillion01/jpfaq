@@ -29,7 +29,6 @@ var jpFaq = jpFaq || {};
     var jpfaqRequiredField = '.jpfaqRequired';
     var jpfaqCommentFieldWarning = 'jpfaqCommentFieldWarning';
     var jpfaqSubmitComment = '.jpfaqSubmitComment';
-    var jpfaqCommentPageType = '&type=88188';
     var jpfaqSpinner = '.jpfaqSpinner';
     var jpfaqSpinnerHtml = '<div class="jpfaqSpinner"></div>';
     var jpfaqCatCommentContainerLink = '.jpfaqCatCommentContainerLink';
@@ -161,7 +160,7 @@ var jpFaq = jpFaq || {};
                 event.preventDefault();
                 $(this).closest(jpfaqQuestionHelpfulText).hide();
 
-                var loadUri = $(this).attr('href') + jpfaqCommentPageType;
+                var loadUri = $(this).attr('href');
                 var contentContainer = $(this).closest(jpfaqQuestionCommentContainer);
                 jpFaq.Main.ajaxPost(loadUri, contentContainer);
 
@@ -187,7 +186,7 @@ var jpFaq = jpFaq || {};
                 event.preventDefault();
                 $(this).closest(jpfaqQuestionHelpfulText).hide();
 
-                var loadUri = $(this).attr('href') + jpfaqCommentPageType;
+                var loadUri = $(this).attr('href');
                 var contentContainer = $(this).closest(jpfaqQuestionCommentContainer).find(jpfaqAddCommentForm);
 
                 jpFaq.Main.ajaxPost(loadUri, contentContainer);
@@ -278,7 +277,7 @@ var jpFaq = jpFaq || {};
                 event.preventDefault();
                 $(this).closest(jpfaqCatCommentContainerIntro).hide();
 
-                var loadUri = $(this).attr('href') + jpfaqCommentPageType;
+                var loadUri = $(this).attr('href');
                 var contentContainer = $(this).closest(jpfaqCatCommentContainer).find(jpfaqAddCommentForm);
                 jpFaq.Main.ajaxPost(loadUri, contentContainer);
             })
@@ -415,7 +414,7 @@ var jpFaq = jpFaq || {};
          * @return void
          */
         postComment: function (event, commentContainer, form) {
-            var loadUri = $(form).attr('action') + jpfaqCommentPageType;
+            var loadUri = $(form).attr('action');
             $(commentContainer + ' ' + jpfaqAddCommentForm).fadeOut();
             $(commentContainer).append(jpfaqSpinnerHtml);
 

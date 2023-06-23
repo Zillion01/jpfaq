@@ -18,14 +18,14 @@ ul.jpfaqList {
 }
 
 .jpfaqList > li h3.toggleTrigger {
-	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/plus.png') no-repeat left center;
+	background: url('../Images/plus.png') no-repeat left center;
 	padding-left: 20px;
 	margin-bottom: 3px;
 	cursor: pointer;
 }
 
 .jpfaqList > li h3.questionUnfolded {
-	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/min.png') no-repeat left center;
+	background: url('../Images/min.png') no-repeat left center;
 }
 
 .jpfaqList li ul {
@@ -39,13 +39,13 @@ ul.jpfaqList {
 
 .tx-jpfaq .jpfaqShowAll,
 .tx-jpfaq .jpfaqHideAll {
-	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/all_plus.png') no-repeat left center;
+	background: url('../Images/all_plus.png') no-repeat left center;
 	padding-left: 20px;
 	cursor: pointer;
 }
 
 .tx-jpfaq .jpfaqHideAll {
-	background: url('/typo3conf/ext/jpfaq/Resources/Public/Images/all_min.png') no-repeat left center;
+	background: url('../Images/all_min.png') no-repeat left center;
 }
 
 .tx-jpfaq label,
@@ -61,7 +61,7 @@ ul.jpfaqList {
 }
 
 .tx-jpfaq .jpfaqSpinner {
-	background-image: url('/typo3conf/ext/jpfaq/Resources/Public/Images/jpfaqSpinner.gif');
+	background-image: url('../Images/jpfaqSpinner.gif');
 	background-size: 32px 32px;
 	width: 32px;
 	height: 32px;

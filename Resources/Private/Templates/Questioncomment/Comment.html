@@ -12,7 +12,7 @@
         <div class="form-group">
             <f:render partial="FormErrors" arguments="{object:Questioncomment}"/>
 
-            <f:form action="addComment" class="jpfaqQuestionComment" id="jpfaqQuestionCommentForm{question.uid}" name="newQuestioncomment" object="{newQuestioncomment}" arguments="{question:question, newQuestioncomment:newQuestioncomment, pluginUid:currentUid}">
+            <f:form action="addComment" class="jpfaqQuestionComment" id="jpfaqQuestionCommentForm{question.uid}" name="newQuestioncomment" object="{newQuestioncomment}" arguments="{question:question, newQuestioncomment:newQuestioncomment, pluginUid:currentUid}" pageType="1687523179">
                 <f:render partial="Questioncomment/FormFields"/>
                 <f:form.submit value="{f:translate(key: 'tx_jpfaq_submit_comment')}" class="jpfaqSubmitComment btn btn-primary" id="jpfaqSubmitComment{question.uid}"/>
             </f:form>

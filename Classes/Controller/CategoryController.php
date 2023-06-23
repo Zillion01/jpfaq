@@ -14,7 +14,7 @@ class CategoryController extends ActionController
     /**
      * @var CategoryRepository
      */
-    protected $categoryRepository;
+    protected CategoryRepository $categoryRepository;
 
     /**
      * @param CategoryRepository $categoryRepository

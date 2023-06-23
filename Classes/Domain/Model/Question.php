@@ -22,8 +22,6 @@ class Question extends AbstractEntity
     /**
      * answer
      *
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
-     *
      * @var string
      */
     protected $answer = '';
