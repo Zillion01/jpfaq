@@ -14,7 +14,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
@@ -74,7 +73,7 @@ class QuestioncommentController extends ActionController
      */
     public function commentAction(Question $question): ResponseInterface
     {
-        $currentUid = $this->getCurrentUid();
+        $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
         $this->view->assignMultiple([
             'currentUid' => $currentUid,
@@ -94,16 +93,15 @@ class QuestioncommentController extends ActionController
      * @param int $pluginUid
      *
      * @return ResponseInterface|ForwardResponse
-     * @throws StopActionException
      */
-    public function addCommentAction(Question $question, Questioncomment $newQuestioncomment, int $pluginUid)
+    public function addCommentAction(Question $question, Questioncomment $newQuestioncomment, int $pluginUid): ResponseInterface|ForwardResponse
     {
         // If honeypot field 'finfo' is filled by spambot do not add new comment
         if ($newQuestioncomment->getFinfo()) {
             $this->redirect('list', 'Question');
         }
 
-        $currentUid = $this->getCurrentUid();
+        $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
         $anonymizeIpSetting = null;
 
         if ($currentUid == $pluginUid) {
@@ -132,18 +130,11 @@ class QuestioncommentController extends ActionController
             } catch (IllegalObjectTypeException|UnknownObjectException $e) {
             }
 
-            // SignalSlotDispatcher, connect with this to run a custom action after comment creation
-            try {
-                $this->signalSlotDispatcher->dispatch(__CLASS__, 'NewFaqComment', [$question, $newQuestioncomment]);
-            } catch (\Exception $exception) {
-                // do nothing
-            }
-
             // Send notification emails
             $emailSettings = $this->settings['question']['comment']['email'];
 
             if ($emailSettings['enable']) {
-                $emailBodyCenterText = '<br/><strong>' . $question->getUid() . '. ' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
+                $emailBodyCenterText = '<br/><strong>' . $question->getUid() . '. ' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($this->request->getAttribute('currentContentObject'), $newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
 
                 $sender = [htmlspecialchars($emailSettings['sender']['email']) => htmlspecialchars($emailSettings['sender']['name'])];
 
@@ -151,17 +142,17 @@ class QuestioncommentController extends ActionController
                     $receivers = htmlspecialchars($emailSettings['receivers']['email']),
                     $sender,
                     $subject = htmlspecialchars($emailSettings['subject']),
-                    $body = $this->formatRte($emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['closeText'])
+                    $body = $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['closeText'])
                 );
 
                 if ($emailSettings['sendCommenterNotification']) {
-                    $emailBodyCenterText = '<br/><strong>' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
+                    $emailBodyCenterText = '<br/><strong>' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($this->request->getAttribute('currentContentObject'), $newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
 
                     SendMailService::sendMail(
                         $receivers = htmlspecialchars($newQuestioncomment->getEmail()),
                         $sender,
                         $subject = htmlspecialchars($emailSettings['commenter']['subject']),
-                        $body = $this->formatRte($emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['commenter']['closeText'])
+                        $body = $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['commenter']['closeText'])
                     );
                 }
             }
@@ -185,7 +176,7 @@ class QuestioncommentController extends ActionController
      */
     public function thankForCommentAction(Questioncomment $newQuestioncomment, int $pluginUid): ResponseInterface
     {
-        $currentUid = $this->getCurrentUid();
+        $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
         $emailNotification = (int)$this->settings['question']['comment']['email']['sendCommenterNotification'];
 
@@ -211,25 +202,15 @@ class QuestioncommentController extends ActionController
     }
 
     /**
-     * Get current uid of content element
-     *
-     * @return int
-     */
-    private function getCurrentUid(): int
-    {
-        $cObj = $this->configurationManager->getContentObject();
-        return $cObj->data['uid'];
-    }
-
-    /**
      * Format / clean a string with parseFunc
      *
+     * @param $request
      * @param $str
      *
      * @return string
      */
-    private function formatRte($str): string
+    private function formatRte($request, $str): string
     {
-        return $this->configurationManager->getContentObject()->parseFunc($str, [], '< lib.parseFunc_RTE');
+        return $request->parseFunc($str, [], '< lib.parseFunc_RTE');
     }
 }

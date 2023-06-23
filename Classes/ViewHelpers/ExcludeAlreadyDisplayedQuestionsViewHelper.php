@@ -34,7 +34,7 @@ class ExcludeAlreadyDisplayedQuestionsViewHelper extends AbstractViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('question', Question::class, 'question item', true);
@@ -49,7 +49,8 @@ class ExcludeAlreadyDisplayedQuestionsViewHelper extends AbstractViewHelper
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
-    ) {
+    ): void
+    {
         $question = $arguments['question'];
         $uid = $question->getUid();
 

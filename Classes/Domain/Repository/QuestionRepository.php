@@ -2,6 +2,7 @@
 
 namespace Jp\Jpfaq\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
@@ -24,10 +25,10 @@ class QuestionRepository extends Repository
      * @param array $categories
      * @param bool $excludeAlreadyDisplayedQuestions
      *
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      * @return array|QueryResultInterface
+     * @throws InvalidQueryException
      */
-    public function findQuestionsWithConstraints(array $categories = [], bool $excludeAlreadyDisplayedQuestions = false)
+    public function findQuestionsWithConstraints(array $categories = [], bool $excludeAlreadyDisplayedQuestions = false): QueryResultInterface|array
     {
         $query = $this->createQuery();
         $constraintsOr = [];
@@ -50,14 +51,14 @@ class QuestionRepository extends Repository
         }
 
         if (!empty($constraintsOr) && !empty($constraintsAnd)) {
-            $query->matching($query->logicalAnd([
-                $query->logicalOr($constraintsOr),
-                $query->logicalOr($constraintsAnd)
-            ]));
+            $query->matching($query->logicalAnd(
+                $query->logicalOr(...$constraintsOr),
+                $query->logicalOr(...$constraintsAnd)
+            ));
         } elseif (!empty($constraintsOr)) {
-            $query->matching($query->logicalOr($constraintsOr));
+            $query->matching($query->logicalOr(...$constraintsOr));
         } elseif (!empty($constraintsAnd)) {
-            $query->matching($query->logicalAnd($constraintsAnd));
+            $query->matching($query->logicalAnd(...$constraintsAnd));
         }
 
         return $query->execute();

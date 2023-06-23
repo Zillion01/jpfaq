@@ -191,6 +191,34 @@ settings.question.comment.email.enable
 
 .. _settings.question.comment.email.subject:
 
+settings.includeJsAndCssGlobal
+""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.includeJsAndCssGlobal
+   Data type
+         boolean
+   Description
+         Load JS and CSS globally instead of only on plugin page. This might be more efficient in some cases.
+
+.. _settings.includeJsAndCssGlobal:
+
+settings.setSchemaOrgOnHtmlTag
+""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.setSchemaOrgOnHtmlTag
+   Data type
+         boolean
+   Description
+         Set Schema.org/FAQPage as HTML attribute instead of at the FAQ plugin.
+         This will produce a Google Schema.org validated FAQ page, like developers.google.com/search/docs/appearance/structured-data/faqpage
+         Note: when config.htmlTag.attributes is used, then config.htmlTag_setParams has no effect anymore!
+
+.. _settings.setSchemaOrgOnHtmlTag:
+
 settings.question.comment.email.subject
 """""""""""""""""""""""""""""""""""""""
 .. container:: table-row

@@ -1,8 +1,8 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-    <li itemprop="hasPart" itemscope itemtype="http://schema.org/Question">
-        <h3 class="toggleTrigger" itemprop="text" aria-label="{f:translate(key: 'jpfaq_toggleAnswer')}">{question.question}</h3>
+    <li itemscope itemprop="mainEntity" itemtype="http://schema.org/Question">
+        <h3 class="toggleTrigger" itemprop="name" aria-label="{f:translate(key: 'jpfaq_toggleAnswer')}">{question.question}</h3>
 
-        <div class="toggleTriggerContainer" itemprop="suggestedAnswer acceptedAnswer" itemscope itemtype="http://schema.org/Answer">
+        <div class="toggleTriggerContainer" itemscope itemprop="acceptedAnswer" itemtype="http://schema.org/Answer">
             <div class="jpfaqAnswer" itemprop="text">
                 <f:if condition="{question.answer}">
                     <f:format.html>{question.answer}</f:format.html>
@@ -15,11 +15,11 @@
                         </f:cObject>
                     </div>
                 </f:if>
-
-                <f:if condition="{showQuestionCommentForm}">
-                    <f:render partial="Question/Helpfulness" arguments="{question: question, currentUid: currentUid, gtag: gtag}"/>
-                </f:if>
             </div>
+
+            <f:if condition="{showQuestionCommentForm}">
+                <f:render partial="Question/Helpfulness" arguments="{question: question, currentUid: currentUid, gtag: gtag}"/>
+            </f:if>
         </div>
     </li>
 </html>

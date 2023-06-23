@@ -20,7 +20,7 @@ class SendMailService
      *
      * @return bool mail was sent?
      */
-    public static function sendMail(string $receivers, array $sender, string $subject, string $body)
+    public static function sendMail(string $receivers, array $sender, string $subject, string $body): bool
     {
         $mail = GeneralUtility::makeInstance(MailMessage::class);
 

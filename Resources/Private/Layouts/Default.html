@@ -3,7 +3,7 @@
 <f:render partial="Assets/CssFiles" arguments="{settings: '{settings}'}" />
 <f:render partial="Assets/JsFiles" arguments="{settings: '{settings}'}" />
 
-<div class="tx-jpfaq" id="tx-jpfaq{currentUid}" itemscope itemtype="http://schema.org/FAQPage">
+<div class="tx-jpfaq" id="tx-jpfaq{currentUid}" {settings.localSchemaOrgFaqPage}>
 	<f:render section="main" />
 </div>
 

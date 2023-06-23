@@ -118,7 +118,6 @@ return [
                 'type' => 'text',
                 'eval' => 'trim',
                 'enableRichtext' => true,
-                // 'required' => true,
             ],
         ],
         'additional_content_answer' => [

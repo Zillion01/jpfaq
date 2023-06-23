@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 
 class CategorycommentController extends ActionController
 {
@@ -68,7 +69,7 @@ class CategorycommentController extends ActionController
      */
     public function commentAction(array $catUids, int $pluginUid): ResponseInterface
     {
-        $currentUid = $this->getCurrentUid();
+        $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
         if ($currentUid == $pluginUid) {
             $this->view->assignMultiple([
@@ -96,8 +97,7 @@ class CategorycommentController extends ActionController
      *
      * @return ResponseInterface
      *
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
+     * @throws IllegalObjectTypeException
      */
     public function addCommentAction(
         Categorycomment $newCategorycomment,
@@ -109,7 +109,7 @@ class CategorycommentController extends ActionController
             $this->redirect('list', 'Question');
         }
 
-        $currentUid = $this->getCurrentUid();
+        $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
         $categories = [];
         $categoryNames = '';
@@ -147,40 +147,29 @@ class CategorycommentController extends ActionController
 
             $this->categorycommentRepository->add($newCategorycomment);
 
-            // SignalSlotDispatcher, connect with this to run a custom action after comment creation
-            try {
-                $this->signalSlotDispatcher->dispatch(
-                    __CLASS__,
-                    'NewCategoriesComment',
-                    [$categories, $newCategorycomment]
-                );
-            } catch (\Exception $exception) {
-                // do nothing
-            }
-
             // Send notification emails
             $emailSettings = $this->settings['category']['comment']['email'];
 
             if ($emailSettings['enable']) {
                 $sender = [htmlspecialchars($emailSettings['sender']['email']) => htmlspecialchars($emailSettings['sender']['name'])];
 
-                $emailBodyCenterText = '<br/><strong>' . $categoryNames . '</strong>' . '<p><i>' . $this->formatRte($newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
+                $emailBodyCenterText = '<br/><strong>' . $categoryNames . '</strong>' . '<p><i>' . $this->formatRte($this->request->getAttribute('currentContentObject'), $newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
 
                 SendMailService::sendMail(
                     $receivers = htmlspecialchars($emailSettings['receivers']['email']),
                     $sender,
                     $subject = $emailSettings['subject'],
-                    $body = $this->formatRte($emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['closeText'])
+                    $body = $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['closeText'])
                 );
 
                 if ($emailSettings['sendCommenterNotification']) {
-                    $emailBodyCenterText = '<br/>' . '<p><i>' . $this->formatRte($newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
+                    $emailBodyCenterText = '<br/>' . '<p><i>' . $this->formatRte($this->request->getAttribute('currentContentObject'), $newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
 
                     SendMailService::sendMail(
                         $receivers = htmlspecialchars($newCategorycomment->getEmail()),
                         $sender,
                         $subject = htmlspecialchars($emailSettings['commenter']['subject']),
-                        $body = $this->formatRte($emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['commenter']['closeText'])
+                        $body = $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['commenter']['closeText'])
                     );
                 }
             }
@@ -204,7 +193,7 @@ class CategorycommentController extends ActionController
      */
     public function thankForCommentAction(Categorycomment $newCategorycomment, int $pluginUid): ResponseInterface
     {
-        $currentUid = $this->getCurrentUid();
+        $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
         $emailNotification = (int)$this->settings['category']['comment']['email']['sendCommenterNotification'];
 
@@ -230,27 +219,15 @@ class CategorycommentController extends ActionController
     }
 
     /**
-     * Get current uid of content element
-     *
-     * @return int
-     */
-    private function getCurrentUid()
-    {
-        $cObj = $this->configurationManager->getContentObject();
-        $currentUid = $cObj->data['uid'];
-
-        return $currentUid;
-    }
-
-    /**
      * Format / clean a string with parseFunc
      *
+     * @param $request
      * @param $str
      *
      * @return string
      */
-    private function formatRte($str): string
+    private function formatRte($request, $str): string
     {
-        return $this->configurationManager->getContentObject()->parseFunc($str, [], '< lib.parseFunc_RTE');
+        return $request->parseFunc($str, [], '< lib.parseFunc_RTE');
     }
 }

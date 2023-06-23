@@ -52,14 +52,6 @@ $boot = static function (): void {
             ['source' => $path]
         );
     }
-
-    // Example Signal Slot registering
-    //$signalSlotDispatcher->connect(
-    //    \Jp\Jpfaq\Controller\QuestionController::class,  // Signal class name
-    //    'NewFaqComment',                                  // Signal name
-    //    'bla::class',        // Slot class name
-    //    'yourslot'           // Slot name
-    //);
 };
 
 $boot();

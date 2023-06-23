@@ -6,6 +6,7 @@
             <f:link.action action="helpfulness" arguments="{question:question, helpful:1, pluginUid:currentUid}"
                            class="jpfaqQuestionHelpful"
                            rel="nofollow"
+                           pageType="1687523179"
                            additionalAttributes="{f:if(condition:'{gtag.enable}', then: '{data-gtagevent: gtag.event, data-gtagcategory: gtag.category, data-gtaglabel: question.question, data-gtagvalue: gtag.valueHelpful}', else: '{data:0}')}">
                 <f:translate key="tx_jpfaq_domain_model_question.helpful"/>
             </f:link.action>
@@ -13,6 +14,7 @@
             <f:link.action action="helpfulness" arguments="{question:question, helpful:0, pluginUid:currentUid}"
                            class="jpfaqQuestionNotHelpful"
                            rel="nofollow"
+                           pageType="1687523179"
                            additionalAttributes="{f:if(condition:'{gtag.enable}', then: '{data-gtagevent: gtag.event, data-gtagcategory: gtag.category, data-gtaglabel: question.question, data-gtagvalue: gtag.valueUnhelpful}', else: '{data:0}')}">
                 <f:translate key="tx_jpfaq_domain_model_question.notHelpful"/>
             </f:link.action>
