@@ -204,6 +204,7 @@ class QuestionController extends ActionController
     {
         $userAgent = $_SERVER['HTTP_USER_AGENT'];
         $bots = $this->settings['bots'];
+        $bots = explode(',', $bots);
 
         foreach ($bots as $bot) {
             if (stripos($userAgent, htmlspecialchars($bot)) !== false) return true;
