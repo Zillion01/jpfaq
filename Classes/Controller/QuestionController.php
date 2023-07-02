@@ -31,7 +31,8 @@ class QuestionController extends ActionController
     public function __construct(
         QuestionRepository $questionRepository,
         CategoryRepository $categoryRepository
-    ) {
+    )
+    {
         $this->questionRepository = $questionRepository;
         $this->categoryRepository = $categoryRepository;
     }
@@ -124,19 +125,21 @@ class QuestionController extends ActionController
      */
     public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid): ResponseInterface|ForwardResponse
     {
-        $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
+        if (!$this->isBot()) {
+            $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
-        if ($currentUid == $pluginUid) {
-            $this->updateHelpful($question, $helpful);
+            if ($currentUid == $pluginUid) {
+                $this->updateHelpful($question, $helpful);
 
-            if (!$helpful) {
-                // Show comment form
-                return (new ForwardResponse('comment'))
-                    ->withControllerName('Questioncomment');
+                if (!$helpful) {
+                    // Show comment form
+                    return (new ForwardResponse('comment'))
+                        ->withControllerName('Questioncomment');
+                }
+
+                // Show helpfullness template
+                return $this->htmlResponse();
             }
-
-            // Show helpfullness template
-            return $this->htmlResponse();
         }
 
         // Else do not render view
@@ -190,5 +193,21 @@ class QuestionController extends ActionController
 
         // Store user interaction on helpfulness in session
         $GLOBALS['TSFE']->fe_user->setKey('ses', $questionUid, $helpful);
+    }
+
+    /**
+     * Check if browser is a well known bot
+     *
+     * @return bool
+     */
+    private function isBot(): bool
+    {
+        $userAgent = $_SERVER['HTTP_USER_AGENT'];
+        $bots = $this->settings['bots'];
+
+        foreach ($bots as $bot) {
+            if (stripos($userAgent, htmlspecialchars($bot)) !== false) return true;
+        }
+        return true;
     }
 }

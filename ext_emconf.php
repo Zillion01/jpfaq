@@ -7,12 +7,12 @@ $EM_CONF['jpfaq'] = [
     'author' => 'Jacco van der Post',
     'author_email' => 'jacco@id-webdesign.nl',
     'state' => 'stable',
-    'version' => '12.4.0',
+    'version' => '12.4.1',
     'constraints' =>
         [
             'depends' =>
                 [
-                    'typo3' => '12.4.0-12.4.99',
+                    'typo3' => '12.4.2-12.4.99',
                 ],
             'conflicts' =>
                 [],

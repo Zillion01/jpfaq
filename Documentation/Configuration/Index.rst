@@ -219,6 +219,19 @@ settings.setSchemaOrgOnHtmlTag
 
 .. _settings.setSchemaOrgOnHtmlTag:
 
+settings.bots
+"""""""""""""
+.. container:: table-row
+
+   Property
+         settings.bots
+   Data type
+         string
+   Description
+         List of well known bots, spiders and crawlers, to prevent them clicking helpfullness actions
+
+.. _settings.bots:
+
 settings.question.comment.email.subject
 """""""""""""""""""""""""""""""""""""""
 .. container:: table-row
