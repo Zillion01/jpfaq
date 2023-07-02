@@ -10,6 +10,10 @@
 
 ChangeLog
 =========
+12.4.2
+"""""
+#. Small bugfix in isBot function
+
 12.4.1
 """""
 #. Prevent well known bots to click on helpfullness actions

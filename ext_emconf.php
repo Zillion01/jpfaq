@@ -7,7 +7,7 @@ $EM_CONF['jpfaq'] = [
     'author' => 'Jacco van der Post',
     'author_email' => 'jacco@id-webdesign.nl',
     'state' => 'stable',
-    'version' => '12.4.1',
+    'version' => '12.4.2',
     'constraints' =>
         [
             'depends' =>
