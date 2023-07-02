@@ -10,6 +10,10 @@
 
 ChangeLog
 =========
+12.4.1
+"""""
+#. Prevent well known bots to click on helpfullness actions
+
 12.4.0
 """""
 #. For TYPO3 v12 (also thx to Christian-Hackl)
