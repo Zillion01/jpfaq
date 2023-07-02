@@ -208,6 +208,6 @@ class QuestionController extends ActionController
         foreach ($bots as $bot) {
             if (stripos($userAgent, htmlspecialchars($bot)) !== false) return true;
         }
-        return true;
+        return false;
     }
 }
