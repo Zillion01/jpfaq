@@ -79,7 +79,7 @@ class QuestionController extends ActionController
     public function listAction(): ResponseInterface
     {
         $restrictToCategories = (array)$this->settings['questions']['categories'];
-        $excludeAlreadyDisplayedQuestions = (int)$this->settings['excludeAlreadyDisplayedQuestions'];
+        $excludeAlreadyDisplayedQuestions = (int)($this->settings['excludeAlreadyDisplayedQuestions'] ?? 1);
         $questions = $this->questionRepository->findQuestionsWithConstraints(
             $restrictToCategories,
             $excludeAlreadyDisplayedQuestions
@@ -104,7 +104,7 @@ class QuestionController extends ActionController
             'categories' => $categories,
             'restrictToCategories' => $restrictToCategories,
             'currentUid' => $currentUid,
-            'gtag' => $this->settings['gtag'],
+            'gtag' => $this->settings['gtag'] ?? '',
             'questions' => $questions
         ]);
 
