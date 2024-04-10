@@ -22,6 +22,7 @@ Users Manual
 #. If would like to track helpfulness of questions, which shows a comment form when visitors click 'not helpful', check 'Show a comment form under each question'
 #. If the email and comment fields in the flexform are not filled in, the corresponding typoscript settings will be used.
 #. You can also present a feedback form under each plugin. Check 'Show a (categories) comment form under this list of questions'.
+#. On upgrade from older major version, make sure the plugin is saved again with the correct flexform values and recheck included typoscript settings.
 
 
 .. _11.6:
