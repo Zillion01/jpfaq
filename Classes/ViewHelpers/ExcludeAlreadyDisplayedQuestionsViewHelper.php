@@ -13,7 +13,6 @@ use Jp\Jpfaq\Domain\Model\Question;
  */
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * ViewHelper to exclude question items in other plugins
@@ -38,19 +37,18 @@ class ExcludeAlreadyDisplayedQuestionsViewHelper extends AbstractViewHelper
         $this->registerArgument('question', Question::class, 'question item', true);
     }
 
-    /**
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     */
-    public function render(): void
-    {
-        $question = $this->arguments['question'];
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ) {
+        $question = $arguments['question'];
         $uid = $question->getUid();
         if (empty($GLOBALS['EXT']['jpfaq']['alreadyDisplayed'])) {
             $GLOBALS['EXT']['jpfaq']['alreadyDisplayed'] = [];
         }
         $GLOBALS['EXT']['jpfaq']['alreadyDisplayed'][$uid] = $uid;
+
         // Add localized uid as well
         $originalUid = (int)$question->_getProperty('_localizedUid');
         if ($originalUid > 0) {

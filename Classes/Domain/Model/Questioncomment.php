@@ -2,6 +2,8 @@
 
 namespace Jp\Jpfaq\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -39,7 +41,7 @@ class Questioncomment extends AbstractEntity
      *
      * @var string
      */
-    #[TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $comment = '';
 
     /**
@@ -59,9 +61,9 @@ class Questioncomment extends AbstractEntity
     /**
      * question
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Question>
+     * @var ObjectStorage<Question>
      */
-    #[TYPO3\CMS\Extbase\Annotation\ORM\Lazy]
+    #[Lazy]
     protected $question;
 
     /**
@@ -164,7 +166,7 @@ class Questioncomment extends AbstractEntity
     /**
      * Returns the question
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Question> $question
+     * @return ObjectStorage<Question> $question
      */
     public function getQuestion()
     {
@@ -174,7 +176,7 @@ class Questioncomment extends AbstractEntity
     /**
      * Sets the question
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Question> $question
+     * @param ObjectStorage<Question> $question
      */
     public function setQuestion($question): void
     {

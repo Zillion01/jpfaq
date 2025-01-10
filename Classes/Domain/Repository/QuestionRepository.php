@@ -12,11 +12,8 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class QuestionRepository extends Repository
 {
-    /**
-     * @var array
-     */
     protected $defaultOrderings = [
-        'sorting' => QueryInterface::ORDER_ASCENDING
+        'sorting' => QueryInterface::ORDER_ASCENDING,
     ];
 
     /**

@@ -2,6 +2,9 @@
 
 namespace Jp\Jpfaq\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -16,7 +19,7 @@ class Question extends AbstractEntity
      *
      * @var string
      */
-    #[TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $question = '';
 
     /**
@@ -32,8 +35,8 @@ class Question extends AbstractEntity
      *
      * @var int
      */
-    #[TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
-    protected $helpful = '';
+    #[Validate(['validator' => 'NotEmpty'])]
+    protected $helpful = 0;
 
     /**
      * nothelpful
@@ -41,23 +44,23 @@ class Question extends AbstractEntity
      *
      * @var int
      */
-    #[TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
-    protected $nothelpful = '';
+    #[Validate(['validator' => 'NotEmpty'])]
+    protected $nothelpful = 0;
 
     /**
      * Additional tt_content for Answer
      *
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\TtContent>
+     * @var ObjectStorage<TtContent>
      */
-    #[TYPO3\CMS\Extbase\Annotation\ORM\Cascade(['value' => 'remove'])]
-    #[TYPO3\CMS\Extbase\Annotation\ORM\Lazy]
+    #[Cascade(['value' => 'remove'])]
+    #[Lazy]
     protected $additionalContentAnswer;
 
     /**
      * categories
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category>
+     * @var ObjectStorage<Category>
      */
     protected $categories;
 
@@ -65,10 +68,10 @@ class Question extends AbstractEntity
      * comments
      *
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Questioncomment>
+     * @var ObjectStorage<Questioncomment>
      */
-    #[TYPO3\CMS\Extbase\Annotation\ORM\Cascade(['value' => 'remove'])]
-    #[TYPO3\CMS\Extbase\Annotation\ORM\Lazy]
+    #[Cascade(['value' => 'remove'])]
+    #[Lazy]
     protected $questioncomment;
 
     /**
@@ -136,7 +139,7 @@ class Question extends AbstractEntity
     /**
      * Get content elements (additionalContentAnswer)
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\TtContent> $additionalContentAnswer
+     * @return ObjectStorage<TtContent> $additionalContentAnswer
      */
     public function getAdditionalContentAnswer()
     {
@@ -152,18 +155,18 @@ class Question extends AbstractEntity
     {
         $idList = [];
         $contentElements = $this->getAdditionalContentAnswer();
-        if ($contentElements) {
-            foreach ($this->getAdditionalContentAnswer() as $contentElement) {
-                $idList[] = $contentElement->getUid();
-            }
+
+        foreach ($this->getAdditionalContentAnswer() as $contentElement) {
+            $idList[] = $contentElement->getUid();
         }
+
         return implode(',', $idList);
     }
 
     /**
      * Adds a Category
      *
-     * @param \Jp\Jpfaq\Domain\Model\Category $category
+     * @param Category $category
      */
     public function addCategory(Category $category): void
     {
@@ -173,7 +176,7 @@ class Question extends AbstractEntity
     /**
      * Removes a Category
      *
-     * @param \Jp\Jpfaq\Domain\Model\Category $categoryToRemove The Category to be removed
+     * @param Category $categoryToRemove The Category to be removed
      */
     public function removeCategory(Category $categoryToRemove): void
     {
@@ -183,7 +186,7 @@ class Question extends AbstractEntity
     /**
      * Returns the categories
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category> $categories
+     * @return ObjectStorage<Category> $categories
      */
     public function getCategories()
     {
@@ -193,7 +196,7 @@ class Question extends AbstractEntity
     /**
      * Sets the categories
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category> $categories
+     * @param ObjectStorage<Category> $categories
      */
     public function setCategories(ObjectStorage $categories): void
     {
@@ -243,7 +246,7 @@ class Question extends AbstractEntity
     /**
      * Returns the Questioncomment
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Questioncomment>
+     * @return ObjectStorage<Questioncomment>
      */
     public function getQuestioncomment()
     {
@@ -253,7 +256,7 @@ class Question extends AbstractEntity
     /**
      * Adds a questioncomment
      *
-     * @param \Jp\Jpfaq\Domain\Model\Questioncomment $questioncomment
+     * @param Questioncomment $questioncomment
      */
     public function addComment(Questioncomment $questioncomment): void
     {

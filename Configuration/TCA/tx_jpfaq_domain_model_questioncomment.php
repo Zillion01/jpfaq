@@ -20,7 +20,7 @@ return [
         ],
         'searchFields' => 'name,email,comment,finfo,question',
         'typeicon_classes' => [
-            'default' => 'tx_jpfaq_domain_model_questioncomment'
+            'default' => 'tx_jpfaq_domain_model_questioncomment',
         ],
     ],
     'types' => [
@@ -62,8 +62,8 @@ return [
                 'items' => [
                     [
                         'label' => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
             ],
         ],
@@ -74,8 +74,8 @@ return [
                 'type' => 'datetime',
                 'default' => 0,
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'endtime' => [
@@ -85,11 +85,11 @@ return [
                 'type' => 'datetime',
                 'default' => 0,
                 'range' => [
-                    'upper' => mktime(0, 0, 0, 1, 1, 2038)
+                    'upper' => mktime(0, 0, 0, 1, 1, 2038),
                 ],
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'name' => [
@@ -98,7 +98,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'email' => [
@@ -106,7 +106,7 @@ return [
             'label' => 'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:tx_jpfaq_domain_model_questioncomment.email',
             'config' => [
                 'type' => 'email',
-                'size' => 30
+                'size' => 30,
             ],
         ],
         'comment' => [
@@ -118,7 +118,7 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
                 'required' => true,
-            ]
+            ],
         ],
         'finfo' => [
             'exclude' => true,
@@ -126,7 +126,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'question' => [
@@ -146,7 +146,7 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.creationDate',
             'config' => [
                 'type' => 'datetime',
-                'default' => 0
+                'default' => 0,
             ],
         ],
         'ip' => [
@@ -155,7 +155,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
     ],

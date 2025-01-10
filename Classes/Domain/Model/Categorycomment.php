@@ -2,6 +2,8 @@
 
 namespace Jp\Jpfaq\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -39,7 +41,7 @@ class Categorycomment extends AbstractEntity
      *
      * @var string
      */
-    #[TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $comment = '';
 
     /**
@@ -59,9 +61,9 @@ class Categorycomment extends AbstractEntity
     /**
      * category
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category>
+     * @var ObjectStorage<Category>
      */
-    #[TYPO3\CMS\Extbase\Annotation\ORM\Lazy]
+    #[Lazy]
     protected $category;
 
     /**
@@ -167,7 +169,7 @@ class Categorycomment extends AbstractEntity
     /**
      * Adds a Category
      *
-     * @param \Jp\Jpfaq\Domain\Model\Category $category
+     * @param Category $category
      */
     public function addCategory(Category $category): void
     {
@@ -177,7 +179,7 @@ class Categorycomment extends AbstractEntity
     /**
      * Removes a Category
      *
-     * @param \Jp\Jpfaq\Domain\Model\Category $categoryToRemove The Category to be removed
+     * @param Category $categoryToRemove The Category to be removed
      */
     public function removeCategory(Category $categoryToRemove): void
     {
@@ -187,7 +189,7 @@ class Categorycomment extends AbstractEntity
     /**
      * Returns the category
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category> $category
+     * @return ObjectStorage<Category> $category
      */
     public function getCategory()
     {
@@ -197,7 +199,7 @@ class Categorycomment extends AbstractEntity
     /**
      * Sets the category
      *
-     * @param  \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category> $category
+     * @param ObjectStorage<Category> $category
      */
     public function setCategory($category): void
     {

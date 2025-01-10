@@ -19,7 +19,7 @@ return [
         ],
         'searchFields' => 'question,answer,additional_content_answer,categories,',
         'typeicon_classes' => [
-            'default' => 'tx_jpfaq_domain_model_question'
+            'default' => 'tx_jpfaq_domain_model_question',
         ],
         'security' => [
             'ignorePageTypeRestriction' => true,
@@ -64,8 +64,8 @@ return [
                 'items' => [
                     [
                         'label' => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
             ],
         ],
@@ -76,8 +76,8 @@ return [
                 'type' => 'datetime',
                 'default' => 0,
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'endtime' => [
@@ -87,11 +87,11 @@ return [
                 'type' => 'datetime',
                 'default' => 0,
                 'range' => [
-                    'upper' => mktime(0, 0, 0, 1, 1, 2038)
+                    'upper' => mktime(0, 0, 0, 1, 1, 2038),
                 ],
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'question' => [
@@ -125,8 +125,8 @@ return [
                     'columns' => [
                         'CType' => [
                             'config' => [
-                                'default' => 'textmedia'
-                            ]
+                                'default' => 'textmedia',
+                            ],
                         ],
                     ],
                 ],
@@ -144,10 +144,10 @@ return [
                     'showSynchronizationLink' => 1,
                     'enabledControls' => [
                         'info' => false,
-                    ]
+                    ],
                 ],
                 'allowLanguageSynchronization' => true,
-            ]
+            ],
         ],
         'categories' => [
             'exclude' => 1,
@@ -207,9 +207,9 @@ return [
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
                     'useSortable' => 1,
-                    'showAllLocalizationLink' => 1
+                    'showAllLocalizationLink' => 1,
                 ],
             ],
         ],
-    ]
+    ],
 ];

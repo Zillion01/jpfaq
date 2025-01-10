@@ -32,8 +32,7 @@ class QuestionController extends ActionController
     public function __construct(
         QuestionRepository $questionRepository,
         CategoryRepository $categoryRepository
-    )
-    {
+    ) {
         $this->questionRepository = $questionRepository;
         $this->categoryRepository = $categoryRepository;
     }
@@ -83,7 +82,7 @@ class QuestionController extends ActionController
         $excludeAlreadyDisplayedQuestions = (int)($this->settings['excludeAlreadyDisplayedQuestions'] ?? 1);
         $questions = $this->questionRepository->findQuestionsWithConstraints(
             $restrictToCategories,
-            $excludeAlreadyDisplayedQuestions
+            (bool)$excludeAlreadyDisplayedQuestions
         );
 
         $categories = [];
@@ -106,7 +105,7 @@ class QuestionController extends ActionController
             'restrictToCategories' => $restrictToCategories,
             'currentUid' => $currentUid,
             'gtag' => $this->settings['gtag'] ?? '',
-            'questions' => $questions
+            'questions' => $questions,
         ]);
 
         return $this->htmlResponse();

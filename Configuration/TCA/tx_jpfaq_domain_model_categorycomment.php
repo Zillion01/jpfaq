@@ -19,7 +19,7 @@ return [
         ],
         'searchFields' => 'name,email,comment,finfo,category',
         'typeicon_classes' => [
-            'default' => 'tx_jpfaq_domain_model_categorycomment'
+            'default' => 'tx_jpfaq_domain_model_categorycomment',
         ],
     ],
     'types' => [
@@ -61,8 +61,8 @@ return [
                 'items' => [
                     [
                         'label' => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
             ],
         ],
@@ -73,8 +73,8 @@ return [
                 'type' => 'datetime',
                 'default' => 0,
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'endtime' => [
@@ -84,11 +84,11 @@ return [
                 'type' => 'datetime',
                 'default' => 0,
                 'range' => [
-                    'upper' => mktime(0, 0, 0, 1, 1, 2038)
+                    'upper' => mktime(0, 0, 0, 1, 1, 2038),
                 ],
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'name' => [
@@ -97,7 +97,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'email' => [
@@ -106,7 +106,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'comment' => [
@@ -118,7 +118,7 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
                 'required' => true,
-            ]
+            ],
         ],
         'finfo' => [
             'exclude' => true,
@@ -126,7 +126,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'crdate' => [
@@ -134,7 +134,7 @@ return [
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.creationDate',
             'config' => [
                 'type' => 'datetime',
-                'default' => 0
+                'default' => 0,
             ],
         ],
         'ip' => [
@@ -143,7 +143,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'category' => [

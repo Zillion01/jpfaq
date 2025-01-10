@@ -20,10 +20,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class QuestioncommentRepository extends Repository
 {
-    /**
-     * @var array
-     */
     protected $defaultOrderings = [
-        'sorting' => QueryInterface::ORDER_ASCENDING
+        'sorting' => QueryInterface::ORDER_ASCENDING,
     ];
 }

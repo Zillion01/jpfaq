@@ -2,34 +2,26 @@
 
 namespace Jp\Jpfaq\Utility;
 
-use TYPO3\CMS\Core\TypoScript\TypoScriptService;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager;
 
-/**
- * Class: Typo3Utility
- * Description: general utilities
- *
- * 2024 Jacco van der Post <jacco@typo3-webdesign.nl>
- */
 class Typo3Utility
 {
     /**
-     * Get typoscript settings for a plugin
+     * Get TypoScript settings
      *
-     * @param string $plugin
-     *
-     * @return mixed
+     * @param string $extensionName
+     * @return array
      */
-    public static function getSettings(string $plugin): mixed
+    public static function getSettings(string $extensionName): array
     {
-        $plugin = htmlspecialchars($plugin);
+        /** @var ServerRequestInterface $request */
+        $request = GeneralUtility::makeInstance(ServerRequestInterface::class);
+        /** @var BackendConfigurationManager $configurationManager */
         $configurationManager = GeneralUtility::makeInstance(BackendConfigurationManager::class);
-        $typoScriptSettings = $configurationManager->getTypoScriptSetup();
+        $typoScriptSetup = $configurationManager->getTypoScriptSetup($request);
 
-        $typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
-        $typoScriptSettingsWithoutDots = $typoScriptService->convertTypoScriptArrayToPlainArray($typoScriptSettings);
-
-        return $typoScriptSettingsWithoutDots['plugin'][$plugin]['settings'];
+        return $typoScriptSetup['plugin.']['tx_' . strtolower($extensionName) . '.'] ?? [];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 defined('TYPO3') or die();
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
@@ -18,7 +19,7 @@ defined('TYPO3') or die();
 $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
     'jpFAQ',
     'jpfaq',
-    'apps-pagetree-folder-contains-board'
+    'apps-pagetree-folder-contains-board',
 ];
 
 $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-jpfaq'] = 'apps-pagetree-folder-contains-board';

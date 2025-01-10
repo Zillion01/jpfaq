@@ -19,7 +19,7 @@ return [
         ],
         'searchFields' => 'category,description,',
         'typeicon_classes' => [
-            'default' => 'tx_jpfaq_domain_model_category'
+            'default' => 'tx_jpfaq_domain_model_category',
         ],
         'security' => [
             'ignorePageTypeRestriction' => true,
@@ -64,8 +64,8 @@ return [
                 'items' => [
                     [
                         'label' => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'invertStateDisplay' => true,
+                    ],
                 ],
             ],
         ],
@@ -76,8 +76,8 @@ return [
                 'type' => 'datetime',
                 'default' => 0,
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'endtime' => [
@@ -87,11 +87,11 @@ return [
                 'type' => 'datetime',
                 'default' => 0,
                 'range' => [
-                    'upper' => mktime(0, 0, 0, 1, 1, 2038)
+                    'upper' => mktime(0, 0, 0, 1, 1, 2038),
                 ],
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'category' => [
@@ -111,8 +111,8 @@ return [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 15,
-                'eval' => 'trim'
-            ]
+                'eval' => 'trim',
+            ],
         ],
     ],
 ];
