@@ -38,8 +38,8 @@ class Categorycomment extends AbstractEntity
      * comment
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
     protected $comment = '';
 
     /**
@@ -60,8 +60,8 @@ class Categorycomment extends AbstractEntity
      * category
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[TYPO3\CMS\Extbase\Annotation\ORM\Lazy]
     protected $category;
 
     /**
@@ -99,7 +99,7 @@ class Categorycomment extends AbstractEntity
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -119,7 +119,7 @@ class Categorycomment extends AbstractEntity
      *
      * @param string $email
      */
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
@@ -139,7 +139,7 @@ class Categorycomment extends AbstractEntity
      *
      * @param string $comment
      */
-    public function setComment($comment)
+    public function setComment($comment): void
     {
         $this->comment = $comment;
     }
@@ -159,7 +159,7 @@ class Categorycomment extends AbstractEntity
      *
      * @param string $finfo
      */
-    public function setFinfo($finfo)
+    public function setFinfo($finfo): void
     {
         $this->finfo = $finfo;
     }
@@ -169,7 +169,7 @@ class Categorycomment extends AbstractEntity
      *
      * @param \Jp\Jpfaq\Domain\Model\Category $category
      */
-    public function addCategory(Category $category)
+    public function addCategory(Category $category): void
     {
         $this->category->attach($category);
     }
@@ -179,7 +179,7 @@ class Categorycomment extends AbstractEntity
      *
      * @param \Jp\Jpfaq\Domain\Model\Category $categoryToRemove The Category to be removed
      */
-    public function removeCategory(Category $categoryToRemove)
+    public function removeCategory(Category $categoryToRemove): void
     {
         $this->category->detach($categoryToRemove);
     }
@@ -199,7 +199,7 @@ class Categorycomment extends AbstractEntity
      *
      * @param  \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category> $category
      */
-    public function setCategory($category)
+    public function setCategory($category): void
     {
         $this->category = $category;
     }
@@ -219,7 +219,7 @@ class Categorycomment extends AbstractEntity
      *
      * @param string $ip
      */
-    public function setIp($ip)
+    public function setIp($ip): void
     {
         $this->ip = $ip;
     }

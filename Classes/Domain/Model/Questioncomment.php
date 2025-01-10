@@ -38,8 +38,8 @@ class Questioncomment extends AbstractEntity
      * comment
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
     protected $comment = '';
 
     /**
@@ -60,8 +60,8 @@ class Questioncomment extends AbstractEntity
      * question
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Question>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
+    #[TYPO3\CMS\Extbase\Annotation\ORM\Lazy]
     protected $question;
 
     /**
@@ -96,7 +96,7 @@ class Questioncomment extends AbstractEntity
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -116,7 +116,7 @@ class Questioncomment extends AbstractEntity
      *
      * @param string $email
      */
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
@@ -136,7 +136,7 @@ class Questioncomment extends AbstractEntity
      *
      * @param string $comment
      */
-    public function setComment($comment)
+    public function setComment($comment): void
     {
         $this->comment = $comment;
     }
@@ -156,7 +156,7 @@ class Questioncomment extends AbstractEntity
      *
      * @param string $finfo
      */
-    public function setFinfo($finfo)
+    public function setFinfo($finfo): void
     {
         $this->finfo = $finfo;
     }
@@ -176,7 +176,7 @@ class Questioncomment extends AbstractEntity
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Question> $question
      */
-    public function setQuestion($question)
+    public function setQuestion($question): void
     {
         $this->question = $question;
     }
@@ -196,7 +196,7 @@ class Questioncomment extends AbstractEntity
      *
      * @param string $ip
      */
-    public function setIp($ip)
+    public function setIp($ip): void
     {
         $this->ip = $ip;
     }

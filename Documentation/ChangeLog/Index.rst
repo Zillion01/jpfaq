@@ -10,6 +10,10 @@
 
 ChangeLog
 =========
+13.4.0
+"""""
+#. For TYPO3 v13
+
 12.5.0
 """""
 #. Use null coalescence for undefined array indices, for if not all settings are set. (Michiel Roos)

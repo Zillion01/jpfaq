@@ -29,8 +29,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  */
 class ExcludeAlreadyDisplayedQuestionsViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     /**
      * Initialize arguments
      */
@@ -45,20 +43,14 @@ class ExcludeAlreadyDisplayedQuestionsViewHelper extends AbstractViewHelper
      * @param \Closure $renderChildrenClosure
      * @param RenderingContextInterface $renderingContext
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ): void
+    public function render(): void
     {
-        $question = $arguments['question'];
+        $question = $this->arguments['question'];
         $uid = $question->getUid();
-
         if (empty($GLOBALS['EXT']['jpfaq']['alreadyDisplayed'])) {
             $GLOBALS['EXT']['jpfaq']['alreadyDisplayed'] = [];
         }
         $GLOBALS['EXT']['jpfaq']['alreadyDisplayed'][$uid] = $uid;
-
         // Add localized uid as well
         $originalUid = (int)$question->_getProperty('_localizedUid');
         if ($originalUid > 0) {

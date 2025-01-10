@@ -7,13 +7,12 @@ defined('TYPO3') or die();
     'jpFAQ'
 );
 
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['jpfaq_faq'] = 'recursive,select_key';
-
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['jpfaq_faq'] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', '--div--;Configuration,pi_flexform,', 'jpfaq_faq', 'after:subheader');
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    'jpfaq_faq',
-    'FILE:EXT:' . 'jpfaq' . '/Configuration/FlexForm/Flexform.xml'
+    '*',
+    'FILE:EXT:' . 'jpfaq' . '/Configuration/FlexForm/Flexform.xml',
+    'jpfaq_faq'
 );
 
 $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [

@@ -15,10 +15,9 @@ $boot = static function (): void {
             \Jp\Jpfaq\Controller\QuestionController::class => 'helpfulness',
             \Jp\Jpfaq\Controller\QuestioncommentController::class => 'comment, addComment',
             \Jp\Jpfaq\Controller\CategorycommentController::class => 'comment, addComment'
-        ]
+        ],
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('<INCLUDE_TYPOSCRIPT: source="FILE: EXT:jpfaq/Configuration/TsConfig/includePageTSconfig.tsconfig">');
 
     /**
      *  Icon registry

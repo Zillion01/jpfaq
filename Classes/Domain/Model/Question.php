@@ -13,10 +13,10 @@ class Question extends AbstractEntity
     /**
      * question
      *
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      *
      * @var string
      */
+    #[TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
     protected $question = '';
 
     /**
@@ -29,29 +29,29 @@ class Question extends AbstractEntity
     /**
      * helpful
      *
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      *
      * @var int
      */
+    #[TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
     protected $helpful = '';
 
     /**
      * nothelpful
      *
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      *
      * @var int
      */
+    #[TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
     protected $nothelpful = '';
 
     /**
      * Additional tt_content for Answer
      *
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\TtContent>
      */
+    #[TYPO3\CMS\Extbase\Annotation\ORM\Cascade(['value' => 'remove'])]
+    #[TYPO3\CMS\Extbase\Annotation\ORM\Lazy]
     protected $additionalContentAnswer;
 
     /**
@@ -64,11 +64,11 @@ class Question extends AbstractEntity
     /**
      * comments
      *
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Questioncomment>
      */
+    #[TYPO3\CMS\Extbase\Annotation\ORM\Cascade(['value' => 'remove'])]
+    #[TYPO3\CMS\Extbase\Annotation\ORM\Lazy]
     protected $questioncomment;
 
     /**
@@ -108,7 +108,7 @@ class Question extends AbstractEntity
      *
      * @param string $question
      */
-    public function setQuestion($question)
+    public function setQuestion($question): void
     {
         $this->question = $question;
     }
@@ -128,7 +128,7 @@ class Question extends AbstractEntity
      *
      * @param string $answer
      */
-    public function setAnswer($answer)
+    public function setAnswer($answer): void
     {
         $this->answer = $answer;
     }
@@ -165,7 +165,7 @@ class Question extends AbstractEntity
      *
      * @param \Jp\Jpfaq\Domain\Model\Category $category
      */
-    public function addCategory(Category $category)
+    public function addCategory(Category $category): void
     {
         $this->categories->attach($category);
     }
@@ -175,7 +175,7 @@ class Question extends AbstractEntity
      *
      * @param \Jp\Jpfaq\Domain\Model\Category $categoryToRemove The Category to be removed
      */
-    public function removeCategory(Category $categoryToRemove)
+    public function removeCategory(Category $categoryToRemove): void
     {
         $this->categories->detach($categoryToRemove);
     }
@@ -195,7 +195,7 @@ class Question extends AbstractEntity
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category> $categories
      */
-    public function setCategories(ObjectStorage $categories)
+    public function setCategories(ObjectStorage $categories): void
     {
         $this->categories = $categories;
     }
@@ -215,7 +215,7 @@ class Question extends AbstractEntity
      *
      * @param int $helpful
      */
-    public function setHelpful($helpful)
+    public function setHelpful($helpful): void
     {
         $this->helpful = $helpful;
     }
@@ -235,7 +235,7 @@ class Question extends AbstractEntity
      *
      * @param int $nothelpful
      */
-    public function setNothelpful($nothelpful)
+    public function setNothelpful($nothelpful): void
     {
         $this->nothelpful = $nothelpful;
     }
@@ -255,7 +255,7 @@ class Question extends AbstractEntity
      *
      * @param \Jp\Jpfaq\Domain\Model\Questioncomment $questioncomment
      */
-    public function addComment(Questioncomment $questioncomment)
+    public function addComment(Questioncomment $questioncomment): void
     {
         $this->questioncomment->attach($questioncomment);
     }

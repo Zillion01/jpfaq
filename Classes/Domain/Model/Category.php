@@ -12,10 +12,10 @@ class Category extends AbstractEntity
     /**
      * category
      *
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      *
      * @var string
      */
+    #[TYPO3\CMS\Extbase\Annotation\Validate(['validator' => 'NotEmpty'])]
     protected $category = '';
 
     /**
@@ -40,7 +40,7 @@ class Category extends AbstractEntity
      *
      * @param string $category
      */
-    public function setCategory($category)
+    public function setCategory($category): void
     {
         $this->category = $category;
     }
@@ -60,7 +60,7 @@ class Category extends AbstractEntity
      *
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         $this->description = $description;
     }
