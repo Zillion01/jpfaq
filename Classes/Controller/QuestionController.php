@@ -5,6 +5,7 @@ namespace Jp\Jpfaq\Controller;
 use Jp\Jpfaq\Domain\Model\Question;
 use Jp\Jpfaq\Domain\Repository\CategoryRepository;
 use Jp\Jpfaq\Domain\Repository\QuestionRepository;
+use Jp\Jpfaq\Utility\IsBot;
 use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -79,7 +80,7 @@ class QuestionController extends ActionController
     public function listAction(): ResponseInterface
     {
         $restrictToCategories = (array)$this->settings['questions']['categories'];
-        $excludeAlreadyDisplayedQuestions = (int)$this->settings['excludeAlreadyDisplayedQuestions'];
+        $excludeAlreadyDisplayedQuestions = (int)($this->settings['excludeAlreadyDisplayedQuestions'] ?? 1);
         $questions = $this->questionRepository->findQuestionsWithConstraints(
             $restrictToCategories,
             $excludeAlreadyDisplayedQuestions
@@ -104,7 +105,7 @@ class QuestionController extends ActionController
             'categories' => $categories,
             'restrictToCategories' => $restrictToCategories,
             'currentUid' => $currentUid,
-            'gtag' => $this->settings['gtag'],
+            'gtag' => $this->settings['gtag'] ?? '',
             'questions' => $questions
         ]);
 
@@ -125,7 +126,7 @@ class QuestionController extends ActionController
      */
     public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid): ResponseInterface|ForwardResponse
     {
-        if (!$this->isBot()) {
+        if (!IsBot::isBot()) {
             $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
             if ($currentUid == $pluginUid) {
@@ -193,22 +194,5 @@ class QuestionController extends ActionController
 
         // Store user interaction on helpfulness in session
         $GLOBALS['TSFE']->fe_user->setKey('ses', $questionUid, $helpful);
-    }
-
-    /**
-     * Check if browser is a well known bot
-     *
-     * @return bool
-     */
-    private function isBot(): bool
-    {
-        $userAgent = $_SERVER['HTTP_USER_AGENT'];
-        $bots = $this->settings['bots'];
-        $bots = explode(',', $bots);
-
-        foreach ($bots as $bot) {
-            if (stripos($userAgent, htmlspecialchars($bot)) !== false) return true;
-        }
-        return false;
     }
 }

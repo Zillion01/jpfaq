@@ -6,6 +6,7 @@ use Jp\Jpfaq\Domain\Model\Categorycomment;
 use Jp\Jpfaq\Domain\Repository\CategorycommentRepository;
 use Jp\Jpfaq\Domain\Repository\CategoryRepository;
 use Jp\Jpfaq\Service\SendMailService;
+use Jp\Jpfaq\Utility\IsBot;
 use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
@@ -69,15 +70,17 @@ class CategorycommentController extends ActionController
      */
     public function commentAction(array $catUids, int $pluginUid): ResponseInterface
     {
-        $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
+        if (!IsBot::isBot()) {
+            $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
-        if ($currentUid == $pluginUid) {
-            $this->view->assignMultiple([
-                'catUids' => $catUids,
-                'currentUid' => $currentUid,
-            ]);
+            if ($currentUid == $pluginUid) {
+                $this->view->assignMultiple([
+                    'catUids' => $catUids,
+                    'currentUid' => $currentUid,
+                ]);
 
-            return $this->htmlResponse();
+                return $this->htmlResponse();
+            }
         }
 
         // Else do not render view

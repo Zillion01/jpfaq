@@ -10,6 +10,11 @@
 
 ChangeLog
 =========
+12.5.0
+"""""
+#. Use null coalescence for undefined array indices, for if not all settings are set. (Michiel Roos)
+#. Improved bot detection for helpfullness and comment actions
+
 12.4.2
 """""
 #. Small bugfix in isBot function
