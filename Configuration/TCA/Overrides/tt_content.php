@@ -1,19 +1,30 @@
 <?php
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 defined('TYPO3') or die();
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+$pluginSignature = ExtensionUtility::registerPlugin(
     'Jpfaq',
     'Faq',
-    'jpFAQ'
+    'jpFAQ',
+    'ext-jpfaq-wizard-icon',
+    'Plugins',
+    'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:pi1_plus_wiz_description'
 );
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_content', '--div--;Configuration,pi_flexform,', 'jpfaq_faq', 'after:subheader');
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;Configuration,pi_flexform,',
+    $pluginSignature,
+    'after:subheader',
+);
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+ExtensionManagementUtility::addPiFlexFormValue(
     '*',
     'FILE:EXT:' . 'jpfaq' . '/Configuration/FlexForm/Flexform.xml',
-    'jpfaq_faq'
+    $pluginSignature,
 );
 
 $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [

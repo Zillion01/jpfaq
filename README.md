@@ -3,7 +3,7 @@ Frequently Asked Questions (FAQ) plugin.
 
 Optional features: categories, on-the-fly search, customer helpfulness tracking and comments.
 
-For TYPO3 11 LTS
+For TYPO3 13 LTS
 
 ## Install
 

@@ -2,26 +2,29 @@
 
 namespace Jp\Jpfaq\Utility;
 
-use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class Typo3Utility
 {
     /**
-     * Get TypoScript settings
+     * Get TypoScript settings for a pluginSignature, e.g. jpfaq_faq
      *
-     * @param string $extensionName
+     * @param string $pluginSignature
      * @return array
      */
-    public static function getSettings(string $extensionName): array
+    public static function getSettings(string $pluginSignature): array
     {
-        /** @var ServerRequestInterface $request */
-        $request = GeneralUtility::makeInstance(ServerRequestInterface::class);
-        /** @var BackendConfigurationManager $configurationManager */
-        $configurationManager = GeneralUtility::makeInstance(BackendConfigurationManager::class);
-        $typoScriptSetup = $configurationManager->getTypoScriptSetup($request);
+        $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
+        $fullTypoScript = $configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+        );
 
-        return $typoScriptSetup['plugin.']['tx_' . strtolower($extensionName) . '.'] ?? [];
+        $typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
+        $plainTypoScript = $typoScriptService->convertTypoScriptArrayToPlainArray($fullTypoScript);
+
+        return $plainTypoScript['plugin']['tx_' . strtolower($pluginSignature)]['settings'] ?? [];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Jp\Jpfaq\Domain\Repository;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -25,9 +26,11 @@ class QuestionRepository extends Repository
      * @return array|QueryResultInterface
      * @throws InvalidQueryException
      */
-    public function findQuestionsWithConstraints(array $categories = [], bool $excludeAlreadyDisplayedQuestions = false): QueryResultInterface|array
+    public function findQuestionsWithConstraints(array $categories = [], bool $excludeAlreadyDisplayedQuestions = false, ?string $startingPoint = null): QueryResultInterface|array
     {
         $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectStoragePage(false);
+
         $constraintsOr = [];
         $constraintsAnd = [];
 
@@ -45,6 +48,10 @@ class QuestionRepository extends Repository
                     $GLOBALS['EXT']['jpfaq']['alreadyDisplayed']
                 )
             );
+        }
+
+        if (is_null($startingPoint) === false) {
+            $constraintsAnd[] = $query->in('pid', GeneralUtility::trimExplode(',', $startingPoint, true));
         }
 
         if (!empty($constraintsOr) && !empty($constraintsAnd)) {

@@ -1,301 +1,246 @@
 <T3DataStructure>
-    <meta>
-        <langDisable>1</langDisable>
-    </meta>
     <sheets>
         <main>
             <ROOT>
-                <TCEforms>
-                    <sheetTitle>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_main</sheetTitle>
-                </TCEforms>
+                <sheetTitle>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_main</sheetTitle>
                 <type>array</type>
                 <el>
                     <settings.flexform.showSearch>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.showSearch</label>
-                            <config>
-                                <type>check</type>
-                                <default>0</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.showSearch</label>
+                        <config>
+                            <type>check</type>
+                            <default>0</default>
+                        </config>
                     </settings.flexform.showSearch>
                     <settings.flexform.showNumberOfResults>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.showResultsNumber</label>
-                            <config>
-                                <type>check</type>
-                                <default>0</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.showResultsNumber</label>
+                        <config>
+                            <type>check</type>
+                            <default>0</default>
+                        </config>
                     </settings.flexform.showNumberOfResults>
                     <settings.flexform.showQuestionCommentForm>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.showQuestionCommentForm</label>
-                            <config>
-                                <type>check</type>
-                                <default>0</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.showQuestionCommentForm</label>
+                        <config>
+                            <type>check</type>
+                            <default>0</default>
+                        </config>
                     </settings.flexform.showQuestionCommentForm>
                     <settings.question.comment.email.enable>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.question.comment.email.enable</label>
-                            <onChange>reload</onChange>
-                            <config>
-                                <type>check</type>
-                                <default>0</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.question.comment.email.enable</label>
+                        <onChange>reload</onChange>
+                        <config>
+                            <type>check</type>
+                            <default>0</default>
+                        </config>
                     </settings.question.comment.email.enable>
                     <settings.flexform.showCategoriesCommentForm>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.showCategoriesCommentForm</label>
-                            <config>
-                                <type>check</type>
-                                <default>0</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.showCategoriesCommentForm</label>
+                        <config>
+                            <type>check</type>
+                            <default>0</default>
+                        </config>
                     </settings.flexform.showCategoriesCommentForm>
                     <settings.category.comment.email.enable>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.category.comment.email.enable</label>
-                            <onChange>reload</onChange>
-                            <config>
-                                <type>check</type>
-                                <default>0</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.category.comment.email.enable</label>
+                        <onChange>reload</onChange>
+                        <config>
+                            <type>check</type>
+                            <default>0</default>
+                        </config>
                     </settings.category.comment.email.enable>
                     <settings.excludeAlreadyDisplayedQuestions>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.excludeAlreadyDisplayedQuestions</label>
-                            <config>
-                                <type>check</type>
-                                <default>1</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.excludeAlreadyDisplayedQuestions</label>
+                        <config>
+                            <type>check</type>
+                            <default>1</default>
+                        </config>
                     </settings.excludeAlreadyDisplayedQuestions>
                     <settings.flexform.selectCategory>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.selectCategory</label>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectMultipleSideBySide</renderType>
-                                <foreign_table>tx_jpfaq_domain_model_category</foreign_table>
-                                <foreign_table_where>ORDER BY category</foreign_table_where>
-                                <multiple>0</multiple>
-                                <size>10</size>
-                                <maxitems>100</maxitems>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.selectCategory</label>
+                        <config>
+                            <type>select</type>
+                            <renderType>selectMultipleSideBySide</renderType>
+                            <foreign_table>tx_jpfaq_domain_model_category</foreign_table>
+                            <foreign_table_where>ORDER BY category</foreign_table_where>
+                            <multiple>0</multiple>
+                            <size>10</size>
+                            <maxitems>100</maxitems>
+                        </config>
                     </settings.flexform.selectCategory>
+                    <settings.startingpoint>
+                        <label>LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.startingpoint</label>
+                        <config>
+                            <type>group</type>
+                            <allowed>pages</allowed>
+                            <size>3</size>
+                            <maxitems>50</maxitems>
+                            <minitems>0</minitems>
+                        </config>
+                    </settings.startingpoint>
                 </el>
             </ROOT>
         </main>
         <questionComment>
             <ROOT>
-                <TCEforms>
-                    <sheetTitle>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm</sheetTitle>
-                    <displayCond>FIELD:main.settings.question.comment.email.enable:=:1</displayCond>
-                </TCEforms>
+                <sheetTitle>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm</sheetTitle>
+                <displayCond>FIELD:main.settings.question.comment.email.enable:=:1</displayCond>
                 <type>array</type>
                 <el>
                     <settings.question.comment.email.subject>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.subject</label>
-                            <config>
-                                <type>input</type>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.subject</label>
+                        <config>
+                            <type>input</type>
+                            <eval>trim</eval>
+                        </config>
                     </settings.question.comment.email.subject>
                     <settings.question.comment.email.sender.name>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.senderName</label>
-                            <config>
-                                <type>input</type>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.senderName</label>
+                        <config>
+                            <type>input</type>
+                            <eval>trim</eval>
+                        </config>
                     </settings.question.comment.email.sender.name>
                     <settings.question.comment.email.sender.email>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.senderEmail</label>
-                            <config>
-                                <type>input</type>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.senderEmail</label>
+                        <config>
+                            <type>input</type>
+                            <eval>trim</eval>
+                        </config>
                     </settings.question.comment.email.sender.email>
                     <settings.question.comment.email.receivers.email>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.receivers</label>
-                            <config>
-                                <type>input</type>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.receivers</label>
+                        <config>
+                            <type>input</type>
+                            <eval>trim</eval>
+                        </config>
                     </settings.question.comment.email.receivers.email>
                     <settings.question.comment.email.introText>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.introText</label>
-                            <config>
-                                <type>text</type>
-                                <enableRichtext>1</enableRichtext>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.introText</label>
+                        <config>
+                            <type>text</type>
+                            <enableRichtext>1</enableRichtext>
+                        </config>
                     </settings.question.comment.email.introText>
                     <settings.question.comment.email.closeText>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.closeText</label>
-                            <config>
-                                <type>text</type>
-                                <enableRichtext>1</enableRichtext>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.closeText</label>
+                        <config>
+                            <type>text</type>
+                            <enableRichtext>1</enableRichtext>
+                        </config>
                     </settings.question.comment.email.closeText>
                     <settings.question.comment.email.sendCommenterNotification>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.sendCommenterNotification</label>
-                            <onChange>reload</onChange>
-                            <config>
-                                <type>check</type>
-                                <default>0</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.sendCommenterNotification</label>
+                        <onChange>reload</onChange>
+                        <config>
+                            <type>check</type>
+                            <default>0</default>
+                        </config>
                     </settings.question.comment.email.sendCommenterNotification>
                     <settings.question.comment.email.commenter.subject>
-                        <TCEforms>
-                            <displayCond>FIELD:questionComment.settings.question.comment.email.sendCommenterNotification:=:1</displayCond>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
+                        <displayCond>FIELD:questionComment.settings.question.comment.email.sendCommenterNotification:=:1</displayCond>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.subject</label>
+                        <config>
+                            <type>input</type>
+                        </config>
                     </settings.question.comment.email.commenter.subject>
                     <settings.question.comment.email.commenter.introText>
-                        <TCEforms>
-                            <displayCond>FIELD:questionComment.settings.question.comment.email.sendCommenterNotification:=:1</displayCond>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.commenter.introText</label>
-                            <config>
-                                <type>text</type>
-                                <enableRichtext>1</enableRichtext>
-                            </config>
-                        </TCEforms>
+                        <displayCond>FIELD:questionComment.settings.question.comment.email.sendCommenterNotification:=:1</displayCond>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.commenter.introText</label>
+                        <config>
+                            <type>text</type>
+                            <enableRichtext>1</enableRichtext>
+                        </config>
                     </settings.question.comment.email.commenter.introText>
                     <settings.question.comment.email.commenter.closeText>
-                        <TCEforms>
-                            <displayCond>FIELD:questionComment.settings.question.comment.email.sendCommenterNotification:=:1</displayCond>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.commenter.closeText</label>
-                            <config>
-                                <type>text</type>
-                                <enableRichtext>1</enableRichtext>
-                            </config>
-                        </TCEforms>
+                        <displayCond>FIELD:questionComment.settings.question.comment.email.sendCommenterNotification:=:1</displayCond>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.commenter.closeText</label>
+                        <config>
+                            <type>text</type>
+                            <enableRichtext>1</enableRichtext>
+                        </config>
                     </settings.question.comment.email.commenter.closeText>
                 </el>
             </ROOT>
         </questionComment>
         <categoryComment>
             <ROOT>
-                <TCEforms>
-                    <sheetTitle>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_categoryCommentForm</sheetTitle>
-                    <displayCond>FIELD:main.settings.category.comment.email.enable:=:1</displayCond>
-                </TCEforms>
+                <sheetTitle>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_categoryCommentForm</sheetTitle>
+                <displayCond>FIELD:main.settings.category.comment.email.enable:=:1</displayCond>
                 <type>array</type>
                 <el>
                     <settings.category.comment.email.subject>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.subject</label>
-                            <config>
-                                <type>input</type>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.subject</label>
+                        <config>
+                            <type>input</type>
+                            <eval>trim</eval>
+                        </config>
                     </settings.category.comment.email.subject>
                     <settings.category.comment.email.sender.name>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.senderName</label>
-                            <config>
-                                <type>input</type>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.senderName</label>
+                        <config>
+                            <type>input</type>
+                            <eval>trim</eval>
+                        </config>
                     </settings.category.comment.email.sender.name>
                     <settings.category.comment.email.sender.email>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.senderEmail</label>
-                            <config>
-                                <type>input</type>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.senderEmail</label>
+                        <config>
+                            <type>input</type>
+                            <eval>trim</eval>
+                        </config>
                     </settings.category.comment.email.sender.email>
                     <settings.category.comment.email.receivers.email>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.receivers</label>
-                            <config>
-                                <type>input</type>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.receivers</label>
+                        <config>
+                            <type>input</type>
+                            <eval>trim</eval>
+                        </config>
                     </settings.category.comment.email.receivers.email>
                     <settings.category.comment.email.introText>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.introText</label>
-                            <config>
-                                <type>text</type>
-                                <enableRichtext>1</enableRichtext>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.introText</label>
+                        <config>
+                            <type>text</type>
+                            <enableRichtext>1</enableRichtext>
+                        </config>
                     </settings.category.comment.email.introText>
                     <settings.category.comment.email.closeText>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.closeText</label>
-                            <config>
-                                <type>text</type>
-                                <enableRichtext>1</enableRichtext>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.closeText</label>
+                        <config>
+                            <type>text</type>
+                            <enableRichtext>1</enableRichtext>
+                        </config>
                     </settings.category.comment.email.closeText>
                     <settings.category.comment.email.sendCommenterNotification>
-                        <TCEforms>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.sendCommenterNotification</label>
-                            <onChange>reload</onChange>
-                            <config>
-                                <type>check</type>
-                                <default>0</default>
-                            </config>
-                        </TCEforms>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.sendCommenterNotification</label>
+                        <onChange>reload</onChange>
+                        <config>
+                            <type>check</type>
+                            <default>0</default>
+                        </config>
                     </settings.category.comment.email.sendCommenterNotification>
                     <settings.category.comment.email.commenter.subject>
-                        <TCEforms>
-                            <displayCond>FIELD:categoryComment.settings.category.comment.email.sendCommenterNotification:=:1</displayCond>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
+                        <displayCond>FIELD:categoryComment.settings.category.comment.email.sendCommenterNotification:=:1</displayCond>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.subject</label>
+                        <config>
+                            <type>input</type>
+                        </config>
                     </settings.category.comment.email.commenter.subject>
                     <settings.category.comment.email.commenter.introText>
-                        <TCEforms>
-                            <displayCond>FIELD:categoryComment.settings.category.comment.email.sendCommenterNotification:=:1</displayCond>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.commenter.introText</label>
-                            <config>
-                                <type>text</type>
-                                <enableRichtext>1</enableRichtext>
-                            </config>
-                        </TCEforms>
+                        <displayCond>FIELD:categoryComment.settings.category.comment.email.sendCommenterNotification:=:1</displayCond>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.commenter.introText</label>
+                        <config>
+                            <type>text</type>
+                            <enableRichtext>1</enableRichtext>
+                        </config>
                     </settings.category.comment.email.commenter.introText>
                     <settings.category.comment.email.commenter.closeText>
-                        <TCEforms>
-                            <displayCond>FIELD:categoryComment.settings.category.comment.email.sendCommenterNotification:=:1</displayCond>
-                            <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.commenter.closeText</label>
-                            <config>
-                                <type>text</type>
-                                <enableRichtext>1</enableRichtext>
-                            </config>
-                        </TCEforms>
+                        <displayCond>FIELD:categoryComment.settings.category.comment.email.sendCommenterNotification:=:1</displayCond>
+                        <label>LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xfl:tx_jpfaq_flexform.sheet_questionCommentForm.commenter.closeText</label>
+                        <config>
+                            <type>text</type>
+                            <enableRichtext>1</enableRichtext>
+                        </config>
                     </settings.category.comment.email.commenter.closeText>
                 </el>
             </ROOT>

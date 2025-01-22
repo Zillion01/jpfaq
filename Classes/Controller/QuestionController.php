@@ -15,6 +15,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 /**
  * QuestionController
@@ -80,9 +81,16 @@ class QuestionController extends ActionController
     {
         $restrictToCategories = (array)$this->settings['questions']['categories'];
         $excludeAlreadyDisplayedQuestions = (int)($this->settings['excludeAlreadyDisplayedQuestions'] ?? 1);
+
+        $startingPoint = null;
+        if (!empty($this->settings['startingpoint'] ?? '')) {
+            $startingPoint = $this->settings['startingpoint'];
+        }
+
         $questions = $this->questionRepository->findQuestionsWithConstraints(
             $restrictToCategories,
-            (bool)$excludeAlreadyDisplayedQuestions
+            (bool)$excludeAlreadyDisplayedQuestions,
+            $startingPoint
         );
 
         $categories = [];
@@ -163,7 +171,11 @@ class QuestionController extends ActionController
         $questionUid = $question->getUid();
         $questionHelpful = $question->getHelpful();
         $questionNotHelpful = $question->getNothelpful();
-        $userClickedHelpfulness = $GLOBALS['TSFE']->fe_user->getKey('ses', $questionUid);
+
+        /** @var FrontendUserAuthentication $frontendUserAuthentication */
+        $frontendUserAuthentication = $this->request->getAttribute('frontend.user');
+
+        $userClickedHelpfulness = $frontendUserAuthentication->getKey('ses', (string)$questionUid);
 
         // User already clicked helpful for this question this session
         if (isset($userClickedHelpfulness)) {
@@ -192,6 +204,6 @@ class QuestionController extends ActionController
         $this->questionRepository->update($question);
 
         // Store user interaction on helpfulness in session
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $questionUid, $helpful);
+        $frontendUserAuthentication->setKey('ses', (string)$questionUid, $helpful);
     }
 }

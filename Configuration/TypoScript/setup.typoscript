@@ -150,7 +150,7 @@ jpfaqAjaxComment {
         stdWrap.trim = 1
 
         select {
-            where = list_type = "jpfaq_faq"
+            where = CType = "jpfaq_faq"
         }
         renderObj < tt_content.list.20.jpfaq_faq
     }
