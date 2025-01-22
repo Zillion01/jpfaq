@@ -6,7 +6,6 @@ return [
         'label' => 'question',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'sortby' => 'sorting',
         'versioningWS' => true,
         'languageField' => 'sys_language_uid',
@@ -20,7 +19,7 @@ return [
         ],
         'searchFields' => 'question,answer,additional_content_answer,categories,',
         'typeicon_classes' => [
-            'default' => 'tx_jpfaq_domain_model_question'
+            'default' => 'tx_jpfaq_domain_model_question',
         ],
         'security' => [
             'ignorePageTypeRestriction' => true,
@@ -45,7 +44,7 @@ return [
                 'renderType' => 'selectSingle',
                 'default' => 0,
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_jpfaq_domain_model_question',
                 'foreign_table_where' => 'AND {#tx_jpfaq_domain_model_question}.{#pid}=###CURRENT_PID### AND {#tx_jpfaq_domain_model_question}.{#sys_language_uid} IN (-1,0)',
@@ -64,10 +63,9 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items' => [
                     [
-                        0 => '',
-                        1 => '',
-                        'invertStateDisplay' => true
-                    ]
+                        'label' => '',
+                        'invertStateDisplay' => true,
+                    ],
                 ],
             ],
         ],
@@ -75,29 +73,25 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'endtime' => [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
                 'range' => [
-                    'upper' => mktime(0, 0, 0, 1, 1, 2038)
+                    'upper' => mktime(0, 0, 0, 1, 1, 2038),
                 ],
                 'behaviour' => [
-                    'allowLanguageSynchronization' => true
-                ]
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'question' => [
@@ -131,8 +125,8 @@ return [
                     'columns' => [
                         'CType' => [
                             'config' => [
-                                'default' => 'textmedia'
-                            ]
+                                'default' => 'textmedia',
+                            ],
                         ],
                     ],
                 ],
@@ -150,10 +144,10 @@ return [
                     'showSynchronizationLink' => 1,
                     'enabledControls' => [
                         'info' => false,
-                    ]
+                    ],
                 ],
                 'allowLanguageSynchronization' => true,
-            ]
+            ],
         ],
         'categories' => [
             'exclude' => 1,
@@ -213,9 +207,9 @@ return [
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
                     'useSortable' => 1,
-                    'showAllLocalizationLink' => 1
+                    'showAllLocalizationLink' => 1,
                 ],
             ],
         ],
-    ]
+    ],
 ];

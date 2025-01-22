@@ -1,25 +1,36 @@
 <?php
+
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 defined('TYPO3') or die();
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+$pluginSignature = ExtensionUtility::registerPlugin(
     'Jpfaq',
     'Faq',
-    'jpFAQ'
+    'jpFAQ',
+    'ext-jpfaq-wizard-icon',
+    'Plugins',
+    'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:pi1_plus_wiz_description'
 );
 
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['jpfaq_faq'] = 'recursive,select_key';
+ExtensionManagementUtility::addToAllTCAtypes(
+    'tt_content',
+    '--div--;Configuration,pi_flexform,',
+    $pluginSignature,
+    'after:subheader',
+);
 
-$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['jpfaq_faq'] = 'pi_flexform';
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
-    'jpfaq_faq',
-    'FILE:EXT:' . 'jpfaq' . '/Configuration/FlexForm/Flexform.xml'
+ExtensionManagementUtility::addPiFlexFormValue(
+    '*',
+    'FILE:EXT:' . 'jpfaq' . '/Configuration/FlexForm/Flexform.xml',
+    $pluginSignature,
 );
 
 $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
     'jpFAQ',
     'jpfaq',
-    'apps-pagetree-folder-contains-board'
+    'apps-pagetree-folder-contains-board',
 ];
 
 $GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-jpfaq'] = 'apps-pagetree-folder-contains-board';

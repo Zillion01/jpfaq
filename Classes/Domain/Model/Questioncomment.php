@@ -2,6 +2,8 @@
 
 namespace Jp\Jpfaq\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -38,8 +40,8 @@ class Questioncomment extends AbstractEntity
      * comment
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $comment = '';
 
     /**
@@ -59,9 +61,9 @@ class Questioncomment extends AbstractEntity
     /**
      * question
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Question>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @var ObjectStorage<Question>
      */
+    #[Lazy]
     protected $question;
 
     /**
@@ -96,7 +98,7 @@ class Questioncomment extends AbstractEntity
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -116,7 +118,7 @@ class Questioncomment extends AbstractEntity
      *
      * @param string $email
      */
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
@@ -136,7 +138,7 @@ class Questioncomment extends AbstractEntity
      *
      * @param string $comment
      */
-    public function setComment($comment)
+    public function setComment($comment): void
     {
         $this->comment = $comment;
     }
@@ -156,7 +158,7 @@ class Questioncomment extends AbstractEntity
      *
      * @param string $finfo
      */
-    public function setFinfo($finfo)
+    public function setFinfo($finfo): void
     {
         $this->finfo = $finfo;
     }
@@ -164,7 +166,7 @@ class Questioncomment extends AbstractEntity
     /**
      * Returns the question
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Question> $question
+     * @return ObjectStorage<Question> $question
      */
     public function getQuestion()
     {
@@ -174,9 +176,9 @@ class Questioncomment extends AbstractEntity
     /**
      * Sets the question
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Question> $question
+     * @param ObjectStorage<Question> $question
      */
-    public function setQuestion($question)
+    public function setQuestion($question): void
     {
         $this->question = $question;
     }
@@ -196,7 +198,7 @@ class Questioncomment extends AbstractEntity
      *
      * @param string $ip
      */
-    public function setIp($ip)
+    public function setIp($ip): void
     {
         $this->ip = $ip;
     }

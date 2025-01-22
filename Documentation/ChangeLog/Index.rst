@@ -10,6 +10,10 @@
 
 ChangeLog
 =========
+13.4.0
+"""""
+#. For TYPO3 v13. Notice that with the changes needed for TYPO3 v13, the plugin needs to be reinserted as a content element and the flexform needs to be saved again.
+
 12.5.0
 """""
 #. Use null coalescence for undefined array indices, for if not all settings are set. (Michiel Roos)

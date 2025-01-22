@@ -7,7 +7,7 @@ return [
         'tableName' => 'tt_content',
         'properties' => [
             'contentType' => [
-                'fieldName' => 'CType'
+                'fieldName' => 'CType',
             ],
         ],
     ],

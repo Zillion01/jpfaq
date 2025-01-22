@@ -30,3 +30,7 @@ Users Manual
 11.6
 ====
 If you upgrade to version 11.6.x please consult the changelog. Comments now need to be enabled in the flexform.
+
+13.4
+====
+If you upgrade to version 13.4.x please consult the changelog. The plugin is now a content element.

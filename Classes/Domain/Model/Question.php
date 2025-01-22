@@ -2,6 +2,9 @@
 
 namespace Jp\Jpfaq\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -13,10 +16,10 @@ class Question extends AbstractEntity
     /**
      * question
      *
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      *
      * @var string
      */
+    #[Validate(['validator' => 'NotEmpty'])]
     protected $question = '';
 
     /**
@@ -29,46 +32,46 @@ class Question extends AbstractEntity
     /**
      * helpful
      *
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      *
      * @var int
      */
-    protected $helpful = '';
+    #[Validate(['validator' => 'NotEmpty'])]
+    protected $helpful = 0;
 
     /**
      * nothelpful
      *
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      *
      * @var int
      */
-    protected $nothelpful = '';
+    #[Validate(['validator' => 'NotEmpty'])]
+    protected $nothelpful = 0;
 
     /**
      * Additional tt_content for Answer
      *
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\TtContent>
+     * @var ObjectStorage<TtContent>
      */
+    #[Cascade(['value' => 'remove'])]
+    #[Lazy]
     protected $additionalContentAnswer;
 
     /**
      * categories
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category>
+     * @var ObjectStorage<Category>
      */
     protected $categories;
 
     /**
      * comments
      *
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Questioncomment>
+     * @var ObjectStorage<Questioncomment>
      */
+    #[Cascade(['value' => 'remove'])]
+    #[Lazy]
     protected $questioncomment;
 
     /**
@@ -108,7 +111,7 @@ class Question extends AbstractEntity
      *
      * @param string $question
      */
-    public function setQuestion($question)
+    public function setQuestion($question): void
     {
         $this->question = $question;
     }
@@ -128,7 +131,7 @@ class Question extends AbstractEntity
      *
      * @param string $answer
      */
-    public function setAnswer($answer)
+    public function setAnswer($answer): void
     {
         $this->answer = $answer;
     }
@@ -136,7 +139,7 @@ class Question extends AbstractEntity
     /**
      * Get content elements (additionalContentAnswer)
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\TtContent> $additionalContentAnswer
+     * @return ObjectStorage<TtContent> $additionalContentAnswer
      */
     public function getAdditionalContentAnswer()
     {
@@ -152,20 +155,20 @@ class Question extends AbstractEntity
     {
         $idList = [];
         $contentElements = $this->getAdditionalContentAnswer();
-        if ($contentElements) {
-            foreach ($this->getAdditionalContentAnswer() as $contentElement) {
-                $idList[] = $contentElement->getUid();
-            }
+
+        foreach ($this->getAdditionalContentAnswer() as $contentElement) {
+            $idList[] = $contentElement->getUid();
         }
+
         return implode(',', $idList);
     }
 
     /**
      * Adds a Category
      *
-     * @param \Jp\Jpfaq\Domain\Model\Category $category
+     * @param Category $category
      */
-    public function addCategory(Category $category)
+    public function addCategory(Category $category): void
     {
         $this->categories->attach($category);
     }
@@ -173,9 +176,9 @@ class Question extends AbstractEntity
     /**
      * Removes a Category
      *
-     * @param \Jp\Jpfaq\Domain\Model\Category $categoryToRemove The Category to be removed
+     * @param Category $categoryToRemove The Category to be removed
      */
-    public function removeCategory(Category $categoryToRemove)
+    public function removeCategory(Category $categoryToRemove): void
     {
         $this->categories->detach($categoryToRemove);
     }
@@ -183,7 +186,7 @@ class Question extends AbstractEntity
     /**
      * Returns the categories
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category> $categories
+     * @return ObjectStorage<Category> $categories
      */
     public function getCategories()
     {
@@ -193,9 +196,9 @@ class Question extends AbstractEntity
     /**
      * Sets the categories
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Category> $categories
+     * @param ObjectStorage<Category> $categories
      */
-    public function setCategories(ObjectStorage $categories)
+    public function setCategories(ObjectStorage $categories): void
     {
         $this->categories = $categories;
     }
@@ -215,7 +218,7 @@ class Question extends AbstractEntity
      *
      * @param int $helpful
      */
-    public function setHelpful($helpful)
+    public function setHelpful($helpful): void
     {
         $this->helpful = $helpful;
     }
@@ -235,7 +238,7 @@ class Question extends AbstractEntity
      *
      * @param int $nothelpful
      */
-    public function setNothelpful($nothelpful)
+    public function setNothelpful($nothelpful): void
     {
         $this->nothelpful = $nothelpful;
     }
@@ -243,7 +246,7 @@ class Question extends AbstractEntity
     /**
      * Returns the Questioncomment
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Jp\Jpfaq\Domain\Model\Questioncomment>
+     * @return ObjectStorage<Questioncomment>
      */
     public function getQuestioncomment()
     {
@@ -253,9 +256,9 @@ class Question extends AbstractEntity
     /**
      * Adds a questioncomment
      *
-     * @param \Jp\Jpfaq\Domain\Model\Questioncomment $questioncomment
+     * @param Questioncomment $questioncomment
      */
-    public function addComment(Questioncomment $questioncomment)
+    public function addComment(Questioncomment $questioncomment): void
     {
         $this->questioncomment->attach($questioncomment);
     }

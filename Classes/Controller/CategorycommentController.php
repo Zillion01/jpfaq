@@ -2,6 +2,7 @@
 
 namespace Jp\Jpfaq\Controller;
 
+use Jp\Jpfaq\Domain\Model\Category;
 use Jp\Jpfaq\Domain\Model\Categorycomment;
 use Jp\Jpfaq\Domain\Repository\CategorycommentRepository;
 use Jp\Jpfaq\Domain\Repository\CategoryRepository;
@@ -121,8 +122,10 @@ class CategorycommentController extends ActionController
                 $catUid = (int)$catUid;
 
                 $tempCat = $this->categoryRepository->findByUid($catUid);
-                $categories[] = $tempCat;
-                $categoryNames = $categoryNames . $tempCat->getCategory() . '<br/>';
+                if ($tempCat instanceof Category) {
+                    $categories[] = $tempCat;
+                    $categoryNames = $categoryNames . $tempCat->getCategory() . '<br/>';
+                }
             }
         }
 
@@ -208,7 +211,7 @@ class CategorycommentController extends ActionController
         if ($currentUid == $pluginUid) {
             $this->view->assignMultiple([
                 'comment' => $newCategorycomment,
-                'emailNotification' => $emailNotification
+                'emailNotification' => $emailNotification,
             ]);
 
             return $this->htmlResponse();

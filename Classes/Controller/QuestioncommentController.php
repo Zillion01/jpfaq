@@ -21,7 +21,7 @@ class QuestioncommentController extends ActionController
 {
     protected QuestioncommentRepository $questioncommentRepository;
     protected QuestionRepository $questionRepository;
-    protected $configurationManager;
+    protected ConfigurationManagerInterface $configurationManager;
 
     /**
      * @param QuestioncommentRepository $questioncommentRepository
@@ -77,7 +77,7 @@ class QuestioncommentController extends ActionController
 
         $this->view->assignMultiple([
             'currentUid' => $currentUid,
-            'question' => $question
+            'question' => $question,
         ]);
 
         return $this->htmlResponse();
@@ -188,7 +188,7 @@ class QuestioncommentController extends ActionController
         if ($currentUid == $pluginUid) {
             $this->view->assignMultiple([
                 'comment' => $newQuestioncomment,
-                'emailNotification' => $emailNotification
+                'emailNotification' => $emailNotification,
             ]);
 
             return $this->htmlResponse();
