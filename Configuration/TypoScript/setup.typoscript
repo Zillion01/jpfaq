@@ -86,7 +86,7 @@ plugin.tx_jpfaq_faq.settings {
     jquery = {$plugin.tx_jpfaq_faq.settings.jquery}
     js = {$plugin.tx_jpfaq_faq.settings.js}
     css = {$plugin.tx_jpfaq_faq.settings.css}
-    fontawesome = {$plugin.tx_jpfaq_faq.settings.fontAwesome}
+    fontAwesome = {$plugin.tx_jpfaq_faq.settings.fontAwesome}
 }
 
 [{$plugin.tx_jpfaq_faq.settings.includeJsAndCssGlobal} === 1]
@@ -105,21 +105,18 @@ plugin.tx_jpfaq_faq.settings {
         jquery >
         js >
         css >
-        fontawesome >
+        fontAwesome >
     }
 [END]
 
-config.htmlTag.attributes {
-    itemscope=
-    itemtype=https://schema.org/FAQPage
-}
+[{$plugin.tx_jpfaq_faq.settings.setSchemaOrgOnHtmlTag} === 1 && traverse(page, "uid") in [{$plugin.tx_jpfaq_faq.settings.setSchemaOrgOnHtmlTagPages}]]
+    config.htmlTag.attributes {
+        itemscope=
+        itemtype=https://schema.org/FAQPage
+    }
+[END]
 
 [{$plugin.tx_jpfaq_faq.settings.setSchemaOrgOnHtmlTag} === 0]
-    config.htmlTag.attributes {
-        itemscope >
-        itemtype >
-    }
-
     plugin.tx_jpfaq_faq.settings {
         localSchemaOrgFaqPage = itemscope itemtype=https://schema.org/FAQPage
     }

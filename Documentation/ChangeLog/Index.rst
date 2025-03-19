@@ -10,6 +10,12 @@
 
 ChangeLog
 =========
+13.4.2
+"""""
+#. Bug fix. Added setSchemaOrgOnHtmlTagPages constant see documentation. This allows to choose the page uid's where the Schema.org/FAQPage is set as an HTML attribute. This was a bug because it set on all pages before the HTML tag. It is not ideal, but unfortunately there is no easy way to set the html tag attributes based on the content of the page.
+#. Fixed casing of the word fontAwesome in typoscript, verify your settings!
+#. Update jQuery to 3.7.1
+
 13.4.1
 """""
 #. For TYPO3 v13. Removed unfinished upgrade wizard. Since the flexform is changed, I would suggest reinserting the plugin as a content element manually and saving the flexform again.

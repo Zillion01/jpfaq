@@ -215,9 +215,21 @@ settings.setSchemaOrgOnHtmlTag
    Description
          Set Schema.org/FAQPage as HTML attribute instead of at the FAQ plugin.
          This will produce a Google Schema.org validated FAQ page, like developers.google.com/search/docs/appearance/structured-data/faqpage
-         Note: when config.htmlTag.attributes is used, then config.htmlTag_setParams has no effect anymore!
 
 .. _settings.setSchemaOrgOnHtmlTag:
+
+settings.setSchemaOrgOnHtmlTagPages
+"""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.setSchemaOrgOnHtmlTagPages (constant!)
+   Data type
+         string
+   Description
+         Set Schema.org/FAQPage as HTML tag attribute at these pages. Commaseperated list of page IDs. Used for condition in typoscript.
+
+.. _settings.setSchemaOrgOnHtmlTagPages:
 
 settings.bots
 """""""""""""
