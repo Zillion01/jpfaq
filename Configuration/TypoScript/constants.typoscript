@@ -28,5 +28,8 @@ plugin.tx_jpfaq_faq {
 
         # cat=plugin.tx_jpfaq_faq/page; type=boolean; label=Set Schema.org/FAQPage as HTML attribute instead of at the FAQ plugin. See developers.google.com/search/docs/appearance/structured-data/faqpage
         setSchemaOrgOnHtmlTag = 1
+
+        # cat=plugin.tx_jpfaq_faq/page; type=string; label=Set Schema.org/FAQPage as HTML tag attribute at the following pages (comma separated list of page IDs)
+        setSchemaOrgOnHtmlTagPages =
     }
 }
