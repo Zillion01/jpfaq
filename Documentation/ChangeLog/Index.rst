@@ -10,6 +10,10 @@
 
 ChangeLog
 =========
+12.5.1
+"""""
+#. Bug fix. Added setSchemaOrgOnHtmlTagPages constant see documentation. This allows to choose the page uid's where the Schema.org/FAQPage is set as an HTML attribute. This was a bug because it set on all pages before the HTML tag. It is not ideal, but unfortunately there is no easy way to set the html tag attributes based on the content of the page.
+
 12.5.0
 """""
 #. Use null coalescence for undefined array indices, for if not all settings are set. (Michiel Roos)

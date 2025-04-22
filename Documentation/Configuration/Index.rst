@@ -219,6 +219,19 @@ settings.setSchemaOrgOnHtmlTag
 
 .. _settings.setSchemaOrgOnHtmlTag:
 
+settings.setSchemaOrgOnHtmlTagPages
+"""""""""""""""""""""""""""""""""""
+.. container:: table-row
+
+   Property
+         settings.setSchemaOrgOnHtmlTagPages (constant!)
+   Data type
+         string
+   Description
+         Set Schema.org/FAQPage as HTML tag attribute at these pages. Commaseperated list of page IDs. Used for condition in typoscript.
+
+.. _settings.setSchemaOrgOnHtmlTagPages:
+
 settings.bots
 """""""""""""
 .. container:: table-row
