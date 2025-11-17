@@ -10,7 +10,7 @@ $pluginSignature = ExtensionUtility::registerPlugin(
     'Faq',
     'jpFAQ',
     'ext-jpfaq-wizard-icon',
-    'Plugins',
+    'plugins',
     'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:pi1_plus_wiz_description'
 );
 
