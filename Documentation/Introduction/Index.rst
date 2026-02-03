@@ -21,6 +21,8 @@ Frequently Asked Questions (FAQ) or definitions list with rich text answers and 
 
 Find out what your customers do find helpful, and what they miss in the information you present in Frequently Asked Questions.
 
+Note that we are working on a premium version with very nice features for corporate implementation, see https://github.com/Zillion01/jpfaq/issues/64
+
 
 .. _license:
 
