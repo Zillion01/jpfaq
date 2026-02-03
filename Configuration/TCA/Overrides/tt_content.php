@@ -26,11 +26,3 @@ ExtensionManagementUtility::addPiFlexFormValue(
     'FILE:EXT:' . 'jpfaq' . '/Configuration/FlexForm/Flexform.xml',
     $pluginSignature,
 );
-
-$GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
-    'jpFAQ',
-    'jpfaq',
-    'apps-pagetree-folder-contains-board',
-];
-
-$GLOBALS['TCA']['pages']['ctrl']['typeicon_classes']['contains-jpfaq'] = 'apps-pagetree-folder-contains-board';
