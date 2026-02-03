@@ -13,7 +13,9 @@ CREATE TABLE tx_jpfaq_domain_model_question (
 
 # IRRE Records
 CREATE TABLE tt_content (
-    jpfaq int(11) unsigned DEFAULT '0' NOT NULL
+    jpfaq int(11) unsigned DEFAULT '0' NOT NULL,
+
+    KEY jpfaq_content (jpfaq)
 );
 
 #
