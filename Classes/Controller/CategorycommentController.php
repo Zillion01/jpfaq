@@ -110,7 +110,7 @@ class CategorycommentController extends ActionController
     ): ResponseInterface {
         // If honeypot field 'finfo' is filled by spambot do not add new comment
         if ($newCategorycomment->getFinfo()) {
-            $this->redirect('list', 'Question');
+            return $this->redirect('list', 'Question');
         }
 
         $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
