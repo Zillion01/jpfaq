@@ -129,9 +129,9 @@ class CategorycommentController extends ActionController
             $this->categorycommentRepository->add($newCategorycomment);
 
             // Send notification emails
-            $emailSettings = $this->settings['category']['comment']['email'];
+            $emailSettings = $this->settings['category']['comment']['email'] ?? [];
 
-            if ($emailSettings['enable']) {
+            if ($emailSettings['enable'] ?? false) {
                 $sender = [htmlspecialchars($emailSettings['sender']['email']) => htmlspecialchars($emailSettings['sender']['name'])];
 
                 $emailBodyCenterText = '<br/><strong>' . $categoryNames . '</strong>' . '<p><i>' . $this->formatRte($newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
@@ -143,7 +143,7 @@ class CategorycommentController extends ActionController
                     $this->formatRte($emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['closeText'])
                 );
 
-                if ($emailSettings['sendCommenterNotification']) {
+                if ($emailSettings['sendCommenterNotification'] ?? false) {
                     $emailBodyCenterText = '<br/>' . '<p><i>' . $this->formatRte($newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
 
                     $this->sendMailService->sendMail(
@@ -176,10 +176,11 @@ class CategorycommentController extends ActionController
     {
         $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
-        $emailNotification = (int)$this->settings['category']['comment']['email']['sendCommenterNotification'];
+        $emailSettings = $this->settings['category']['comment']['email'] ?? [];
+        $emailNotification = (int)($emailSettings['sendCommenterNotification'] ?? 0);
 
         // First tab of flexform
-        if ((int)$this->settings['category']['comment']['email']['enable'] == 0) {
+        if ((int)($emailSettings['enable'] ?? 0) === 0) {
             $emailNotification = 0;
         }
 

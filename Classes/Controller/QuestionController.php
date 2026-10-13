@@ -63,7 +63,7 @@ class QuestionController extends ActionController
 
         // Avoid code injection
         $this->settings['questions']['categories'] = [];
-        if ($this->settings['flexform']['selectCategory']) {
+        if ($this->settings['flexform']['selectCategory'] ?? '') {
             $categories = explode(',', $this->settings['flexform']['selectCategory']);
             foreach ($categories as $category) {
                 $this->settings['questions']['categories'][] = (int)$category;
@@ -79,7 +79,7 @@ class QuestionController extends ActionController
      */
     public function listAction(): ResponseInterface
     {
-        $restrictToCategories = (array)$this->settings['questions']['categories'];
+        $restrictToCategories = $this->settings['questions']['categories'];
         $excludeAlreadyDisplayedQuestions = (int)($this->settings['excludeAlreadyDisplayedQuestions'] ?? 1);
 
         $startingPoint = null;
@@ -103,12 +103,13 @@ class QuestionController extends ActionController
         }
 
         $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
+        $flexformSettings = $this->settings['flexform'] ?? [];
 
         $this->view->assignMultiple([
-            'showSearchForm' => (int)$this->settings['flexform']['showSearch'],
-            'showNumberOfResults' => (int)$this->settings['flexform']['showNumberOfResults'],
-            'showQuestionCommentForm' => (int)$this->settings['flexform']['showQuestionCommentForm'],
-            'showCategoriesCommentForm' => (int)$this->settings['flexform']['showCategoriesCommentForm'],
+            'showSearchForm' => (int)($flexformSettings['showSearch'] ?? 0),
+            'showNumberOfResults' => (int)($flexformSettings['showNumberOfResults'] ?? 0),
+            'showQuestionCommentForm' => (int)($flexformSettings['showQuestionCommentForm'] ?? 0),
+            'showCategoriesCommentForm' => (int)($flexformSettings['showCategoriesCommentForm'] ?? 0),
             'categories' => $categories,
             'restrictToCategories' => $restrictToCategories,
             'currentUid' => $currentUid,

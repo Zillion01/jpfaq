@@ -101,9 +101,9 @@ class QuestioncommentController extends ActionController
             }
 
             // Send notification emails
-            $emailSettings = $this->settings['question']['comment']['email'];
+            $emailSettings = $this->settings['question']['comment']['email'] ?? [];
 
-            if ($emailSettings['enable']) {
+            if ($emailSettings['enable'] ?? false) {
                 $emailBodyCenterText = '<br/><strong>' . $question->getUid() . '. ' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
 
                 $sender = [htmlspecialchars($emailSettings['sender']['email']) => htmlspecialchars($emailSettings['sender']['name'])];
@@ -115,7 +115,7 @@ class QuestioncommentController extends ActionController
                     $this->formatRte($emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['closeText'])
                 );
 
-                if ($emailSettings['sendCommenterNotification']) {
+                if ($emailSettings['sendCommenterNotification'] ?? false) {
                     $emailBodyCenterText = '<br/><strong>' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
 
                     $this->sendMailService->sendMail(
@@ -148,10 +148,11 @@ class QuestioncommentController extends ActionController
     {
         $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
-        $emailNotification = (int)$this->settings['question']['comment']['email']['sendCommenterNotification'];
+        $emailSettings = $this->settings['question']['comment']['email'] ?? [];
+        $emailNotification = (int)($emailSettings['sendCommenterNotification'] ?? 0);
 
         // First tab of flexform
-        if ((int)$this->settings['question']['comment']['email']['enable'] == 0) {
+        if ((int)($emailSettings['enable'] ?? 0) === 0) {
             $emailNotification = 0;
         }
 
