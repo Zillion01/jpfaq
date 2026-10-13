@@ -59,7 +59,7 @@ class QuestionRepository extends Repository
         if (!empty($constraintsOr) && !empty($constraintsAnd)) {
             $query->matching($query->logicalAnd(
                 $query->logicalOr(...$constraintsOr),
-                $query->logicalOr(...$constraintsAnd)
+                ...$constraintsAnd
             ));
         } elseif (!empty($constraintsOr)) {
             $query->matching($query->logicalOr(...$constraintsOr));

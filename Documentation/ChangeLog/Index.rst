@@ -19,6 +19,7 @@ ChangeLog
 #. fix: comments with a filled honeypot field were stored on TYPO3 12+ (#77)
 #. fix: undefined array key warnings when FlexForm settings are missing (#72)
 #. fix: FlexForm labels used the wrong file suffix xfl (#73)
+#. fix: 'exclude already displayed questions' combined with a startingpoint matched questions with either condition instead of both
 #. Anonymized IP addresses now also work for IPv6
 
 13.4.3
