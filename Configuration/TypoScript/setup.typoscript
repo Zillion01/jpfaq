@@ -149,6 +149,6 @@ jpfaqAjaxComment {
         select {
             where = CType = "jpfaq_faq"
         }
-        renderObj < tt_content.list.20.jpfaq_faq
+        renderObj < tt_content.jpfaq_faq.20
     }
 }

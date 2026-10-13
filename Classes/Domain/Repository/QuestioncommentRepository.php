@@ -17,6 +17,8 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  ***/
 /**
  * The repository for Questioncomments
+ *
+ * @extends Repository<\Jp\Jpfaq\Domain\Model\Questioncomment>
  */
 class QuestioncommentRepository extends Repository
 {

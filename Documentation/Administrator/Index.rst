@@ -27,10 +27,8 @@ Installation
 
 To install the extension, perform the following steps:
 
-#. Go to the Extension Manager
-#. Install the extension
-#. Include static template jpFAQ
+#. Install the extension via composer require jvdp/jpfaq (or the Extension Manager in classic mode)
+#. Add the site set 'jpFAQ' to your site (Site Management > Sites > Sets), or include the static template jpFAQ in a TypoScript record
+#. Run the upgrade wizards when upgrading from an older version
 #. Then... see Users manual
-
-Since 9.5.1. the extension can be installed via composer require jvdp/jpfaq
 

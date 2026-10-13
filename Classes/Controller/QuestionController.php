@@ -133,7 +133,7 @@ class QuestionController extends ActionController
      */
     public function helpfulnessAction(Question $question, bool $helpful, int $pluginUid): ResponseInterface|ForwardResponse
     {
-        if (!IsBot::isBot()) {
+        if (!IsBot::isBot($this->request, (string)($this->settings['bots'] ?? ''))) {
             $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
             if ($currentUid == $pluginUid) {

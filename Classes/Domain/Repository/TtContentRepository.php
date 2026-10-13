@@ -2,6 +2,7 @@
 
 namespace Jp\Jpfaq\Domain\Repository;
 
+use Jp\Jpfaq\Domain\Model\TtContent;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
@@ -18,8 +19,10 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 /**
  * Repository for tt_content objects
+ *
+ * @extends Repository<\Jp\Jpfaq\Domain\Model\TtContent>
  */
 class TtContentRepository extends Repository
 {
-    protected $objectType = '\Jp\Jpfaq\Domain\Model\TtContent';
+    protected $objectType = TtContent::class;
 }

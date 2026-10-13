@@ -1,1 +1,1 @@
-<INCLUDE_TYPOSCRIPT: source="FILE: EXT:jpfaq/Configuration/TsConfig/includePageTSconfig.tsconfig">
+@import 'EXT:jpfaq/Configuration/TsConfig/Page/pageTSconfig.tsconfig'

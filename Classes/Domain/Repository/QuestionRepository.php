@@ -10,6 +10,8 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * The repository for Questions
+ *
+ * @extends Repository<\Jp\Jpfaq\Domain\Model\Question>
  */
 class QuestionRepository extends Repository
 {
@@ -20,13 +22,13 @@ class QuestionRepository extends Repository
     /**
      * Find questions with constraints
      *
-     * @param array $categories
+     * @param int[] $categories
      * @param bool $excludeAlreadyDisplayedQuestions
      *
-     * @return array|QueryResultInterface
+     * @return QueryResultInterface<int, \Jp\Jpfaq\Domain\Model\Question>
      * @throws InvalidQueryException
      */
-    public function findQuestionsWithConstraints(array $categories = [], bool $excludeAlreadyDisplayedQuestions = false, ?string $startingPoint = null): QueryResultInterface|array
+    public function findQuestionsWithConstraints(array $categories = [], bool $excludeAlreadyDisplayedQuestions = false, ?string $startingPoint = null): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);

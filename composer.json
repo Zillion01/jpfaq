@@ -1,7 +1,7 @@
 {
   "name": "jvdp/jpfaq",
   "type": "typo3-cms-extension",
-  "description": "Frequently Asked Questions (FAQ) plugin. With categories, on-the-fly search, customer helpfulness tracking and comments.",
+  "description": "jpFAQ - Frequently Asked Questions (FAQ) plugin. With categories, on-the-fly search, customer helpfulness tracking and comments.",
   "homepage": "http://www.id-webdesign.nl",
   "authors": [
     {
@@ -24,10 +24,15 @@
     "definitions"
   ],
   "support": {
-    "issues": "https://forge.typo3.org/projects/extension-jpfaq/"
+    "issues": "https://github.com/Zillion01/jpfaq/issues",
+    "source": "https://github.com/Zillion01/jpfaq"
   },
   "require": {
-    "typo3/cms-core": "^13.4"
+    "php": "^8.2",
+    "typo3/cms-core": "^14.3",
+    "typo3/cms-extbase": "^14.3",
+    "typo3/cms-fluid": "^14.3",
+    "typo3/cms-frontend": "^14.3"
   },
   "autoload": {
     "psr-4": {
@@ -39,7 +44,11 @@
   },
   "extra": {
     "typo3/cms": {
-      "extension-key": "jpfaq"
+      "extension-key": "jpfaq",
+      "version": "14.3.0",
+      "Package": {
+        "providesPackages": {}
+      }
     }
   }
 }

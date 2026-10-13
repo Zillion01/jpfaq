@@ -10,6 +10,14 @@
 
 ChangeLog
 =========
+14.3.0
+"""""
+#. For TYPO3 v14.3. TYPO3 v13 is no longer supported, use 13.4.x for that.
+#. Notification emails are sent with the TYPO3 v14 mailer, MailMessage::send() no longer exists.
+#. Site set 'jpFAQ' added, the static template is still available.
+#. Upgrade wizard to migrate list_type plugins to the jpfaq_faq content element.
+#. Anonymized IP addresses now also work for IPv6
+
 13.4.3
 """""
 #. fix: change plugin group to lowercase - thanks to Florian Leimer

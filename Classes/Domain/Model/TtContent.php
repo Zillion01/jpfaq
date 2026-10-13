@@ -125,11 +125,6 @@ class TtContent extends AbstractEntity
     protected $headerLayout = '';
 
     /**
-     * @var string
-     */
-    protected $listType = '';
-
-    /**
      * @return \DateTime|null
      */
     public function getCrdate(): ?\DateTime
@@ -499,21 +494,5 @@ class TtContent extends AbstractEntity
     public function setHeaderLayout(string $headerLayout): void
     {
         $this->headerLayout = $headerLayout;
-    }
-
-    /**
-     * @return string
-     */
-    public function getListType(): string
-    {
-        return $this->listType;
-    }
-
-    /**
-     * @param string $listType
-     */
-    public function setListType(string $listType): void
-    {
-        $this->listType = $listType;
     }
 }

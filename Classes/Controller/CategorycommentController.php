@@ -7,10 +7,10 @@ use Jp\Jpfaq\Domain\Model\Categorycomment;
 use Jp\Jpfaq\Domain\Repository\CategorycommentRepository;
 use Jp\Jpfaq\Domain\Repository\CategoryRepository;
 use Jp\Jpfaq\Service\SendMailService;
+use Jp\Jpfaq\Utility\CommentIp;
 use Jp\Jpfaq\Utility\IsBot;
 use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
@@ -19,21 +19,11 @@ use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 
 class CategorycommentController extends ActionController
 {
-    protected CategorycommentRepository $categorycommentRepository;
-
-    protected CategoryRepository $categoryRepository;
-
-    /**
-     * @param CategorycommentRepository $categorycommentRepository
-     * @param CategoryRepository $categoryRepository
-     */
     public function __construct(
-        CategorycommentRepository $categorycommentRepository,
-        CategoryRepository $categoryRepository
-    ) {
-        $this->categorycommentRepository = $categorycommentRepository;
-        $this->categoryRepository = $categoryRepository;
-    }
+        protected readonly CategorycommentRepository $categorycommentRepository,
+        protected readonly CategoryRepository $categoryRepository,
+        protected readonly SendMailService $sendMailService
+    ) {}
 
     /**
      * Initialize
@@ -64,14 +54,14 @@ class CategorycommentController extends ActionController
      *
      * Shows comment form
      *
-     * @param array $catUids
+     * @param array<int|string> $catUids
      * @param int $pluginUid
      *
      * @return ResponseInterface
      */
     public function commentAction(array $catUids, int $pluginUid): ResponseInterface
     {
-        if (!IsBot::isBot()) {
+        if (!IsBot::isBot($this->request, (string)($this->settings['bots'] ?? ''))) {
             $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
             if ($currentUid == $pluginUid) {
@@ -96,7 +86,7 @@ class CategorycommentController extends ActionController
      * Add to database and sendmail, then show thank you
      *
      * @param Categorycomment $newCategorycomment
-     * @param array $catUids
+     * @param array<int|string> $catUids
      * @param int $pluginUid
      *
      * @return ResponseInterface
@@ -130,22 +120,7 @@ class CategorycommentController extends ActionController
         }
 
         if ($currentUid == $pluginUid) {
-            $extensionConfiguration = [];
-            // Set comment IP
-            try {
-                $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('jpfaq');
-            } catch (\Exception $exception) {
-                // do nothing
-            }
-            $anonymizeIpSetting = $extensionConfiguration['anonymizeIp'];
-            $commentIp = (string)GeneralUtility::getIndpEnv('REMOTE_ADDR');
-
-            if ($anonymizeIpSetting) {
-                $parts = explode('.', $commentIp);
-                $newCategorycomment->setIp($parts[0] . '.' . $parts[1] . '.x.x');
-            } else {
-                $newCategorycomment->setIp($commentIp);
-            }
+            $newCategorycomment->setIp(CommentIp::fromRequest($this->request));
 
             foreach ($categories as $category) {
                 $newCategorycomment->addCategory($category);
@@ -159,23 +134,23 @@ class CategorycommentController extends ActionController
             if ($emailSettings['enable']) {
                 $sender = [htmlspecialchars($emailSettings['sender']['email']) => htmlspecialchars($emailSettings['sender']['name'])];
 
-                $emailBodyCenterText = '<br/><strong>' . $categoryNames . '</strong>' . '<p><i>' . $this->formatRte($this->request->getAttribute('currentContentObject'), $newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
+                $emailBodyCenterText = '<br/><strong>' . $categoryNames . '</strong>' . '<p><i>' . $this->formatRte($newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
 
-                SendMailService::sendMail(
-                    $receivers = htmlspecialchars($emailSettings['receivers']['email']),
+                $this->sendMailService->sendMail(
+                    htmlspecialchars($emailSettings['receivers']['email']),
                     $sender,
-                    $subject = $emailSettings['subject'],
-                    $body = $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['closeText'])
+                    $emailSettings['subject'],
+                    $this->formatRte($emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['closeText'])
                 );
 
                 if ($emailSettings['sendCommenterNotification']) {
-                    $emailBodyCenterText = '<br/>' . '<p><i>' . $this->formatRte($this->request->getAttribute('currentContentObject'), $newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
+                    $emailBodyCenterText = '<br/>' . '<p><i>' . $this->formatRte($newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
 
-                    SendMailService::sendMail(
-                        $receivers = htmlspecialchars($newCategorycomment->getEmail()),
+                    $this->sendMailService->sendMail(
+                        htmlspecialchars($newCategorycomment->getEmail()),
                         $sender,
-                        $subject = htmlspecialchars($emailSettings['commenter']['subject']),
-                        $body = $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['commenter']['closeText'])
+                        htmlspecialchars($emailSettings['commenter']['subject']),
+                        $this->formatRte($emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['commenter']['closeText'])
                     );
                 }
             }
@@ -226,14 +201,9 @@ class CategorycommentController extends ActionController
 
     /**
      * Format / clean a string with parseFunc
-     *
-     * @param $request
-     * @param $str
-     *
-     * @return string
      */
-    private function formatRte($request, $str): string
+    private function formatRte(?string $str): string
     {
-        return $request->parseFunc($str, [], '< lib.parseFunc_RTE');
+        return $this->request->getAttribute('currentContentObject')->parseFunc((string)$str, null, '< lib.parseFunc_RTE');
     }
 }

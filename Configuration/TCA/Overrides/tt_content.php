@@ -1,28 +1,15 @@
 <?php
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die();
 
-$pluginSignature = ExtensionUtility::registerPlugin(
+ExtensionUtility::registerPlugin(
     'Jpfaq',
     'Faq',
     'jpFAQ',
     'ext-jpfaq-wizard-icon',
     'plugins',
-    'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:pi1_plus_wiz_description'
-);
-
-ExtensionManagementUtility::addToAllTCAtypes(
-    'tt_content',
-    '--div--;Configuration,pi_flexform,',
-    $pluginSignature,
-    'after:subheader',
-);
-
-ExtensionManagementUtility::addPiFlexFormValue(
-    '*',
-    'FILE:EXT:' . 'jpfaq' . '/Configuration/FlexForm/Flexform.xml',
-    $pluginSignature,
+    'LLL:EXT:jpfaq/Resources/Private/Language/locallang_db.xlf:pi1_plus_wiz_description',
+    'FILE:EXT:jpfaq/Configuration/FlexForm/Flexform.xml'
 );
