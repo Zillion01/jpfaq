@@ -27,6 +27,7 @@ class Categorycomment extends AbstractEntity
      *
      * @var string
      */
+    #[Validate(validator: 'NotEmpty')]
     protected $name = '';
 
     /**
@@ -34,6 +35,8 @@ class Categorycomment extends AbstractEntity
      *
      * @var string
      */
+    #[Validate(validator: 'NotEmpty')]
+    #[Validate(validator: 'EmailAddress')]
     protected $email = '';
 
     /**

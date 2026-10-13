@@ -111,6 +111,21 @@ settings.excludeAlreadyDisplayedQuestions
    Description
          Exclude already displayed questions when multiple plugins are inserted on a page.
 
+.. _settings.spamProtection.minimumSecondsBeforeSubmit:
+
+settings.spamProtection.minimumSecondsBeforeSubmit
+""
+.. container:: table-row
+
+   Property
+         settings.spamProtection.minimumSecondsBeforeSubmit
+   Data type
+         int
+   Description
+         Comments that are sent sooner after the comment form was loaded are treated as spam and silently discarded. Bots usually send a form immediately.
+   Default
+         3
+
 .. _settings.gtag.enable:
 
 settings.gtag.enable

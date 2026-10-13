@@ -14,11 +14,11 @@
         <span class="required">*</span>
     </label>
     <f:form.textarea property="comment" cols="60" rows="5" class="form-control jpfaqRequired"/>
-    <div class="jpfaqFinfo">
+    <div class="jpfaqFinfo" aria-hidden="true">
         <label for="finfo">
             <f:translate key="tx_jpfaq_domain_model_questioncomment.finfo"/>
         </label>
-        <f:form.textfield property="finfo"/>
+        <f:form.textfield property="finfo" autocomplete="off" additionalAttributes="{tabindex: '-1'}"/>
     </div>
     <br/>
 </html>

@@ -21,6 +21,8 @@ ChangeLog
 #. fix: FlexForm labels used the wrong file suffix xfl (#73)
 #. fix: 'exclude already displayed questions' combined with a startingpoint matched questions with either condition instead of both
 #. fix: the Ajax page type rendered nothing on sites without fluid_styled_content
+#. feat: better spam protection for comments: minimum time before sending, rate limit, bot check on sending, server side validation of name and email
+#. Visitor input in notification emails is escaped instead of rendered as HTML
 #. Anonymized IP addresses now also work for IPv6
 
 13.4.3

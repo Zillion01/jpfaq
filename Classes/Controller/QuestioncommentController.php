@@ -7,10 +7,12 @@ use Jp\Jpfaq\Domain\Model\Questioncomment;
 use Jp\Jpfaq\Domain\Repository\QuestioncommentRepository;
 use Jp\Jpfaq\Domain\Repository\QuestionRepository;
 use Jp\Jpfaq\Service\SendMailService;
+use Jp\Jpfaq\Service\SpamProtection;
 use Jp\Jpfaq\Utility\CommentIp;
 use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Attribute\RateLimit;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -22,7 +24,8 @@ class QuestioncommentController extends ActionController
     public function __construct(
         protected readonly QuestioncommentRepository $questioncommentRepository,
         protected readonly QuestionRepository $questionRepository,
-        protected readonly SendMailService $sendMailService
+        protected readonly SendMailService $sendMailService,
+        protected readonly SpamProtection $spamProtection
     ) {}
 
     /**
@@ -65,6 +68,7 @@ class QuestioncommentController extends ActionController
         $this->view->assignMultiple([
             'currentUid' => $currentUid,
             'question' => $question,
+            'formToken' => $this->spamProtection->createFormToken(),
         ]);
 
         return $this->htmlResponse();
@@ -81,10 +85,12 @@ class QuestioncommentController extends ActionController
      *
      * @return ResponseInterface|ForwardResponse
      */
+    #[RateLimit(limit: 5, interval: '15 minutes')]
     public function addCommentAction(Question $question, Questioncomment $newQuestioncomment, int $pluginUid): ResponseInterface|ForwardResponse
     {
-        // If honeypot field 'finfo' is filled by spambot do not add new comment
-        if ($newQuestioncomment->getFinfo()) {
+        $formToken = $this->request->hasArgument('formToken') ? (string)$this->request->getArgument('formToken') : '';
+        // Answer spam like a request for another plugin, so a bot gets no hint
+        if ($this->spamProtection->isSpam($this->request, $newQuestioncomment->getFinfo(), $formToken, $this->settings)) {
             return $this->responseFactory->createResponse();
         }
 
@@ -104,25 +110,22 @@ class QuestioncommentController extends ActionController
             $emailSettings = $this->settings['question']['comment']['email'] ?? [];
 
             if ($emailSettings['enable'] ?? false) {
-                $emailBodyCenterText = '<br/><strong>' . $question->getUid() . '. ' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
-
-                $sender = [htmlspecialchars($emailSettings['sender']['email']) => htmlspecialchars($emailSettings['sender']['name'])];
+                $sender = [$emailSettings['sender']['email'] => $emailSettings['sender']['name']];
+                $comment = '<p><i>' . nl2br(htmlspecialchars($newQuestioncomment->getComment())) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
 
                 $this->sendMailService->sendMail(
-                    htmlspecialchars($emailSettings['receivers']['email']),
+                    $emailSettings['receivers']['email'],
                     $sender,
-                    htmlspecialchars($emailSettings['subject']),
-                    $this->formatRte($emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['closeText'])
+                    $emailSettings['subject'],
+                    $this->formatRte($emailSettings['introText']) . '<br/><strong>' . $question->getUid() . '. ' . htmlspecialchars($question->getQuestion()) . '</strong>' . $comment . $this->formatRte($emailSettings['closeText'])
                 );
 
                 if ($emailSettings['sendCommenterNotification'] ?? false) {
-                    $emailBodyCenterText = '<br/><strong>' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
-
                     $this->sendMailService->sendMail(
-                        htmlspecialchars($newQuestioncomment->getEmail()),
+                        $newQuestioncomment->getEmail(),
                         $sender,
-                        htmlspecialchars($emailSettings['commenter']['subject']),
-                        $this->formatRte($emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['commenter']['closeText'])
+                        $emailSettings['commenter']['subject'],
+                        $this->formatRte($emailSettings['commenter']['introText']) . '<br/><strong>' . htmlspecialchars($question->getQuestion()) . '</strong>' . $comment . $this->formatRte($emailSettings['commenter']['closeText'])
                     );
                 }
             }
@@ -173,7 +176,7 @@ class QuestioncommentController extends ActionController
     }
 
     /**
-     * Format / clean a string with parseFunc
+     * Format / clean an editor supplied string with parseFunc
      */
     private function formatRte(?string $str): string
     {

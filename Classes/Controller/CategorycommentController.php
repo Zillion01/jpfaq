@@ -7,11 +7,13 @@ use Jp\Jpfaq\Domain\Model\Categorycomment;
 use Jp\Jpfaq\Domain\Repository\CategorycommentRepository;
 use Jp\Jpfaq\Domain\Repository\CategoryRepository;
 use Jp\Jpfaq\Service\SendMailService;
+use Jp\Jpfaq\Service\SpamProtection;
 use Jp\Jpfaq\Utility\CommentIp;
 use Jp\Jpfaq\Utility\IsBot;
 use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Attribute\RateLimit;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -22,7 +24,8 @@ class CategorycommentController extends ActionController
     public function __construct(
         protected readonly CategorycommentRepository $categorycommentRepository,
         protected readonly CategoryRepository $categoryRepository,
-        protected readonly SendMailService $sendMailService
+        protected readonly SendMailService $sendMailService,
+        protected readonly SpamProtection $spamProtection
     ) {}
 
     /**
@@ -68,6 +71,7 @@ class CategorycommentController extends ActionController
                 $this->view->assignMultiple([
                     'catUids' => $catUids,
                     'currentUid' => $currentUid,
+                    'formToken' => $this->spamProtection->createFormToken(),
                 ]);
 
                 return $this->htmlResponse();
@@ -93,13 +97,15 @@ class CategorycommentController extends ActionController
      *
      * @throws IllegalObjectTypeException
      */
+    #[RateLimit(limit: 5, interval: '15 minutes')]
     public function addCommentAction(
         Categorycomment $newCategorycomment,
         array $catUids,
         int $pluginUid
     ): ResponseInterface {
-        // If honeypot field 'finfo' is filled by spambot do not add new comment
-        if ($newCategorycomment->getFinfo()) {
+        $formToken = $this->request->hasArgument('formToken') ? (string)$this->request->getArgument('formToken') : '';
+        // Answer spam like a request for another plugin, so a bot gets no hint
+        if ($this->spamProtection->isSpam($this->request, $newCategorycomment->getFinfo(), $formToken, $this->settings)) {
             return $this->responseFactory->createResponse();
         }
 
@@ -114,7 +120,7 @@ class CategorycommentController extends ActionController
                 $tempCat = $this->categoryRepository->findByUid($catUid);
                 if ($tempCat instanceof Category) {
                     $categories[] = $tempCat;
-                    $categoryNames = $categoryNames . $tempCat->getCategory() . '<br/>';
+                    $categoryNames = $categoryNames . htmlspecialchars($tempCat->getCategory()) . '<br/>';
                 }
             }
         }
@@ -132,25 +138,22 @@ class CategorycommentController extends ActionController
             $emailSettings = $this->settings['category']['comment']['email'] ?? [];
 
             if ($emailSettings['enable'] ?? false) {
-                $sender = [htmlspecialchars($emailSettings['sender']['email']) => htmlspecialchars($emailSettings['sender']['name'])];
-
-                $emailBodyCenterText = '<br/><strong>' . $categoryNames . '</strong>' . '<p><i>' . $this->formatRte($newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
+                $sender = [$emailSettings['sender']['email'] => $emailSettings['sender']['name']];
+                $comment = '<p><i>' . nl2br(htmlspecialchars($newCategorycomment->getComment())) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
 
                 $this->sendMailService->sendMail(
-                    htmlspecialchars($emailSettings['receivers']['email']),
+                    $emailSettings['receivers']['email'],
                     $sender,
                     $emailSettings['subject'],
-                    $this->formatRte($emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['closeText'])
+                    $this->formatRte($emailSettings['introText']) . '<br/><strong>' . $categoryNames . '</strong>' . $comment . $this->formatRte($emailSettings['closeText'])
                 );
 
                 if ($emailSettings['sendCommenterNotification'] ?? false) {
-                    $emailBodyCenterText = '<br/>' . '<p><i>' . $this->formatRte($newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
-
                     $this->sendMailService->sendMail(
-                        htmlspecialchars($newCategorycomment->getEmail()),
+                        $newCategorycomment->getEmail(),
                         $sender,
-                        htmlspecialchars($emailSettings['commenter']['subject']),
-                        $this->formatRte($emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($emailSettings['commenter']['closeText'])
+                        $emailSettings['commenter']['subject'],
+                        $this->formatRte($emailSettings['commenter']['introText']) . '<br/>' . $comment . $this->formatRte($emailSettings['commenter']['closeText'])
                     );
                 }
             }
@@ -201,7 +204,7 @@ class CategorycommentController extends ActionController
     }
 
     /**
-     * Format / clean a string with parseFunc
+     * Format / clean an editor supplied string with parseFunc
      */
     private function formatRte(?string $str): string
     {
