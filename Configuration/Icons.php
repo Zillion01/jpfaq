@@ -18,7 +18,7 @@ return [
     ],
     'tx_jpfaq_domain_model_categorycomment' => [
         'provider' => SvgIconProvider::class,
-        'source' => $iconPath . 'tx_jpfaq_domain_model_categorycomment',
+        'source' => $iconPath . 'tx_jpfaq_domain_model_categorycomment.svg',
     ],
     'tx_jpfaq_domain_model_category' => [
         'provider' => BitmapIconProvider::class,
