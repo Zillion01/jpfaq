@@ -3,6 +3,7 @@
 namespace Jp\Jpfaq\Utility;
 
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class IsBot
 {
@@ -13,11 +14,8 @@ class IsBot
     {
         $userAgent = $request->getHeaderLine('User-Agent');
 
-        foreach (explode(',', $bots) as $bot) {
-            if (trim($bot) === '') {
-                continue;
-            }
-            if (stripos($userAgent, htmlspecialchars($bot)) !== false) {
+        foreach (GeneralUtility::trimExplode(',', $bots, true) as $bot) {
+            if (stripos($userAgent, $bot) !== false) {
                 return true;
             }
         }

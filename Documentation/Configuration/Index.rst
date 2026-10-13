@@ -126,6 +126,19 @@ settings.spamProtection.minimumSecondsBeforeSubmit
    Default
          3
 
+.. _settings.bots:
+
+settings.bots
+"
+.. container:: table-row
+
+   Property
+         settings.bots
+   Data type
+         string
+   Description
+         Comma separated names, one per line, that are searched case-insensitively in the User-Agent header. Matching visitors cannot vote on helpfulness or send comments. Based on github.com/fabiomb/is_bot.
+
 .. _settings.gtag.enable:
 
 settings.gtag.enable

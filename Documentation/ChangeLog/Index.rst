@@ -24,6 +24,7 @@ ChangeLog
 #. feat: better spam protection for comments: minimum time before sending, rate limit, bot check on sending, server side validation of name and email
 #. Visitor input in notification emails is escaped instead of rendered as HTML
 #. Anonymized IP addresses now also work for IPv6
+#. Bot list updated from github.com/fabiomb/is_bot (adds AI crawlers like ClaudeBot, PerplexityBot and OAI-SearchBot). Names with spaces or '&' did not match before. The in-app browsers of WeChat, QQ and 2345 are no longer seen as bots. settings.bots now has one name per line.
 
 13.4.3
 """""
