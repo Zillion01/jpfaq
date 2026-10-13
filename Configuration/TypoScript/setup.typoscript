@@ -142,12 +142,14 @@ jpfaqAjaxComment {
         admPanel = 0
         debug = 0
     }
-    10 < styles.content.get
+    10 = CONTENT
     10 {
+        table = tt_content
         stdWrap.trim = 1
 
         select {
-            where = CType = "jpfaq_faq"
+            orderBy = sorting
+            where = {#CType} = 'jpfaq_faq'
         }
         renderObj < tt_content.jpfaq_faq.20
     }

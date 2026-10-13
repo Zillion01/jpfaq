@@ -20,6 +20,7 @@ ChangeLog
 #. fix: undefined array key warnings when FlexForm settings are missing (#72)
 #. fix: FlexForm labels used the wrong file suffix xfl (#73)
 #. fix: 'exclude already displayed questions' combined with a startingpoint matched questions with either condition instead of both
+#. fix: the Ajax page type rendered nothing on sites without fluid_styled_content
 #. Anonymized IP addresses now also work for IPv6
 
 13.4.3
