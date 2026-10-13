@@ -85,7 +85,7 @@ class QuestioncommentController extends ActionController
     {
         // If honeypot field 'finfo' is filled by spambot do not add new comment
         if ($newQuestioncomment->getFinfo()) {
-            $this->redirect('list', 'Question');
+            return $this->responseFactory->createResponse();
         }
 
         $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];

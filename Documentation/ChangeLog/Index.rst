@@ -16,6 +16,7 @@ ChangeLog
 #. Notification emails are sent with the TYPO3 v14 mailer, MailMessage::send() no longer exists.
 #. Site set 'jpFAQ' added, the static template is still available.
 #. Upgrade wizard to migrate list_type plugins to the jpfaq_faq content element.
+#. fix: comments with a filled honeypot field were stored on TYPO3 12+ (#77)
 #. fix: undefined array key warnings when FlexForm settings are missing (#72)
 #. fix: FlexForm labels used the wrong file suffix xfl (#73)
 #. Anonymized IP addresses now also work for IPv6
