@@ -2,8 +2,8 @@
 
 namespace Jp\Jpfaq\Domain\Model;
 
-use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
-use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Attribute\ORM\Lazy;
+use TYPO3\CMS\Extbase\Attribute\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -27,6 +27,7 @@ class Categorycomment extends AbstractEntity
      *
      * @var string
      */
+    #[Validate(validator: 'NotEmpty')]
     protected $name = '';
 
     /**
@@ -34,6 +35,8 @@ class Categorycomment extends AbstractEntity
      *
      * @var string
      */
+    #[Validate(validator: 'NotEmpty')]
+    #[Validate(validator: 'EmailAddress')]
     protected $email = '';
 
     /**
@@ -41,7 +44,7 @@ class Categorycomment extends AbstractEntity
      *
      * @var string
      */
-    #[Validate(['validator' => 'NotEmpty'])]
+    #[Validate(validator: 'NotEmpty')]
     protected $comment = '';
 
     /**
@@ -81,7 +84,7 @@ class Categorycomment extends AbstractEntity
      * It will be rewritten on each save in the extension builder
      * You may modify the constructor of this class instead
      */
-    protected function initStorageObjects()
+    protected function initStorageObjects(): void
     {
         $this->category = new ObjectStorage();
     }

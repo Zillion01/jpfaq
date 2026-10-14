@@ -20,8 +20,7 @@ $boot = static function (): void {
             QuestionController::class => 'helpfulness',
             QuestioncommentController::class => 'comment, addComment',
             CategorycommentController::class => 'comment, addComment',
-        ],
-        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+        ]
     );
 };
 

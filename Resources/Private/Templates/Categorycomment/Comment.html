@@ -12,6 +12,7 @@
 
             <f:form action="addComment" controller="Categorycomment" class="jpfaqCatComment" id="jpfaqCatCommentForm{currentUid}" name="newCategorycomment"
                     object="{newCategorycomment}" arguments="{catUids: catUids, pluginUid: currentUid}" pageType="1687523179">
+                <f:form.hidden name="formToken" value="{formToken}"/>
                 <f:render partial="Categorycomment/FormFields"/>
                 <f:form.submit value="{f:translate(key: 'tx_jpfaq_submit_comment')}" class="jpfaqSubmitCatComment btn btn-primary" id="jpfaqSubmitCatComment{currentUid}"/>
             </f:form>

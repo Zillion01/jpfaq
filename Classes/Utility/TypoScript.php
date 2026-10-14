@@ -16,9 +16,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class TypoScript
 {
     /**
-     * @param array $base
-     * @param array $overload
-     * @return array
+     * @param array<string, mixed> $base
+     * @param array<string, mixed> $overload
+     * @return array<string, mixed>
      */
     public function override(array $base, array $overload): array
     {
@@ -79,11 +79,11 @@ class TypoScript
     /**
      * Set value in array by path
      *
-     * @param array $array
+     * @param array<string, mixed> $array
      * @param string[] $path
      *
      * @param mixed $value
-     * @return array
+     * @return array<string, mixed>
      */
     protected function setValue(array $array, array $path, $value): array
     {
@@ -96,9 +96,9 @@ class TypoScript
     /**
      * Set value by reference
      *
-     * @param array $array
-     * @param array $path
-     * @param $value
+     * @param array<string, mixed> $array
+     * @param string[] $path
+     * @param mixed $value
      */
     private function setValueByReference(array &$array, array $path, $value): void
     {

@@ -34,3 +34,7 @@ If you upgrade to version 11.6.x please consult the changelog. Comments now need
 13.4
 ====
 If you upgrade to version 13.4.x please consult the changelog. The plugin is now a content element.
+
+14.3
+====
+If you upgrade to version 14.3.x please consult the changelog. TYPO3 v14.3 is required. Plugins still stored as list_type are migrated by the upgrade wizard 'Migrate "jpFAQ" plugins to content elements'.

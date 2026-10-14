@@ -7,10 +7,12 @@ use Jp\Jpfaq\Domain\Model\Questioncomment;
 use Jp\Jpfaq\Domain\Repository\QuestioncommentRepository;
 use Jp\Jpfaq\Domain\Repository\QuestionRepository;
 use Jp\Jpfaq\Service\SendMailService;
+use Jp\Jpfaq\Service\SpamProtection;
+use Jp\Jpfaq\Utility\CommentIp;
 use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Attribute\RateLimit;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -19,24 +21,12 @@ use TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException;
 
 class QuestioncommentController extends ActionController
 {
-    protected QuestioncommentRepository $questioncommentRepository;
-    protected QuestionRepository $questionRepository;
-    protected ConfigurationManagerInterface $configurationManager;
-
-    /**
-     * @param QuestioncommentRepository $questioncommentRepository
-     * @param QuestionRepository $questionRepository
-     * @param ConfigurationManagerInterface $configurationManager
-     */
     public function __construct(
-        QuestioncommentRepository $questioncommentRepository,
-        QuestionRepository $questionRepository,
-        ConfigurationManagerInterface $configurationManager
-    ) {
-        $this->questioncommentRepository = $questioncommentRepository;
-        $this->questionRepository = $questionRepository;
-        $this->configurationManager = $configurationManager;
-    }
+        protected readonly QuestioncommentRepository $questioncommentRepository,
+        protected readonly QuestionRepository $questionRepository,
+        protected readonly SendMailService $sendMailService,
+        protected readonly SpamProtection $spamProtection
+    ) {}
 
     /**
      * Initialize
@@ -78,6 +68,7 @@ class QuestioncommentController extends ActionController
         $this->view->assignMultiple([
             'currentUid' => $currentUid,
             'question' => $question,
+            'formToken' => $this->spamProtection->createFormToken(),
         ]);
 
         return $this->htmlResponse();
@@ -94,34 +85,19 @@ class QuestioncommentController extends ActionController
      *
      * @return ResponseInterface|ForwardResponse
      */
+    #[RateLimit(limit: 5, interval: '15 minutes')]
     public function addCommentAction(Question $question, Questioncomment $newQuestioncomment, int $pluginUid): ResponseInterface|ForwardResponse
     {
-        // If honeypot field 'finfo' is filled by spambot do not add new comment
-        if ($newQuestioncomment->getFinfo()) {
-            $this->redirect('list', 'Question');
+        $formToken = $this->request->hasArgument('formToken') ? (string)$this->request->getArgument('formToken') : '';
+        // Answer spam like a request for another plugin, so a bot gets no hint
+        if ($this->spamProtection->isSpam($this->request, $newQuestioncomment->getFinfo(), $formToken, $this->settings)) {
+            return $this->responseFactory->createResponse();
         }
 
         $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
-        $anonymizeIpSetting = null;
 
         if ($currentUid == $pluginUid) {
-            // Set comment IP
-            try {
-                $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('jpfaq');
-
-                $anonymizeIpSetting = $extensionConfiguration['anonymizeIp'];
-            } catch (\Exception $exception) {
-                // do nothing
-            }
-
-            $commentIp = (string)GeneralUtility::getIndpEnv('REMOTE_ADDR');
-
-            if ($anonymizeIpSetting) {
-                $parts = explode('.', $commentIp);
-                $newQuestioncomment->setIp($parts[0] . '.' . $parts[1] . '.x.x');
-            } else {
-                $newQuestioncomment->setIp($commentIp);
-            }
+            $newQuestioncomment->setIp(CommentIp::fromRequest($this->request));
 
             $question->addComment($newQuestioncomment);
 
@@ -131,28 +107,25 @@ class QuestioncommentController extends ActionController
             }
 
             // Send notification emails
-            $emailSettings = $this->settings['question']['comment']['email'];
+            $emailSettings = $this->settings['question']['comment']['email'] ?? [];
 
-            if ($emailSettings['enable']) {
-                $emailBodyCenterText = '<br/><strong>' . $question->getUid() . '. ' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($this->request->getAttribute('currentContentObject'), $newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
+            if ($emailSettings['enable'] ?? false) {
+                $sender = [$emailSettings['sender']['email'] => $emailSettings['sender']['name']];
+                $comment = '<p><i>' . nl2br(htmlspecialchars($newQuestioncomment->getComment())) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
 
-                $sender = [htmlspecialchars($emailSettings['sender']['email']) => htmlspecialchars($emailSettings['sender']['name'])];
-
-                SendMailService::sendMail(
-                    $receivers = htmlspecialchars($emailSettings['receivers']['email']),
+                $this->sendMailService->sendMail(
+                    $emailSettings['receivers']['email'],
                     $sender,
-                    $subject = htmlspecialchars($emailSettings['subject']),
-                    $body = $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['closeText'])
+                    $emailSettings['subject'],
+                    $this->formatRte($emailSettings['introText']) . '<br/><strong>' . $question->getUid() . '. ' . htmlspecialchars($question->getQuestion()) . '</strong>' . $comment . $this->formatRte($emailSettings['closeText'])
                 );
 
-                if ($emailSettings['sendCommenterNotification']) {
-                    $emailBodyCenterText = '<br/><strong>' . $question->getQuestion() . '</strong>' . '<p><i>' . $this->formatRte($this->request->getAttribute('currentContentObject'), $newQuestioncomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newQuestioncomment->getName()) . '<br/>' . htmlspecialchars($newQuestioncomment->getEmail()) . '</i></p><br/>';
-
-                    SendMailService::sendMail(
-                        $receivers = htmlspecialchars($newQuestioncomment->getEmail()),
+                if ($emailSettings['sendCommenterNotification'] ?? false) {
+                    $this->sendMailService->sendMail(
+                        $newQuestioncomment->getEmail(),
                         $sender,
-                        $subject = htmlspecialchars($emailSettings['commenter']['subject']),
-                        $body = $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['commenter']['closeText'])
+                        $emailSettings['commenter']['subject'],
+                        $this->formatRte($emailSettings['commenter']['introText']) . '<br/><strong>' . htmlspecialchars($question->getQuestion()) . '</strong>' . $comment . $this->formatRte($emailSettings['commenter']['closeText'])
                     );
                 }
             }
@@ -178,10 +151,11 @@ class QuestioncommentController extends ActionController
     {
         $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
-        $emailNotification = (int)$this->settings['question']['comment']['email']['sendCommenterNotification'];
+        $emailSettings = $this->settings['question']['comment']['email'] ?? [];
+        $emailNotification = (int)($emailSettings['sendCommenterNotification'] ?? 0);
 
         // First tab of flexform
-        if ((int)$this->settings['question']['comment']['email']['enable'] == 0) {
+        if ((int)($emailSettings['enable'] ?? 0) === 0) {
             $emailNotification = 0;
         }
 
@@ -202,15 +176,10 @@ class QuestioncommentController extends ActionController
     }
 
     /**
-     * Format / clean a string with parseFunc
-     *
-     * @param $request
-     * @param $str
-     *
-     * @return string
+     * Format / clean an editor supplied string with parseFunc
      */
-    private function formatRte($request, $str): string
+    private function formatRte(?string $str): string
     {
-        return $request->parseFunc($str, [], '< lib.parseFunc_RTE');
+        return $this->request->getAttribute('currentContentObject')->parseFunc((string)$str, null, '< lib.parseFunc_RTE');
     }
 }

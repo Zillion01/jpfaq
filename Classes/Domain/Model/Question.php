@@ -2,9 +2,9 @@
 
 namespace Jp\Jpfaq\Domain\Model;
 
-use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
-use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
-use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Attribute\ORM\Cascade;
+use TYPO3\CMS\Extbase\Attribute\ORM\Lazy;
+use TYPO3\CMS\Extbase\Attribute\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -19,7 +19,7 @@ class Question extends AbstractEntity
      *
      * @var string
      */
-    #[Validate(['validator' => 'NotEmpty'])]
+    #[Validate(validator: 'NotEmpty')]
     protected $question = '';
 
     /**
@@ -35,7 +35,7 @@ class Question extends AbstractEntity
      *
      * @var int
      */
-    #[Validate(['validator' => 'NotEmpty'])]
+    #[Validate(validator: 'NotEmpty')]
     protected $helpful = 0;
 
     /**
@@ -44,7 +44,7 @@ class Question extends AbstractEntity
      *
      * @var int
      */
-    #[Validate(['validator' => 'NotEmpty'])]
+    #[Validate(validator: 'NotEmpty')]
     protected $nothelpful = 0;
 
     /**
@@ -53,7 +53,7 @@ class Question extends AbstractEntity
      *
      * @var ObjectStorage<TtContent>
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade('remove')]
     #[Lazy]
     protected $additionalContentAnswer;
 
@@ -70,7 +70,7 @@ class Question extends AbstractEntity
      *
      * @var ObjectStorage<Questioncomment>
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade('remove')]
     #[Lazy]
     protected $questioncomment;
 
@@ -89,7 +89,7 @@ class Question extends AbstractEntity
      * It will be rewritten on each save in the extension builder
      * You may modify the constructor of this class instead
      */
-    protected function initStorageObjects()
+    protected function initStorageObjects(): void
     {
         $this->categories = new ObjectStorage();
         $this->additionalContentAnswer = new ObjectStorage();

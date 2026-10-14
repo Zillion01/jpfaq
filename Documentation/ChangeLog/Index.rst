@@ -10,6 +10,22 @@
 
 ChangeLog
 =========
+14.3.0
+"""""
+#. For TYPO3 v14.3. TYPO3 v13 is no longer supported, use 13.4.x for that.
+#. Notification emails are sent with the TYPO3 v14 mailer, MailMessage::send() no longer exists.
+#. Site set 'jpFAQ' added, the static template is still available.
+#. Upgrade wizard to migrate list_type plugins to the jpfaq_faq content element.
+#. fix: comments with a filled honeypot field were stored on TYPO3 12+ (#77)
+#. fix: undefined array key warnings when FlexForm settings are missing (#72)
+#. fix: FlexForm labels used the wrong file suffix xfl (#73)
+#. fix: 'exclude already displayed questions' combined with a startingpoint matched questions with either condition instead of both
+#. fix: the Ajax page type rendered nothing on sites without fluid_styled_content
+#. feat: better spam protection for comments: minimum time before sending, rate limit, bot check on sending, server side validation of name and email
+#. Visitor input in notification emails is escaped instead of rendered as HTML
+#. Anonymized IP addresses now also work for IPv6
+#. Bot list updated from github.com/fabiomb/is_bot (adds AI crawlers like ClaudeBot, PerplexityBot and OAI-SearchBot). Names with spaces or '&' did not match before. The in-app browsers of WeChat, QQ and 2345 are no longer seen as bots. settings.bots now has one name per line.
+
 13.4.3
 """""
 #. fix: change plugin group to lowercase - thanks to Florian Leimer

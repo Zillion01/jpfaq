@@ -2,7 +2,7 @@
 
 namespace Jp\Jpfaq\Domain\Model;
 
-use TYPO3\CMS\Extbase\Annotation\Validate;
+use TYPO3\CMS\Extbase\Attribute\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -16,7 +16,7 @@ class Category extends AbstractEntity
      *
      * @var string
      */
-    #[Validate(['validator' => 'NotEmpty'])]
+    #[Validate(validator: 'NotEmpty')]
     protected $category = '';
 
     /**

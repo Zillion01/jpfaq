@@ -7,11 +7,13 @@ use Jp\Jpfaq\Domain\Model\Categorycomment;
 use Jp\Jpfaq\Domain\Repository\CategorycommentRepository;
 use Jp\Jpfaq\Domain\Repository\CategoryRepository;
 use Jp\Jpfaq\Service\SendMailService;
+use Jp\Jpfaq\Service\SpamProtection;
+use Jp\Jpfaq\Utility\CommentIp;
 use Jp\Jpfaq\Utility\IsBot;
 use Jp\Jpfaq\Utility\TypoScript;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Attribute\RateLimit;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -19,21 +21,12 @@ use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 
 class CategorycommentController extends ActionController
 {
-    protected CategorycommentRepository $categorycommentRepository;
-
-    protected CategoryRepository $categoryRepository;
-
-    /**
-     * @param CategorycommentRepository $categorycommentRepository
-     * @param CategoryRepository $categoryRepository
-     */
     public function __construct(
-        CategorycommentRepository $categorycommentRepository,
-        CategoryRepository $categoryRepository
-    ) {
-        $this->categorycommentRepository = $categorycommentRepository;
-        $this->categoryRepository = $categoryRepository;
-    }
+        protected readonly CategorycommentRepository $categorycommentRepository,
+        protected readonly CategoryRepository $categoryRepository,
+        protected readonly SendMailService $sendMailService,
+        protected readonly SpamProtection $spamProtection
+    ) {}
 
     /**
      * Initialize
@@ -64,20 +57,21 @@ class CategorycommentController extends ActionController
      *
      * Shows comment form
      *
-     * @param array $catUids
+     * @param array<int|string> $catUids
      * @param int $pluginUid
      *
      * @return ResponseInterface
      */
     public function commentAction(array $catUids, int $pluginUid): ResponseInterface
     {
-        if (!IsBot::isBot()) {
+        if (!IsBot::isBot($this->request, (string)($this->settings['bots'] ?? ''))) {
             $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
             if ($currentUid == $pluginUid) {
                 $this->view->assignMultiple([
                     'catUids' => $catUids,
                     'currentUid' => $currentUid,
+                    'formToken' => $this->spamProtection->createFormToken(),
                 ]);
 
                 return $this->htmlResponse();
@@ -96,21 +90,23 @@ class CategorycommentController extends ActionController
      * Add to database and sendmail, then show thank you
      *
      * @param Categorycomment $newCategorycomment
-     * @param array $catUids
+     * @param array<int|string> $catUids
      * @param int $pluginUid
      *
      * @return ResponseInterface
      *
      * @throws IllegalObjectTypeException
      */
+    #[RateLimit(limit: 5, interval: '15 minutes')]
     public function addCommentAction(
         Categorycomment $newCategorycomment,
         array $catUids,
         int $pluginUid
     ): ResponseInterface {
-        // If honeypot field 'finfo' is filled by spambot do not add new comment
-        if ($newCategorycomment->getFinfo()) {
-            $this->redirect('list', 'Question');
+        $formToken = $this->request->hasArgument('formToken') ? (string)$this->request->getArgument('formToken') : '';
+        // Answer spam like a request for another plugin, so a bot gets no hint
+        if ($this->spamProtection->isSpam($this->request, $newCategorycomment->getFinfo(), $formToken, $this->settings)) {
+            return $this->responseFactory->createResponse();
         }
 
         $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
@@ -124,28 +120,13 @@ class CategorycommentController extends ActionController
                 $tempCat = $this->categoryRepository->findByUid($catUid);
                 if ($tempCat instanceof Category) {
                     $categories[] = $tempCat;
-                    $categoryNames = $categoryNames . $tempCat->getCategory() . '<br/>';
+                    $categoryNames = $categoryNames . htmlspecialchars($tempCat->getCategory()) . '<br/>';
                 }
             }
         }
 
         if ($currentUid == $pluginUid) {
-            $extensionConfiguration = [];
-            // Set comment IP
-            try {
-                $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('jpfaq');
-            } catch (\Exception $exception) {
-                // do nothing
-            }
-            $anonymizeIpSetting = $extensionConfiguration['anonymizeIp'];
-            $commentIp = (string)GeneralUtility::getIndpEnv('REMOTE_ADDR');
-
-            if ($anonymizeIpSetting) {
-                $parts = explode('.', $commentIp);
-                $newCategorycomment->setIp($parts[0] . '.' . $parts[1] . '.x.x');
-            } else {
-                $newCategorycomment->setIp($commentIp);
-            }
+            $newCategorycomment->setIp(CommentIp::fromRequest($this->request));
 
             foreach ($categories as $category) {
                 $newCategorycomment->addCategory($category);
@@ -154,28 +135,25 @@ class CategorycommentController extends ActionController
             $this->categorycommentRepository->add($newCategorycomment);
 
             // Send notification emails
-            $emailSettings = $this->settings['category']['comment']['email'];
+            $emailSettings = $this->settings['category']['comment']['email'] ?? [];
 
-            if ($emailSettings['enable']) {
-                $sender = [htmlspecialchars($emailSettings['sender']['email']) => htmlspecialchars($emailSettings['sender']['name'])];
+            if ($emailSettings['enable'] ?? false) {
+                $sender = [$emailSettings['sender']['email'] => $emailSettings['sender']['name']];
+                $comment = '<p><i>' . nl2br(htmlspecialchars($newCategorycomment->getComment())) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
 
-                $emailBodyCenterText = '<br/><strong>' . $categoryNames . '</strong>' . '<p><i>' . $this->formatRte($this->request->getAttribute('currentContentObject'), $newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
-
-                SendMailService::sendMail(
-                    $receivers = htmlspecialchars($emailSettings['receivers']['email']),
+                $this->sendMailService->sendMail(
+                    $emailSettings['receivers']['email'],
                     $sender,
-                    $subject = $emailSettings['subject'],
-                    $body = $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['introText']) . $emailBodyCenterText . $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['closeText'])
+                    $emailSettings['subject'],
+                    $this->formatRte($emailSettings['introText']) . '<br/><strong>' . $categoryNames . '</strong>' . $comment . $this->formatRte($emailSettings['closeText'])
                 );
 
-                if ($emailSettings['sendCommenterNotification']) {
-                    $emailBodyCenterText = '<br/>' . '<p><i>' . $this->formatRte($this->request->getAttribute('currentContentObject'), $newCategorycomment->getComment()) . '</i></p><p><i>' . htmlspecialchars($newCategorycomment->getName()) . '<br/>' . htmlspecialchars($newCategorycomment->getEmail()) . '</i></p><br/>';
-
-                    SendMailService::sendMail(
-                        $receivers = htmlspecialchars($newCategorycomment->getEmail()),
+                if ($emailSettings['sendCommenterNotification'] ?? false) {
+                    $this->sendMailService->sendMail(
+                        $newCategorycomment->getEmail(),
                         $sender,
-                        $subject = htmlspecialchars($emailSettings['commenter']['subject']),
-                        $body = $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['commenter']['introText']) . $emailBodyCenterText . $this->formatRte($this->request->getAttribute('currentContentObject'), $emailSettings['commenter']['closeText'])
+                        $emailSettings['commenter']['subject'],
+                        $this->formatRte($emailSettings['commenter']['introText']) . '<br/>' . $comment . $this->formatRte($emailSettings['commenter']['closeText'])
                     );
                 }
             }
@@ -201,10 +179,11 @@ class CategorycommentController extends ActionController
     {
         $currentUid = $this->request->getAttribute('currentContentObject')->data['uid'];
 
-        $emailNotification = (int)$this->settings['category']['comment']['email']['sendCommenterNotification'];
+        $emailSettings = $this->settings['category']['comment']['email'] ?? [];
+        $emailNotification = (int)($emailSettings['sendCommenterNotification'] ?? 0);
 
         // First tab of flexform
-        if ((int)$this->settings['category']['comment']['email']['enable'] == 0) {
+        if ((int)($emailSettings['enable'] ?? 0) === 0) {
             $emailNotification = 0;
         }
 
@@ -225,15 +204,10 @@ class CategorycommentController extends ActionController
     }
 
     /**
-     * Format / clean a string with parseFunc
-     *
-     * @param $request
-     * @param $str
-     *
-     * @return string
+     * Format / clean an editor supplied string with parseFunc
      */
-    private function formatRte($request, $str): string
+    private function formatRte(?string $str): string
     {
-        return $request->parseFunc($str, [], '< lib.parseFunc_RTE');
+        return $this->request->getAttribute('currentContentObject')->parseFunc((string)$str, null, '< lib.parseFunc_RTE');
     }
 }

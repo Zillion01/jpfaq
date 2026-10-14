@@ -17,6 +17,8 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  ***/
 /**
  * The repository for Categories
+ *
+ * @extends Repository<\Jp\Jpfaq\Domain\Model\Category>
  */
 class CategoryRepository extends Repository
 {

@@ -17,7 +17,8 @@ Administrator Manual
 #. If you like to restrict at the answers the additional IRRE tt_content types (for example allow only textmedia), check out Configuration/TsConfig/Page/pageTSconfig.tsconfig
 #. Check out Configuration/TypoScript/setup.typoscript for settings to exclude already displayed questions, configuring comment emails and Google Analytics tracking
 #. In the extension manager you can go to 'Configure' at jpFAQ to anonymize comment IP addresses. This is needed in for example Germany.
-#. Required fields the comment forms (there is a simple JS frontend validation), are determined by the class jpfaqRequired in the FormFields.html files.
+#. Required fields the comment forms (there is a simple JS frontend validation), are determined by the class jpfaqRequired in the FormFields.html files. Name, email and comment are also validated server side.
+#. The comment forms are protected against spam by a honeypot field, the bot list in settings.bots, a minimum time between loading and sending the form (settings.spamProtection.minimumSecondsBeforeSubmit, default 3 seconds) and a rate limit of 5 comments per 15 minutes per IP address. Spam is silently discarded.
 
 
 .. _admin-installation:
@@ -27,10 +28,8 @@ Installation
 
 To install the extension, perform the following steps:
 
-#. Go to the Extension Manager
-#. Install the extension
-#. Include static template jpFAQ
+#. Install the extension via composer require jvdp/jpfaq (or the Extension Manager in classic mode)
+#. Add the site set 'jpFAQ' to your site (Site Management > Sites > Sets), or include the static template jpFAQ in a TypoScript record
+#. Run the upgrade wizards when upgrading from an older version
 #. Then... see Users manual
-
-Since 9.5.1. the extension can be installed via composer require jvdp/jpfaq
 
