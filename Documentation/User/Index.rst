@@ -15,7 +15,7 @@ Users Manual
 #. In the page properties of the folder, under tab 'Behaviour' select 'jpFAQ' at 'Contains Plugin', this gives an own folder icon in the page tree (optional).
 #. Create records of categories (optional).
 #. Create records of questions, choose categories in question record (optional).
-#. Insert jpFAQ plugin on a page. Save and then under Plugin tab choose page or folder with question records at the 'Record Storage Page'. Choose categories if you want. If no categories are selected, all will be shown.
+#. Insert jpFAQ plugin on a page. Under the Plugin tab choose the page or folder with question records at 'Startingpoint'. If it is empty, the questions of all pages are shown. Choose categories if you want. If no categories are selected, all will be shown.
 #. Insert plugin again if needed to show other categories seperate.
 #. If you want the on the fly quicksearch, check checkbox. This searchform searches all questions and answers of the whole page, so I would include this only once in a page. The searchform hides immediately all questions (and answers) which do not contain the terms you type in the searchbox.
 #. You can also check the 'Show number of search results' if wanted.
@@ -37,4 +37,4 @@ If you upgrade to version 13.4.x please consult the changelog. The plugin is now
 
 14.3
 ====
-If you upgrade to version 14.3.x please consult the changelog. TYPO3 v14.3 is required. Plugins still stored as list_type are migrated by the upgrade wizard 'Migrate "jpFAQ" plugins to content elements'.
+If you upgrade to version 14.3.x please consult the changelog. TYPO3 v14.3 is required. Run the upgrade wizard 'Migrate "jpFAQ" plugins to content elements'. It migrates plugins still stored as list_type, and moves the 'Record Storage Page' of plugins from before TYPO3 v13 to the 'Startingpoint' in the plugin options. A startingpoint that is already filled in is kept.

@@ -81,7 +81,7 @@ persistence.storagePid
    Data type
          int
    Description
-         Disabled, to be able to use the Record Storage Page at the plugin properties.
+         Disabled. The questions are selected by the 'Startingpoint' in the plugin options.
 
 .. _settings.overrideFlexformSettingsIfEmpty
 

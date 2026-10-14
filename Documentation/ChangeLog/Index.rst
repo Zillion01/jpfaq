@@ -15,7 +15,7 @@ ChangeLog
 #. For TYPO3 v14.3. TYPO3 v13 is no longer supported, use 13.4.x for that.
 #. Notification emails are sent with the TYPO3 v14 mailer, MailMessage::send() no longer exists.
 #. Site set 'jpFAQ' added, the static template is still available.
-#. Upgrade wizard to migrate list_type plugins to the jpfaq_faq content element.
+#. Upgrade wizard to migrate list_type plugins to the jpfaq_faq content element. It also moves the 'Record Storage Page' of plugins from before TYPO3 v13 to the 'Startingpoint' in the plugin options, otherwise those plugins show the questions of all pages.
 #. fix: comments with a filled honeypot field were stored on TYPO3 12+ (#77)
 #. fix: undefined array key warnings when FlexForm settings are missing (#72)
 #. fix: FlexForm labels used the wrong file suffix xfl (#73)

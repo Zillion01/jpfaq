@@ -30,6 +30,6 @@ To install the extension, perform the following steps:
 
 #. Install the extension via composer require jvdp/jpfaq (or the Extension Manager in classic mode)
 #. Add the site set 'jpFAQ' to your site (Site Management > Sites > Sets), or include the static template jpFAQ in a TypoScript record
-#. Run the upgrade wizards when upgrading from an older version
+#. Run the upgrade wizards when upgrading from an older version. The jpFAQ wizard also moves the 'Record Storage Page' of old plugins to the 'Startingpoint' in the plugin options.
 #. Then... see Users manual
 
